@@ -1,4 +1,5 @@
-public class Board {
+public class board {
 
-    
+    System.out.print("hello");
+
 }
