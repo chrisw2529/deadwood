@@ -1,16 +1,20 @@
-public class scene
+public class scene extends space
 {
-    String name;
     int shotMarker;
     boolean isWrapped = false;
+    ArrayList<player> playersOnScene = new ArrayList<player>();
+    ArrayList<player> playersOffScene = new ArrayList<player>();
 
-    public static void act(player player, scene name)
+    public static void act(player player)
     {
+
         
     }
 
-    public static void rehearse(player player, scene name)
+    public static void rehearse(player player)
     {
+
+
 
     }
 
