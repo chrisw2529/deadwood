@@ -1,4 +1,4 @@
-public class Board {
+public class board {
 
-    
+
 }
