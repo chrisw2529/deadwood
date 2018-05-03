@@ -5,23 +5,36 @@ public class board {
   public board(){
 
   }
-  private static void setupBoard(board){
+  private static void setupBoard(board board){
 
   }
-  private static scene createScene(){
+  private static void createSpace(int id){
 
   }
-  private static player createPlayer(){
+  private static void createPlayer(int id){
 
   }
   private static void endDay(){
 
   }
-  private staitc void endGame(){
+  private static void endGame(){
 
   }
   private static void printAllPlayerLocation(){
 
   }
+  public int getDay(){
+    return this.day;
+  }
+  public int getRemainingScenes(){
+    return this.remainingScenes;
+  }
+  public void setDay(int day){
+    this.day = day;
+  }
+  public void setRemainingScenes(int remainingScenes){
+    this.remainingScenes = remainingScenes;
+  }
+
 
 }
