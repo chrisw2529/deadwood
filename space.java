@@ -2,7 +2,7 @@ public class space
 {
 
     int spaceID;
-    String name; //scene names, casting office, trailer
+    String name = ""; //scene names, casting office, trailer
 
     public space(int spaceID, String name)
     {

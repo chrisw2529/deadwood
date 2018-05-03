@@ -8,17 +8,15 @@ public class scene extends space
     public static void act(player player)
     {
 
-        
+
     }
 
     public static void rehearse(player player)
     {
 
-
-
     }
 
-    public static wrapScene(boolean isWrapped)
+    public wrapScene(boolean isWrapped)
     {
 
     }
