@@ -10,7 +10,10 @@ public class space
         name = this.name;
     }
 
-    public string getName() {
+    public int getSpaceID(){
+        return this.spaceID;
+    }
+    public String getName(){
         return this.name;
     }
 
