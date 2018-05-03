@@ -15,7 +15,6 @@ public class scene extends space
     public static void act(player player)
     {
 
-
     }
 
     public static void rehearse(player player)
@@ -27,16 +26,19 @@ public class scene extends space
     {
 
     }
-    
+
     public int getShotMarker(){
       return this.shotMarker;
     }
+    
     public boolean getIsWrapped(){
       return this.isWrapped;
     }
+
     public ArrayList<player> getplayersOnScene(){
       return this.playersOnScene;
     }
+
     public ArrayList<player> getplayersOffScene(){
       return this.playersOffScene;
     }
@@ -44,6 +46,7 @@ public class scene extends space
     public void incrementShotMarker(){
       shotMarker++;
     }
+
     public void setWrapped(boolean wrap){
       this.isWrapped = wrap;
     }

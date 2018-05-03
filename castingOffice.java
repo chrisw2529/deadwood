@@ -4,6 +4,7 @@ public class castingOffice extends space{
   {
       super(spaceID, name);
   }
+  
   public static void levelUp(player player){
 
   }

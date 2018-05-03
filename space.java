@@ -1,7 +1,7 @@
 public class space
 {
 
-    int spaceID;
+    int spaceID = 0;
     String name = ""; //scene names, casting office, trailer
 
     public space(int spaceID, String name)
@@ -13,6 +13,7 @@ public class space
     public int getSpaceID(){
         return this.spaceID;
     }
+
     public String getName(){
         return this.name;
     }
