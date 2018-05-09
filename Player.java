@@ -5,6 +5,7 @@ public class Player{
     int rank = 0;
     int rehearsalTok = 0;
     int ID = 0;
+    Space currentSpace;
     boolean isTurn = false;
 
     public Player(int id)
@@ -15,10 +16,17 @@ public class Player{
     public static void move(Player player)
     {
 
+
+
     }
 
     public static void endTurn(){
 
+    }
+
+    public void getLocation()
+    {
+      return player.currentSpace.getName();
     }
 
     public int getID(){
@@ -37,7 +45,7 @@ public class Player{
       return this.rank;
     }
 
-    public int getRehersal(){
+    public int getRehearsal(){
       return this.rehearsalTok;
     }
 
@@ -57,7 +65,7 @@ public class Player{
       this.rank = rank;
     }
 
-    public void setRehersal(int rehearsalTok){
+    public void setRehearsal(int rehearsalTok){
       this.rehearsalTok = rehearsalTok;
     }
 
