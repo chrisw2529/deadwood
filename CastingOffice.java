@@ -1,6 +1,6 @@
 public class CastingOffice extends Space{
 
-  public castingOffice(int spaceID, String name)
+  public CastingOffice(int spaceID, String name)
   {
       super(spaceID, name);
   }

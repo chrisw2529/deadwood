@@ -7,7 +7,7 @@ public class Scene extends Space
     ArrayList<player> playersOffScene = new ArrayList<player>();
 
 
-    public scene(int spaceID, String name)
+    public Scene(int spaceID, String name)
     {
         super(spaceID, name);
     }

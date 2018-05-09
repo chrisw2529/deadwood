@@ -3,7 +3,7 @@ public class Board {
   int day = 0;
   int remainingScenes = 10;
 
-  public board(){
+  public Board(){
 
 
 

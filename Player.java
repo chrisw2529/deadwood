@@ -7,7 +7,7 @@ public class Player{
     int ID = 0;
     boolean isTurn = false;
 
-    public player(int id)
+    public Player(int id)
     {
         this.ID = id;
     }
