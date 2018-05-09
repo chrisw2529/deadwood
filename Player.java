@@ -1,4 +1,4 @@
-public class player{
+public class Player{
 
     int fame = 0;
     int cash = 0;

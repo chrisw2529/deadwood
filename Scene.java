@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-public class scene extends space
+public class Scene extends Space
 {
     int shotMarker = 0;
     boolean isWrapped = false;
@@ -14,6 +14,8 @@ public class scene extends space
 
     public static void act(player player)
     {
+
+      //roll die
 
     }
 
@@ -30,7 +32,7 @@ public class scene extends space
     public int getShotMarker(){
       return this.shotMarker;
     }
-    
+
     public boolean getIsWrapped(){
       return this.isWrapped;
     }
