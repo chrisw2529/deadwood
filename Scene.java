@@ -3,8 +3,8 @@ public class Scene extends Space
 {
     int shotMarker = 0;
     boolean isWrapped = false;
-    ArrayList<player> playersOnScene = new ArrayList<player>();
-    ArrayList<player> playersOffScene = new ArrayList<player>();
+    ArrayList<Player> playersOnScene = new ArrayList<Player>();
+    ArrayList<Player> playersOffScene = new ArrayList<Player>();
 
 
     public Scene(int spaceID, String name)
@@ -12,14 +12,14 @@ public class Scene extends Space
         super(spaceID, name);
     }
 
-    public static void act(Player player)
+    public static void act(player player)
     {
 
       //roll die
 
     }
 
-    public static void rehearse(Player player)
+    public static void rehearse(player player)
     {
 
     }
