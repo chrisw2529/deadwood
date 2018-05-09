@@ -6,6 +6,7 @@ public class Player{
     int rehearsalTok = 0;
     int ID = 0;
     Space currentSpace;
+    Role currentRole == null;
     boolean isTurn = false;
 
     public Player(int id)
@@ -13,14 +14,61 @@ public class Player{
         this.ID = id;
     }
 
-    public static void move(Player player)
+    public void move(Player player)
     {
-
-
 
     }
 
-    public static void endTurn(){
+    public void act(String role)
+    {
+
+          Random rand = new Random();
+          int dieRoll = (rand.nextInt(6) + 1) + player.getRehearsal();
+
+          if(dieRoll >= budget) {
+
+            if(/*onScene*/)  {
+              player.currentSpace.decrementShotMarker();
+              player.setFame(player.getFame()+2);
+            }
+
+            else {
+              player.setFame(player.getFame()+1);
+              player.setCash(player.getCash()+1);
+            }
+
+          }
+
+          else {
+
+            if(/*offScene*/)
+              player.getCash(player.getCash()+1);
+
+          }
+
+          if(scene.getShotMarker() == 0) {
+
+            isWrapped = true;
+
+            if(/* on scene*/) {
+
+              wrapScene();
+
+            }
+          }
+    }
+
+    public void rehearse(Player player)
+    {
+
+      if(currentRole != null) {
+
+        if()
+        player.setRehearsal(player.getRehersal()+1);
+
+    }
+
+    public void endTurn(){
 
     }
 
