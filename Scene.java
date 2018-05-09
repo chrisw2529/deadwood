@@ -2,14 +2,14 @@ import java.util.ArrayList;
 public class Scene extends Space
 {
     int shotMarker = 0;
+    int budget;
     boolean isWrapped = false;
-    ArrayList<Player> playersOnScene = new ArrayList<Player>();
-    ArrayList<Player> playersOffScene = new ArrayList<Player>();
 
 
-    public Scene(int spaceID, String name)
+    public Scene(int spaceID, String name, int budget)
     {
         super(spaceID, name);
+        this.budget = budget;
     }
 
     public static void act(player player)
@@ -35,14 +35,6 @@ public class Scene extends Space
 
     public boolean getIsWrapped(){
       return this.isWrapped;
-    }
-
-    public ArrayList<player> getplayersOnScene(){
-      return this.playersOnScene;
-    }
-
-    public ArrayList<player> getplayersOffScene(){
-      return this.playersOffScene;
     }
 
     public void incrementShotMarker(){
