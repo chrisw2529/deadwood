@@ -12,7 +12,7 @@ public class Player{
         this.ID = id;
     }
 
-    public static void move(player player)
+    public static void move(Player player)
     {
 
     }

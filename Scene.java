@@ -12,14 +12,14 @@ public class Scene extends Space
         super(spaceID, name);
     }
 
-    public static void act(player player)
+    public static void act(Player player)
     {
 
       //roll die
 
     }
 
-    public static void rehearse(player player)
+    public static void rehearse(Player player)
     {
 
     }

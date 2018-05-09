@@ -5,7 +5,7 @@ public class CastingOffice extends Space{
       super(spaceID, name);
   }
 
-  public static void levelUp(player player){
+  public static void levelUp(Player player){
 
   }
 

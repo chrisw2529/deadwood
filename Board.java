@@ -9,7 +9,7 @@ public class Board {
 
   }
 
-  private static void setupBoard(board board){
+  private static void setupBoard(Board board){
 
   }
 
