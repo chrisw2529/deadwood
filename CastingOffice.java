@@ -16,7 +16,7 @@ public class CastingOffice extends Space{
 
     }
   }
-  public static void rankUpUsingFame(Player player, int desireedRank){
+  public static void rankUpUsingFame(Player player, int desiredRank){
     int fame = player.getFame();
     int reqFame = fameNeeded(desiredRank, 0);
 
