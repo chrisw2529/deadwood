@@ -5,13 +5,15 @@ public class Role {
   String line;
   boolean onScene;
   Player takenBy = null;
+  Scene scene;
 
-  public Role(String name, String line, int level, boolean onScene){
+  public Role(String name, String line, int level, boolean onScene, Scene scene){
 
     this.name = name;
     this.line = line;
     this.level = level;
     this.onScene = onScene;
+    this.scene = scene;
 
   }
 
@@ -31,7 +33,12 @@ public class Role {
     return this.takenBy;
   }
 
-  public String checkWhere()
+  public Scene getScene()
+  {
+    return this.scene;
+  }
+
+  public void checkWhere()
   {
     if(onScene == false)
       System.out.println("Off scene.");
@@ -42,7 +49,7 @@ public class Role {
 
   public void removePlayer()
   {
-    this.takenBy == null;
+    this.takenBy = null;
   }
 
 

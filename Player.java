@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class Player{
 
     int fame = 0;
@@ -6,7 +8,7 @@ public class Player{
     int rehearsalTok = 0;
     int ID = 0;
     Space currentSpace;
-    Role currentRole == null;
+    Role currentRole = null;
     boolean isTurn = false;
 
     public Player(int id)
@@ -23,58 +25,45 @@ public class Player{
     {
 
           Random rand = new Random();
-          int dieRoll = (rand.nextInt(6) + 1) + player.getRehearsal();
+          int dieRoll = (rand.nextInt(6) + 1) + rehearsalTok;
 
-          if(dieRoll >= budget) {
+          if(dieRoll >= currentRole.getScene().getBudget()) {
 
-            if(/*onScene*/)  {
-              player.currentSpace.decrementShotMarker();
-              player.setFame(player.getFame()+2);
+            if(currentRole.onScene == true)  {
+              currentRole.getScene().decrementShotMarker();
+              fame =+ 2;
             }
 
             else {
-              player.setFame(player.getFame()+1);
-              player.setCash(player.getCash()+1);
+              fame++;
+              cash++;
             }
 
           }
 
           else {
 
-            if(/*offScene*/)
-              player.getCash(player.getCash()+1);
+            if(currentRole.onScene == false)
+              cash++;
 
           }
 
-          if(scene.getShotMarker() == 0) {
+          if(currentRole.getScene().getShotMarker() == 0) {
 
-            isWrapped = true;
+            if(currentRole.onScene == true)
+              currentRole.getScene().wrapScene();
+              //remove all tokens
 
-            if(/* on scene*/) {
-
-              wrapScene();
-
-            }
           }
     }
 
     public void rehearse(Player player)
     {
 
-      if(currentRole != null) {
-
-        if()
-        player.setRehearsal(player.getRehersal()+1);
-
     }
 
     public void endTurn(){
 
-    }
-
-    public void getLocation()
-    {
-      return player.currentSpace.getName();
     }
 
     public int getID(){

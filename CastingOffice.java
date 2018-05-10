@@ -11,8 +11,8 @@ public class CastingOffice extends Space{
   public static void rankUpUsingCash(Player player, int desiredRank){
     int cash = player.getCash();
     if(desiredRank * 5 <= cash){
-      player.setCash(cash - currRank * 5);
-      player.setRank(currRank + 1);
+      player.setCash(cash - desiredRank * 5);
+      player.setRank(desiredRank);
 
     }
   }
@@ -22,7 +22,7 @@ public class CastingOffice extends Space{
 
     if(fame >= reqFame){
       player.setFame(fame - reqFame);
-      player.setRank(currRank + 1);
+      player.setRank(desiredRank);
 
     }
   }

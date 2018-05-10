@@ -31,6 +31,10 @@ public class Scene extends Space
       return this.isWrapped;
     }
 
+    public int getBudget(){
+      return this.budget;
+    }
+
     public void decrementShotMarker(){
       shotMarker--;
     }
