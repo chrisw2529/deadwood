@@ -5,8 +5,8 @@ public class Scene extends Space
 {
     int shotMarker;
     int budget;
-    ArrayList<Role> rolesOnScene = new ArrayList<Role>();
-    ArrayList<Role> rolesOffScene = new ArrayList<Role>();
+    ArrayList<Role> roles = new ArrayList<Role>();
+
 
     boolean isWrapped = false;
 
