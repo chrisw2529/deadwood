@@ -1,7 +1,10 @@
+import java.util.ArrayList;
+
 public class Board {
 
   int day = 0;
   int remainingScenes = 10;
+  ArrayList<Player> players = new ArrayList<Player>();
 
   public Board(){
 
