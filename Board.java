@@ -32,7 +32,11 @@ public class Board {
   private static void printAllPlayerLocation(){
 
   }
-
+  public static int roleDie(){
+    Random rand = new Random();
+    int dieRoll = (rand.nextInt(6) + 1);
+    return dieRoll;
+  }
   public int getDay(){
     return this.day;
   }
