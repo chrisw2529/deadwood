@@ -7,7 +7,7 @@ public class Player{
     int rank = 0;
     int rehearsalTok = 0;
     int ID = 0;
-    Space currentSpace = 0;
+    Space currentSpace = null;
     Role currentRole = null;
     boolean isTurn = false;
 
@@ -70,18 +70,18 @@ public class Player{
 
       if(player.currentRole.getScene().getShotMarker() == 0) {
 
-        wrapScene();
+        player.currentRole.getScene().wrapScene();
 
       }
 
-      player.isturn = false;
+      player.isTurn = false;
       System.out.println("Player " + player.ID + "'s turn has ended.");
     }
 
     public void rehearse(Player player)
     {
 
-      if(player.getRehearsal == player.currentRole.getScene().getBudget() - 1) {
+      if(player.rehearsalTok == player.currentRole.getScene().getBudget() - 1) {
         System.out.println("You have too many rehearsal tokens and you must act.");
         return;
       }
@@ -94,7 +94,7 @@ public class Player{
     public void endTurn(Player player) {
 
       System.out.println("Player " + player.ID + "'s turn has ended.");
-      player.isTurn == false;
+      player.isTurn = false;
 
     }
 
