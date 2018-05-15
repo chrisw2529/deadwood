@@ -26,7 +26,7 @@ public class ParseXML{
 
            try{
                doc = db.parse(filename);
-           } catch (Exception ex){
+           } catch (Exception ex) {
                System.out.println("XML parse failure");
                ex.printStackTrace();
            }
@@ -36,52 +36,59 @@ public class ParseXML{
         }
 
         // reads data from XML file and prints data
-        public void readBookData(Document d){
-
+        public void readSceneData(Document d){
+            System.out.println("in rsd");
             Element root = d.getDocumentElement();
 
-            NodeList scenes = root.getElementsByTagName("set name");
+            NodeList sceneList = root.getElementsByTagName("set");
+            System.out.println(sceneList.getLength());
+            for (int i=0; i<sceneList.getLength();i++){
 
-            for (int i=0; i<scenes.getLength();i++){
-
-                System.out.println("Printing information for scenes "+(i+1));
+                System.out.println("Printing information for sceneList "+(i+1));
 
                 //reads data from the nodes
-                Node scene = scenes.item(i);
-                String sceneName = scens.getAttributes().getNamedItem("set name").getNodeValue();
+                Node scene = sceneList.item(i);
+                String sceneName = scene.getAttributes().getNamedItem("name").getNodeValue();
                 System.out.println("set name = "+sceneName);
 
-                //reads data
 
-                NodeList children = book.getChildNodes();
+                NodeList allNodes = scene.getChildNodes();
 
-                for (int j=0; j< children.getLength(); j++){
+                  //System.out.println("allNodes length = " + allNodes.getLength());
+                Node neighbors = allNodes.item(2);
+                NodeList neighborsList = neighbors.getChildNodes();
 
-                  Node sub = children.item(j);
 
-                  if("title".equals(sub.getNodeName())){
-                     String bookLanguage = sub.getAttributes().getNamedItem("lang").getNodeValue();
-                     System.out.println("Language = "+bookLanguage);
-                     String title = sub.getTextContent();
-                     System.out.println("Title = "+title);
+                for (int j=0; j< neighborsList.getLength(); j++){
+                  // System.out.println("j = " + j);
+                   Node sub = neighborsList.item(j);
+                   //System.out.println("neighbor names = " + sub.getNodeName());
+                  //  String neighborName = sub.getAttributes().getNamedItem("name").getNodeValue();
+                  //  System.out.println("neighborName = "+neighborName);
 
-                  }
-                  
-                  else if("author".equals(sub.getNodeName())){
-                     String authorName = sub.getTextContent();
-                     System.out.println(" Author = "+authorName);
+                 if("neighbors".equals(neighbors.getNodeName())){
+                   String neighborName = sub.getAttributes().getNamedItem("name").getNodeValue();
+                   System.out.println("neighborName = "+neighborName);
+                    //  String title = sub.getTextContent();
+                    //  System.out.println("Title = "+title);
 
-                  }
-                  else if("year".equals(sub.getNodeName())){
-                     String yearVal = sub.getTextContent();
-                     System.out.println(" Publication Year = "+yearVal);
+                 }
 
-                  }
-                  else if("price".equals(sub.getNodeName())){
-                     String priceVal = sub.getTextContent();
-                     System.out.println(" Price = "+priceVal);
-
-                  }
+                  // else if("author".equals(sub.getNodeName())){
+                  //    String authorName = sub.getTextContent();
+                  //    System.out.println(" Author = "+authorName);
+                  //
+                  // }
+                  // else if("year".equals(sub.getNodeName())){
+                  //    String yearVal = sub.getTextContent();
+                  //    System.out.println(" Publication Year = "+yearVal);
+                  //
+                  // }
+                  // else if("price".equals(sub.getNodeName())){
+                  //    String priceVal = sub.getTextContent();
+                  //    System.out.println(" Price = "+priceVal);
+                  //
+                  // }
 
 
                 } //for childnodes
