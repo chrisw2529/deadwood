@@ -15,16 +15,19 @@ import java.io.File;
 public class Deadwood{
   public static void main(String[] args){
 
-    Player joe = new Player(1);
+    //Player joe = new Player(1);
     ParseXML p = new ParseXML();
-    File board = new File("board.xml");
+    //File board = new File("board.xml");
     // DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
     // DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
     // Document doc = dBuilder.parse(board);
     // doc.getDocumentElement().normalize();
     try {
       Document d = p.getDocFromFile("board.xml");
-      p.readSceneData(d);
+      p.readForTrailer(d);
+      p.readForOffice(d);
+      //p.readCardData(d);
+      //p.readSceneData(d);
     }
     catch(ParserConfigurationException ex) {
       System.out.println("par C E");
