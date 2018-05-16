@@ -1,19 +1,19 @@
+import java.util.ArrayList;
+
 public class Space
 {
 
-    int spaceID = 0;
-    String name = ""; //scene names, casting office, trailer
+    String name; //scene names, casting office, trailer
+    ArrayList<String> neighbors = new ArrayList<String>();
 
-    public Space(int spaceID, String name)
+    public Space(String name)
     {
-        spaceID = this.spaceID;
         name = this.name;
     }
 
-    public int getSpaceID(){
-        return this.spaceID;
+    public void addNeighbor(String name){
+      neighbors.add(name);
     }
-
     public String getName(){
         return this.name;
     }
