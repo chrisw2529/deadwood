@@ -46,7 +46,7 @@ public class ParseXML{
         for (int i=0; i<sceneList.getLength();i++){
 
             System.out.println("Printing information for sceneList "+(i+1));
-                Node scene = sceneList.item(i);
+            Node scene = sceneList.item(i);
             String sceneName = scene.getAttributes().getNamedItem("name").getNodeValue();
             System.out.println("set name = "+sceneName);
 
@@ -278,12 +278,11 @@ public class ParseXML{
 
         Element root = d.getDocumentElement();
         NodeList cardList = root.getElementsByTagName("card");
-        System.out.println(cardList.getLength());
-
+    
         for (int i=0; i<cardList.getLength();i++){
 
             System.out.println("Printing information for cardList "+(i+1));
-                Node card = cardList.item(i);
+            Node card = cardList.item(i);
 
             String cardName = card.getAttributes().getNamedItem("name").getNodeValue();
             String budget = card.getAttributes().getNamedItem("budget").getNodeValue();
