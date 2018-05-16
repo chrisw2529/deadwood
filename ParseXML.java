@@ -51,28 +51,22 @@ public class ParseXML{
                 String sceneName = scene.getAttributes().getNamedItem("name").getNodeValue();
                 System.out.println("set name = "+sceneName);
 
+                Element neighbors = (Element) scene;
+                NodeList neighborList = neighbors.getElementsByTagName("neighbor");
 
-                NodeList allNodes = scene.getChildNodes();
+                for (int j=0; j< neighborList.getLength(); j++){
 
-                  //System.out.println("allNodes length = " + allNodes.getLength());
-                Node neighbors = allNodes.item(2);
-                NodeList neighborsList = neighbors.getChildNodes();
+                  Node sub = neighborList.item(j);
+                  String neighborName = sub.getAttributes().getNamedItem("name").getNodeValue();
+                  System.out.println("neighborName = "+neighborName);
 
-
-                for (int j=0; j< neighborsList.getLength(); j++){
-                  // System.out.println("j = " + j);
-                   Node sub = neighborsList.item(j);
-                   //System.out.println("neighbor names = " + sub.getNodeName());
-                  //  String neighborName = sub.getAttributes().getNamedItem("name").getNodeValue();
-                  //  System.out.println("neighborName = "+neighborName);
-
-                 if("neighbors".equals(neighbors.getNodeName())){
-                   String neighborName = sub.getAttributes().getNamedItem("name").getNodeValue();
-                   System.out.println("neighborName = "+neighborName);
+                //  if("neighbors".equals(neighbors.getNodeName())){
+                //    String neighborName = sub.getAttributes().getNamedItem("name").getNodeValue();
+                //    System.out.println("neighborName = "+neighborName);
                     //  String title = sub.getTextContent();
                     //  System.out.println("Title = "+title);
 
-                 }
+                 //}
 
                   // else if("author".equals(sub.getNodeName())){
                   //    String authorName = sub.getTextContent();
