@@ -63,8 +63,10 @@ public class Card
       }
       //Collections.reversep(Arrays.asList(payout));
       System.out.printf("Modified arr[] : %s\n", Arrays.toString(payout));
-      for(int i = payout.length - 1; i >= 0; i--){
+      for(int i = 0; i > payout.length; i++){
+        for(int j = roles.size() - 1; j--){
 
+        }
       }
     }
 
