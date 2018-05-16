@@ -37,64 +37,112 @@ public class ParseXML{
 
         // reads data from XML file and prints data
         public void readSceneData(Document d){
-            System.out.println("in rsd");
-            Element root = d.getDocumentElement();
 
+            Element root = d.getDocumentElement();
             NodeList sceneList = root.getElementsByTagName("set");
             System.out.println(sceneList.getLength());
+
             for (int i=0; i<sceneList.getLength();i++){
 
                 System.out.println("Printing information for sceneList "+(i+1));
-
-                //reads data from the nodes
                 Node scene = sceneList.item(i);
                 String sceneName = scene.getAttributes().getNamedItem("name").getNodeValue();
                 System.out.println("set name = "+sceneName);
 
                 Element neighbors = (Element) scene;
                 NodeList neighborList = neighbors.getElementsByTagName("neighbor");
+                NodeList takeList = neighbors.getElementsByTagName("take");
+                NodeList partList = neighbors.getElementsByTagName("part");
+
 
                 for (int j=0; j< neighborList.getLength(); j++){
 
                   Node sub = neighborList.item(j);
+
                   String neighborName = sub.getAttributes().getNamedItem("name").getNodeValue();
                   System.out.println("neighborName = "+neighborName);
 
-                //  if("neighbors".equals(neighbors.getNodeName())){
-                //    String neighborName = sub.getAttributes().getNamedItem("name").getNodeValue();
-                //    System.out.println("neighborName = "+neighborName);
-                    //  String title = sub.getTextContent();
-                    //  System.out.println("Title = "+title);
+                }
 
-                 //}
+                for (int j=0; j< takeList.getLength(); j++){
 
-                  // else if("author".equals(sub.getNodeName())){
-                  //    String authorName = sub.getTextContent();
-                  //    System.out.println(" Author = "+authorName);
-                  //
-                  // }
-                  // else if("year".equals(sub.getNodeName())){
-                  //    String yearVal = sub.getTextContent();
-                  //    System.out.println(" Publication Year = "+yearVal);
-                  //
-                  // }
-                  // else if("price".equals(sub.getNodeName())){
-                  //    String priceVal = sub.getTextContent();
-                  //    System.out.println(" Price = "+priceVal);
-                  //
-                  // }
+                  Node sub = takeList.item(j);
+                  String takeNum = sub.getAttributes().getNamedItem("number").getNodeValue();
+
+                  System.out.println("takeNum = "+takeNum);
+
+                }
+
+                for (int j=0; j< partList.getLength(); j++){
+
+                  Node sub = partList.item(j);
+                  String partName = sub.getAttributes().getNamedItem("name").getNodeValue();
+                  String level = sub.getAttributes().getNamedItem("level").getNodeValue();
+
+                  System.out.println("partName = "+partName);
+                  System.out.println("level = "+level);
 
 
-                } //for childnodes
-
+                }
                 System.out.println("\n");
 
-            }//for book nodes
+            }
 
-        }// method
+        }
+
+        public void readSceneData(Document d){
+
+            Element root = d.getDocumentElement();
+            NodeList sceneList = root.getElementsByTagName("set");
+            System.out.println(sceneList.getLength());
+
+            for (int i=0; i<sceneList.getLength();i++){
+
+                System.out.println("Printing information for sceneList "+(i+1));
+                Node scene = sceneList.item(i);
+                String sceneName = scene.getAttributes().getNamedItem("name").getNodeValue();
+                System.out.println("set name = "+sceneName);
+
+                Element neighbors = (Element) scene;
+                NodeList neighborList = neighbors.getElementsByTagName("neighbor");
+                NodeList takeList = neighbors.getElementsByTagName("take");
+                NodeList partList = neighbors.getElementsByTagName("part");
 
 
+                for (int j=0; j< neighborList.getLength(); j++){
 
+                  Node sub = neighborList.item(j);
+
+                  String neighborName = sub.getAttributes().getNamedItem("name").getNodeValue();
+                  System.out.println("neighborName = "+neighborName);
+
+                }
+
+                for (int j=0; j< takeList.getLength(); j++){
+
+                  Node sub = takeList.item(j);
+                  String takeNum = sub.getAttributes().getNamedItem("number").getNodeValue();
+
+                  System.out.println("takeNum = "+takeNum);
+
+                }
+
+                for (int j=0; j< partList.getLength(); j++){
+
+                  Node sub = partList.item(j);
+                  String partName = sub.getAttributes().getNamedItem("name").getNodeValue();
+                  String level = sub.getAttributes().getNamedItem("level").getNodeValue();
+
+                  System.out.println("partName = "+partName);
+                  System.out.println("level = "+level);
+
+
+                }
+                System.out.println("\n");
+
+            }
+
+        }
 
 
 }//class
