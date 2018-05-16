@@ -13,158 +13,289 @@ import java.io.File;
 public class ParseXML{
 
 
-        // building a document from the XML file
-        // returns a Document object after loading the book.xml file.
-        public Document getDocFromFile(String filename)
-        throws ParserConfigurationException{
+    // building a document from the XML file
+    // returns a Document object after loading the book.xml file.
+    public Document getDocFromFile(String filename)
+    throws ParserConfigurationException{
         {
 
 
-           DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-           DocumentBuilder db = dbf.newDocumentBuilder();
-           Document doc = null;
+            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+            DocumentBuilder db = dbf.newDocumentBuilder();
+            Document doc = null;
 
-           try{
-               doc = db.parse(filename);
-           } catch (Exception ex) {
-               System.out.println("XML parse failure");
-               ex.printStackTrace();
-           }
-           return doc;
+            try{
+                doc = db.parse(filename);
+            } catch (Exception ex) {
+                System.out.println("XML parse failure");
+                ex.printStackTrace();
+            }
+            return doc;
         } // exception handling
 
-        }
+    }
 
-        // reads data from XML file and prints data
-        public void readSceneData(Document d){
+    // reads data from XML file and prints data
+    public void readSceneData(Document d){
 
-            Element root = d.getDocumentElement();
-            NodeList sceneList = root.getElementsByTagName("set");
+        Element root = d.getDocumentElement();
+        NodeList sceneList = root.getElementsByTagName("set");
 
-            System.out.println(sceneList.getLength());
+        System.out.println(sceneList.getLength());
 
-            for (int i=0; i<sceneList.getLength();i++){
+        for (int i=0; i<sceneList.getLength();i++){
 
-                System.out.println("Printing information for sceneList "+(i+1));
+            System.out.println("Printing information for sceneList "+(i+1));
                 Node scene = sceneList.item(i);
-                String sceneName = scene.getAttributes().getNamedItem("name").getNodeValue();
-                System.out.println("set name = "+sceneName);
+            String sceneName = scene.getAttributes().getNamedItem("name").getNodeValue();
+            System.out.println("set name = "+sceneName);
 
-                Element neighbors = (Element) scene;
-                NodeList neighborList = neighbors.getElementsByTagName("neighbor");
-                NodeList takeList = neighbors.getElementsByTagName("take");
-                NodeList partList = neighbors.getElementsByTagName("part");
+            Element neighbors = (Element) scene;
+            NodeList neighborList = neighbors.getElementsByTagName("neighbor");
+            NodeList takeList = neighbors.getElementsByTagName("take");
+            NodeList partList = neighbors.getElementsByTagName("part");
 
 
-                for (int j=0; j< neighborList.getLength(); j++){
+            for (int j=0; j< neighborList.getLength(); j++){
 
-                  Node sub = neighborList.item(j);
+                Node sub = neighborList.item(j);
 
-                  String neighborName = sub.getAttributes().getNamedItem("name").getNodeValue();
-                  System.out.println("neighborName = "+neighborName);
-                  System.out.println();
+                String neighborName = sub.getAttributes().getNamedItem("name").getNodeValue();
+                System.out.println("neighborName = "+neighborName);
+                System.out.println();
 
-                }
+            }
 
-                for (int j=0; j< takeList.getLength(); j++){
+            for (int j=0; j< takeList.getLength(); j++){
 
-                  Node sub = takeList.item(j);
-                  String takeNum = sub.getAttributes().getNamedItem("number").getNodeValue();
-                  String x = "";
-                  String y = "";
-                  String h = "";
-                  String w = "";
+                Node sub = takeList.item(j);
+                String takeNum = sub.getAttributes().getNamedItem("number").getNodeValue();
+                String x = "";
+                String y = "";
+                String h = "";
+                String w = "";
 
-                  NodeList area = sub.getChildNodes();
-                  Node subsub = area.item(0);
+                NodeList area = sub.getChildNodes();
+                Node subsub = area.item(0);
 
-                  if("area".equals(subsub.getNodeName())){
+                if("area".equals(subsub.getNodeName())){
 
                     x = subsub.getAttributes().getNamedItem("x").getNodeValue();
                     y = subsub.getAttributes().getNamedItem("y").getNodeValue();
                     h = subsub.getAttributes().getNamedItem("h").getNodeValue();
                     w = subsub.getAttributes().getNamedItem("w").getNodeValue();
 
-                  }
-
-                  System.out.println("takeNum = "+takeNum);
-                  System.out.println("Area: " + x + ", " + y + ", " + h + ", " + w);
-                  System.out.println();
-
-
                 }
 
-                for (int j=0; j< partList.getLength(); j++){
+                System.out.println("takeNum = "+takeNum);
+                System.out.println("Area: " + x + ", " + y + ", " + h + ", " + w);
+                System.out.println();
 
-                  Node sub = partList.item(j);
-                  String partName = sub.getAttributes().getNamedItem("name").getNodeValue();
-                  String level = sub.getAttributes().getNamedItem("level").getNodeValue();
-                  String line = "";
-                  String x = "";
-                  String y = "";
-                  String h = "";
-                  String w = "";
 
-                  NodeList moreChildren = sub.getChildNodes();
+            }
 
-                  for (int k = 0; k < moreChildren.getLength(); k++ ) {
+            for (int j=0; j< partList.getLength(); j++){
+
+                Node sub = partList.item(j);
+                String partName = sub.getAttributes().getNamedItem("name").getNodeValue();
+                String level = sub.getAttributes().getNamedItem("level").getNodeValue();
+                String line = "";
+                String x = "";
+                String y = "";
+                String h = "";
+                String w = "";
+
+                NodeList moreChildren = sub.getChildNodes();
+
+                for (int k = 0; k < moreChildren.getLength(); k++ ) {
 
                     Node subsub = moreChildren.item(k);
 
                     if("area".equals(subsub.getNodeName())){
 
-                      x = subsub.getAttributes().getNamedItem("x").getNodeValue();
-                      y = subsub.getAttributes().getNamedItem("y").getNodeValue();
-                      h = subsub.getAttributes().getNamedItem("h").getNodeValue();
-                      w = subsub.getAttributes().getNamedItem("w").getNodeValue();
+                        x = subsub.getAttributes().getNamedItem("x").getNodeValue();
+                        y = subsub.getAttributes().getNamedItem("y").getNodeValue();
+                        h = subsub.getAttributes().getNamedItem("h").getNodeValue();
+                        w = subsub.getAttributes().getNamedItem("w").getNodeValue();
 
                     }
 
                     if("line".equals(subsub.getNodeName()))
-                      line = subsub.getTextContent();
-
-                  }
-
-
-                  System.out.println("partName = "+partName);
-                  System.out.println("level = "+level);
-                  System.out.println("Line = " + line);
-                  System.out.println("Area: " + x + ", " + y + ", " + h + ", " + w);
-                  System.out.println();
-
-
+                    line = subsub.getTextContent();
 
                 }
-                System.out.println("\n");
 
+
+                System.out.println("partName = "+partName);
+                System.out.println("level = "+level);
+                System.out.println("Line = " + line);
+                System.out.println("Area: " + x + ", " + y + ", " + h + ", " + w);
+                System.out.println();
+
+
+
+            }
+            System.out.println("\n");
+
+        }
+
+    }
+
+    public void readForTrailer(Document d)
+    {
+
+        Element root = d.getDocumentElement();
+        NodeList trailerNode = root.getElementsByTagName("trailer");
+        Node sub = trailerNode.item(0);
+        NodeList childrenTrailer = sub.getChildNodes();
+
+        String x = "";
+        String y = "";
+        String h = "";
+        String w = "";
+
+        for (int k = 0; k < childrenTrailer.getLength(); k++ ) {
+
+            Node subsub = childrenTrailer.item(k);
+
+            if("area".equals(subsub.getNodeName())){
+
+                x = subsub.getAttributes().getNamedItem("x").getNodeValue();
+                y = subsub.getAttributes().getNamedItem("y").getNodeValue();
+                h = subsub.getAttributes().getNamedItem("h").getNodeValue();
+                w = subsub.getAttributes().getNamedItem("w").getNodeValue();
+
+            }
+
+            if("neighbors".equals(subsub.getNodeName())){
+
+                Element neighbors = (Element) subsub;
+                NodeList trailerNeighbors = neighbors.getElementsByTagName("neighbor");
+
+                for (int j = 0; j < trailerNeighbors.getLength(); j++) {
+
+                    Node subs = trailerNeighbors.item(j);
+                    String neighborName = subs.getAttributes().getNamedItem("name").getNodeValue();
+                    System.out.println("neighborName = "+neighborName);
+
+                }
             }
 
 
         }
 
-        public void readCardData(Document d)
-        {
+        System.out.println("Area: " + x + ", " + y + ", " + h + ", " + w);
 
-          Element root = d.getDocumentElement();
-          NodeList cardList = root.getElementsByTagName("card");
-          System.out.println(cardList.getLength());
+    }
 
-          for (int i=0; i<cardList.getLength();i++){
+    public void readForOffice(Document d)
+    {
 
-              System.out.println("Printing information for cardList "+(i+1));
-              Node card = cardList.item(i);
+        Element root = d.getDocumentElement();
+        NodeList officeNode = root.getElementsByTagName("office");
+        Node sub = officeNode.item(0);
+        NodeList childrenOffice = sub.getChildNodes();
+        String x = "";
+        String y = "";
+        String h = "";
+        String w = "";
+        String xUpgrade = "";
+        String yUpgrade = "";
+        String hUpgrade = "";
+        String wUpgrade = "";
 
-              String cardName = card.getAttributes().getNamedItem("name").getNodeValue();
-              String budget = card.getAttributes().getNamedItem("budget").getNodeValue();
-              String img = card.getAttributes().getNamedItem("img").getNodeValue();
+        for (int k = 0; k < childrenOffice.getLength(); k++ ) {
 
-              System.out.println("card name = "+cardName);
-              System.out.println("budget = "+budget);
+            Node subsub = childrenOffice.item(k);
 
-              NodeList children = card.getChildNodes();
+            if("area".equals(subsub.getNodeName())){
+
+                x = subsub.getAttributes().getNamedItem("x").getNodeValue();
+                y = subsub.getAttributes().getNamedItem("y").getNodeValue();
+                h = subsub.getAttributes().getNamedItem("h").getNodeValue();
+                w = subsub.getAttributes().getNamedItem("w").getNodeValue();
+
+                System.out.println("Area of Office: " + x + ", " + y + ", " + h + ", " + w);
+                System.out.println();
+
+            }
+
+            if("neighbors".equals(subsub.getNodeName())){
+
+                Element neighbors = (Element) subsub;
+                NodeList trailerNeighbors = neighbors.getElementsByTagName("neighbor");
+
+                for (int j = 0; j < trailerNeighbors.getLength(); j++) {
+
+                    Node subs = trailerNeighbors.item(j);
+                    String neighborName = subs.getAttributes().getNamedItem("name").getNodeValue();
+                    System.out.println("neighborName = "+neighborName);
+
+                }
+            }
+
+            if("upgrades".equals(subsub.getNodeName())){
+
+                Element upgrade = (Element) subsub;
+                NodeList upgradeNodes = upgrade.getElementsByTagName("upgrade");
+
+                for (int j = 0; j < upgradeNodes.getLength(); j++) {
+
+                    Node ssub = upgradeNodes.item(j);
+
+                    String level = ssub.getAttributes().getNamedItem("level").getNodeValue();
+                    String amt = ssub.getAttributes().getNamedItem("amt").getNodeValue();
+                    String currency = ssub.getAttributes().getNamedItem("currency").getNodeValue();
+
+                    System.out.print("level : " + level + ", ");
+                    System.out.print("currency : " + currency + ", ");
+                    System.out.println("amt : " + amt);
+
+                    Element areaUp = (Element) subsub;
+
+                    NodeList areaOfUpgrades = areaUp.getElementsByTagName("area");
+                    Node ssubsub = areaOfUpgrades.item(j);
+
+                    xUpgrade = ssubsub.getAttributes().getNamedItem("x").getNodeValue();
+                    yUpgrade = ssubsub.getAttributes().getNamedItem("y").getNodeValue();
+                    hUpgrade = ssubsub.getAttributes().getNamedItem("h").getNodeValue();
+                    wUpgrade = ssubsub.getAttributes().getNamedItem("w").getNodeValue();
+                    System.out.println("Area: " + xUpgrade + ", " + yUpgrade + ", " + hUpgrade + ", " + wUpgrade);
+                    System.out.println();
 
 
-              for (int j=0; j< children.getLength(); j++){
+                }
+
+            }
+
+        }
+
+    }
+
+
+    public void readCardData(Document d)
+    {
+
+        Element root = d.getDocumentElement();
+        NodeList cardList = root.getElementsByTagName("card");
+        System.out.println(cardList.getLength());
+
+        for (int i=0; i<cardList.getLength();i++){
+
+            System.out.println("Printing information for cardList "+(i+1));
+                Node card = cardList.item(i);
+
+            String cardName = card.getAttributes().getNamedItem("name").getNodeValue();
+            String budget = card.getAttributes().getNamedItem("budget").getNodeValue();
+            String img = card.getAttributes().getNamedItem("img").getNodeValue();
+
+            System.out.println("card name = "+cardName);
+            System.out.println("budget = "+budget);
+
+            NodeList children = card.getChildNodes();
+
+
+            for (int j=0; j< children.getLength(); j++){
 
                 Node sub = children.item(j);
 
@@ -172,58 +303,58 @@ public class ParseXML{
                 if("scene".equals(sub.getNodeName())){
 
 
-                  String sceneNum =  sub.getAttributes().getNamedItem("number").getNodeValue();
-                  String description = sub.getTextContent();
+                    String sceneNum =  sub.getAttributes().getNamedItem("number").getNodeValue();
+                    String description = sub.getTextContent();
 
-                  System.out.println("Scene description = " + description);
-                  System.out.println("sceneNum = "+ sceneNum);
+                    System.out.println("Scene description = " + description);
+                    System.out.println("sceneNum = "+ sceneNum);
 
                 }
 
                 else if("part".equals(sub.getNodeName())){
 
-                  NodeList moreChildren = sub.getChildNodes();
-                  String line = "";
-                  String x = "";
-                  String y = "";
-                  String h = "";
-                  String w = "";
+                    NodeList moreChildren = sub.getChildNodes();
+                    String line = "";
+                    String x = "";
+                    String y = "";
+                    String h = "";
+                    String w = "";
 
-                  for (int k = 0; k < moreChildren.getLength(); k++ ) {
+                    for (int k = 0; k < moreChildren.getLength(); k++ ) {
 
-                    Node subsub = moreChildren.item(k);
+                        Node subsub = moreChildren.item(k);
 
-                    if("area".equals(subsub.getNodeName())){
+                        if("area".equals(subsub.getNodeName())){
 
-                      x = subsub.getAttributes().getNamedItem("x").getNodeValue();
-                      y = subsub.getAttributes().getNamedItem("y").getNodeValue();
-                      h = subsub.getAttributes().getNamedItem("h").getNodeValue();
-                      w = subsub.getAttributes().getNamedItem("w").getNodeValue();
+                            x = subsub.getAttributes().getNamedItem("x").getNodeValue();
+                            y = subsub.getAttributes().getNamedItem("y").getNodeValue();
+                            h = subsub.getAttributes().getNamedItem("h").getNodeValue();
+                            w = subsub.getAttributes().getNamedItem("w").getNodeValue();
+
+                        }
+
+                        if("line".equals(subsub.getNodeName()))
+                        line = subsub.getTextContent();
 
                     }
 
-                    if("line".equals(subsub.getNodeName()))
-                      line = subsub.getTextContent();
+                    String partName =  sub.getAttributes().getNamedItem("name").getNodeValue();
+                    String level =  sub.getAttributes().getNamedItem("level").getNodeValue();
 
-                  }
-
-                  String partName =  sub.getAttributes().getNamedItem("name").getNodeValue();
-                  String level =  sub.getAttributes().getNamedItem("level").getNodeValue();
-
-                  System.out.print("Part name = " + partName + ", ");
-                  System.out.println("Level = " + level);
-                  System.out.println("Line = " + line);
-                  System.out.println("Area: " + x + ", " + y + ", " + h + ", " + w);
+                    System.out.print("Part name = " + partName + ", ");
+                    System.out.println("Level = " + level);
+                    System.out.println("Line = " + line);
+                    System.out.println("Area: " + x + ", " + y + ", " + h + ", " + w);
 
                 }
 
-              } //for childnodes
+            } //for childnodes
 
-              System.out.println("\n");
-
-          }
+            System.out.println("\n");
 
         }
+
+    }
 
 
 }//class
