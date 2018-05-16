@@ -4,24 +4,52 @@ import java.util.Arrays;
 
 public class Card
 {
+    String name;
     int shotMarker;
-    static int budget;
-    ArrayList<Role> roles = new ArrayList<Role>();
-
-
+    int budget;
     boolean isWrapped = false;
+    ArrayList<Role> roles = new ArrayList<Role>();
+    Set set = null;
 
 
-    public Card(String name, int budget, int shotMarker)
+
+    public Card(String name, int budget)
     {
         this.name = name;
         this.budget = budget;
-        this.shotMarker = shotMarker;
     }
 
+
+    public int getShotMarker(){
+      return this.shotMarker;
+    }
+
+    public int getBudget(){
+      return this.budget;
+    }
+
+    public boolean getIsWrapped(){
+      return this.isWrapped;
+    }
+
+    public Set getSet(){
+      return this.set;
+    }
+
+    public void setSet(Set set){
+      this.set = set;
+    }
+
+    public void addRoles(Role role){
+      roles.add(role);
+    }
+
+    //$$$$$$$
+    //to do
+    //$$$$$$$
     public void wrapScene()
     {
-      int[] payout = new int[budget];
+      int[] payout = new int[getBudget()];
       for(int i = 0; i< payout.length; i++){
         payout[i] = Board.roleDie();
       }
@@ -29,26 +57,5 @@ public class Card
       System.out.printf("Modified arr[] : %s", Arrays.toString(payout));
 
     }
-
-    public int getShotMarker(){
-      return this.shotMarker;
-    }
-
-    public boolean getIsWrapped(){
-      return this.isWrapped;
-    }
-
-    public int getBudget(){
-      return this.budget;
-    }
-
-    public void decrementShotMarker(){
-      shotMarker--;
-    }
-
-    public void setWrapped(boolean wrap){
-      this.isWrapped = wrap;
-    }
-
 
 }

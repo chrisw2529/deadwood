@@ -8,7 +8,7 @@ public class Space
 
     public Space(String name)
     {
-        name = this.name;
+        this.name = name;
     }
 
     public void addNeighbor(String name){

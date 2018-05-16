@@ -1,8 +1,8 @@
 public class CastingOffice extends Space{
 
-  public CastingOffice(int spaceID, String name)
+  public CastingOffice(String name)
   {
-      super(spaceID, name);
+      super(name);
   }
 
   /* rankUpUsingCash(Player player)
