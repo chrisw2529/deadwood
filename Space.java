@@ -1,18 +1,14 @@
+import java.util.ArrayList;
 public class Space
 {
 
-    int spaceID = 0;
-    String name = ""; //scene names, casting office, trailer
+    String name; //scene names, casting office, trailer
 
     public Space(int spaceID, String name)
     {
-        spaceID = this.spaceID;
-        name = this.name;
+        this.name = name;
     }
 
-    public int getSpaceID(){
-        return this.spaceID;
-    }
 
     public String getName(){
         return this.name;
