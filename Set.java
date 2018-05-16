@@ -24,6 +24,10 @@ public class Set extends Space
       shotMarker--;
     }
 
+    public void addRoles(Role role){
+      roles.add(role);
+    }
+
 
 
 }
