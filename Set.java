@@ -3,10 +3,8 @@ import java.util.ArrayList;
 public class Set extends Space
 {
     int shotMarker;
+    String partName;
     ArrayList<Role> roles = new ArrayList<Role>();
-
-
-
 
     public Set(String name, int shotMarker)
     {
@@ -15,6 +13,10 @@ public class Set extends Space
     }
 
 
+    public ArrayList<Role> getRoles()
+    {
+      return this.roles;
+    }
 
     public int getShotMarker(){
       return this.shotMarker;
