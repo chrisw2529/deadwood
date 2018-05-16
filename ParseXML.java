@@ -36,40 +36,36 @@ public class ParseXML{
     }
 
     // reads data from XML file and prints data
-    public void readSceneData(Document d){
+    public void readSceneData(Document d, Board board){
 
         Element root = d.getDocumentElement();
         NodeList sceneList = root.getElementsByTagName("set");
+        Set newSet;
 
-        System.out.println(sceneList.getLength());
+        //System.out.println(sceneList.getLength());
 
         for (int i=0; i<sceneList.getLength();i++){
 
-            System.out.println("Printing information for sceneList "+(i+1));
+            // System.out.println("Printing information for sceneList "+(i+1));
             Node scene = sceneList.item(i);
             String sceneName = scene.getAttributes().getNamedItem("name").getNodeValue();
-            System.out.println("set name = "+sceneName);
+            // System.out.println("set name = "+sceneName);
+
 
             Element neighbors = (Element) scene;
             NodeList neighborList = neighbors.getElementsByTagName("neighbor");
             NodeList takeList = neighbors.getElementsByTagName("take");
             NodeList partList = neighbors.getElementsByTagName("part");
-
-
-            for (int j=0; j< neighborList.getLength(); j++){
-
-                Node sub = neighborList.item(j);
-
-                String neighborName = sub.getAttributes().getNamedItem("name").getNodeValue();
-                System.out.println("neighborName = "+neighborName);
-                System.out.println();
-
-            }
+            int shot = -1;
 
             for (int j=0; j< takeList.getLength(); j++){
 
                 Node sub = takeList.item(j);
                 String takeNum = sub.getAttributes().getNamedItem("number").getNodeValue();
+
+                if(j == 0)
+                  shot = Integer.parseInt(takeNum);
+
                 String x = "";
                 String y = "";
                 String h = "";
@@ -87,12 +83,15 @@ public class ParseXML{
 
                 }
 
-                System.out.println("takeNum = "+takeNum);
-                System.out.println("Area: " + x + ", " + y + ", " + h + ", " + w);
-                System.out.println();
+                // System.out.println("takeNum = "+takeNum);
+                // System.out.println("Area: " + x + ", " + y + ", " + h + ", " + w);
+                // System.out.println();
 
 
             }
+
+
+            newSet = new Set(sceneName, shot);
 
             for (int j=0; j< partList.getLength(); j++){
 
@@ -123,31 +122,54 @@ public class ParseXML{
                     if("line".equals(subsub.getNodeName()))
                     line = subsub.getTextContent();
 
-                }
 
 
-                System.out.println("partName = "+partName);
-                System.out.println("level = "+level);
-                System.out.println("Line = " + line);
-                System.out.println("Area: " + x + ", " + y + ", " + h + ", " + w);
-                System.out.println();
+                // System.out.println("partName = "+partName);
+                // System.out.println("level = "+level);
+                // System.out.println("Line = " + line);
+                // System.out.println("Area: " + x + ", " + y + ", " + h + ", " + w);
+                // System.out.println();
 
+                int lvl = Integer.parseInt(level);
 
+                Role newRole = new Role(partName, line, lvl, false);
+                newSet.addRoles(newRole);
 
             }
-            System.out.println("\n");
+            // System.out.println("\n");
 
         }
 
+
+            for (int j=0; j< neighborList.getLength(); j++){
+
+                Node sub = neighborList.item(j);
+
+                String neighborName = sub.getAttributes().getNamedItem("name").getNodeValue();
+                // System.out.println("neighborName = "+neighborName);
+                // System.out.println();
+
+                newSet.addNeighbor(neighborName);
+
+            }
+
+            board.addToSets(newSet);
+
+        }
+
+        //board.addToSets(newSet);
+
     }
 
-    public void readForTrailer(Document d)
+    public void readForTrailer(Document d, Board b)
     {
 
         Element root = d.getDocumentElement();
         NodeList trailerNode = root.getElementsByTagName("trailer");
         Node sub = trailerNode.item(0);
         NodeList childrenTrailer = sub.getChildNodes();
+
+        Trailer trailer = new Trailer("Trailer");
 
         String x = "";
         String y = "";
@@ -176,7 +198,9 @@ public class ParseXML{
 
                     Node subs = trailerNeighbors.item(j);
                     String neighborName = subs.getAttributes().getNamedItem("name").getNodeValue();
-                    System.out.println("neighborName = "+neighborName);
+                    //System.out.println("neighborName = "+neighborName);
+
+                    trailer.addNeighbor(neighborName);
 
                 }
             }
@@ -184,11 +208,11 @@ public class ParseXML{
 
         }
 
-        System.out.println("Area: " + x + ", " + y + ", " + h + ", " + w);
+      //  System.out.println("Area: " + x + ", " + y + ", " + h + ", " + w);
 
     }
 
-    public void readForOffice(Document d)
+    public void readForOffice(Document d, Board b)
     {
 
         Element root = d.getDocumentElement();
@@ -204,6 +228,9 @@ public class ParseXML{
         String hUpgrade = "";
         String wUpgrade = "";
 
+        CastingOffice office = new CastingOffice("Office");
+
+
         for (int k = 0; k < childrenOffice.getLength(); k++ ) {
 
             Node subsub = childrenOffice.item(k);
@@ -215,8 +242,8 @@ public class ParseXML{
                 h = subsub.getAttributes().getNamedItem("h").getNodeValue();
                 w = subsub.getAttributes().getNamedItem("w").getNodeValue();
 
-                System.out.println("Area of Office: " + x + ", " + y + ", " + h + ", " + w);
-                System.out.println();
+                // System.out.println("Area of Office: " + x + ", " + y + ", " + h + ", " + w);
+                // System.out.println();
 
             }
 
@@ -229,7 +256,9 @@ public class ParseXML{
 
                     Node subs = trailerNeighbors.item(j);
                     String neighborName = subs.getAttributes().getNamedItem("name").getNodeValue();
-                    System.out.println("neighborName = "+neighborName);
+                    // System.out.println("neighborName = "+neighborName);
+
+                    office.addNeighbor(neighborName);
 
                 }
             }
@@ -247,9 +276,9 @@ public class ParseXML{
                     String amt = ssub.getAttributes().getNamedItem("amt").getNodeValue();
                     String currency = ssub.getAttributes().getNamedItem("currency").getNodeValue();
 
-                    System.out.print("level : " + level + ", ");
-                    System.out.print("currency : " + currency + ", ");
-                    System.out.println("amt : " + amt);
+                    // System.out.print("level : " + level + ", ");
+                    // System.out.print("currency : " + currency + ", ");
+                    // System.out.println("amt : " + amt);
 
                     Element areaUp = (Element) subsub;
 
@@ -260,8 +289,8 @@ public class ParseXML{
                     yUpgrade = ssubsub.getAttributes().getNamedItem("y").getNodeValue();
                     hUpgrade = ssubsub.getAttributes().getNamedItem("h").getNodeValue();
                     wUpgrade = ssubsub.getAttributes().getNamedItem("w").getNodeValue();
-                    System.out.println("Area: " + xUpgrade + ", " + yUpgrade + ", " + hUpgrade + ", " + wUpgrade);
-                    System.out.println();
+                    // System.out.println("Area: " + xUpgrade + ", " + yUpgrade + ", " + hUpgrade + ", " + wUpgrade);
+                    // System.out.println();
 
 
                 }
@@ -278,7 +307,7 @@ public class ParseXML{
 
         Element root = d.getDocumentElement();
         NodeList cardList = root.getElementsByTagName("card");
-    
+
         for (int i=0; i<cardList.getLength();i++){
 
             System.out.println("Printing information for cardList "+(i+1));
