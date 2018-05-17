@@ -10,7 +10,6 @@ public class Card
     int sceneNum;
     int shotMarker;
     int budget;
-    boolean isWrapped = false;
     ArrayList<Role> roles = new ArrayList<Role>();
     Set set = null;
 
@@ -34,10 +33,6 @@ public class Card
 
     public int getBudget(){
       return this.budget;
-    }
-
-    public boolean getIsWrapped(){
-      return this.isWrapped;
     }
 
     public Set getSet(){
@@ -96,6 +91,7 @@ public class Card
         }
       }
       System.out.println("scene wrapped");
+
     }
 
 }
