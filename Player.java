@@ -69,8 +69,8 @@ public class Player{
         }
       }
 ////////////////////////////////////////////////// Needs fixing (Wrap scene)
-    //  if(player.currentRole.getSet().getShotMarker() == 0)
-      //  player.currentRole.getSet().wrapScene();
+    //if(player.currentRole.getSet().getShotMarker() == 0)
+//player.currentRole.getSet().wrapScene();
         ////////////////////////////////////////////////////////
 
 

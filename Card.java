@@ -63,11 +63,22 @@ public class Card
       }
       //Collections.reversep(Arrays.asList(payout));
       System.out.printf("Modified arr[] : %s\n", Arrays.toString(payout));
-      for(int i = 0; i > payout.length; i++){
-        for(int j = roles.size() - 1; j--){
+      int count = 0;
+      while(count < payout.length){
+        for(int j = roles.size() - 1; j >= 0; j--){
+          Player payTo = roles.get(j).getPlayer();
+          if(payTo != null){
+            payTo.setCash(payTo.getCash() + payout[count]);
+            System.out.println("player " + j + "cash increased by " + payout[count]);
 
+          }
+          count++;
+          if(count >= payout.length){
+            break;
+          }
         }
       }
+      System.out.println("scene wrapped");
     }
 
 }
