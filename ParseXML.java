@@ -302,7 +302,7 @@ public class ParseXML{
     }
 
 
-    public void readCardData(Document d)
+    public void readCardData(Document d, Card c)
     {
 
         Element root = d.getDocumentElement();
@@ -319,6 +319,8 @@ public class ParseXML{
 
             System.out.println("card name = "+cardName);
             System.out.println("budget = "+budget);
+
+            c = new Card(cardName, Integer.parseInt(budget));
 
             NodeList children = card.getChildNodes();
 
@@ -337,9 +339,12 @@ public class ParseXML{
                     System.out.println("Scene description = " + description);
                     System.out.println("sceneNum = "+ sceneNum);
 
+                    c.setSceneNum(Integer.parseInt(sceneNum));
+                    c.setDescription(description);
+
                 }
 
-                else if("part".equals(sub.getNodeName())){
+                if("part".equals(sub.getNodeName())){
 
                     NodeList moreChildren = sub.getChildNodes();
                     String line = "";
@@ -368,6 +373,9 @@ public class ParseXML{
 
                     String partName =  sub.getAttributes().getNamedItem("name").getNodeValue();
                     String level =  sub.getAttributes().getNamedItem("level").getNodeValue();
+
+                    Role cardRoles = new Role(partName, line, Integer.parseInt(level), c.getSet(), true);
+                    c.addRoles(cardRoles);
 
                     System.out.print("Part name = " + partName + ", ");
                     System.out.println("Level = " + level);

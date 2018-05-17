@@ -6,6 +6,8 @@ import java.lang.*;
 public class Card
 {
     String name;
+    String description;
+    int sceneNum;
     int shotMarker;
     int budget;
     boolean isWrapped = false;
@@ -18,6 +20,11 @@ public class Card
     {
         this.name = name;
         this.budget = budget;
+    }
+
+    public void setUpCard(Card card)
+    {
+
     }
 
 
@@ -35,6 +42,16 @@ public class Card
 
     public Set getSet(){
       return this.set;
+    }
+
+    public void setDescription(String description)
+    {
+        this.description = description;
+    }
+
+    public void setSceneNum(int sceneNum)
+    {
+        this.sceneNum = sceneNum;
     }
 
     public void setSet(Set set){
