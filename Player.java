@@ -16,7 +16,7 @@ public class Player{
         this.ID = id;
     }
 
-    public void move(Player player)
+    public void move(Player player, String destination)
     {
 
       if(player.isTurn == false) {
@@ -38,10 +38,11 @@ public class Player{
 
       }
 
-      Random rand = new Random();
-      int dieRoll = (rand.nextInt(6) + 1) + player.rehearsalTok;
+      int dieRoll = Board.roleDie();
+      System.out.println(dieRoll);
+      System.out.println("budget " + player.currentRole.getBudget());
 
-      if(dieRoll >= player.currentRole.getScene().getBudget()) {
+      if(dieRoll >= player.currentRole.getBudget()) {
 
         if(player.currentRole.onScene == true) {
           player.fame += 2;
@@ -54,7 +55,7 @@ public class Player{
           System.out.println("Player " + player.ID + " has acted successfully and has gained 1 fame and 1 cash.");
         }
 
-        currentRole.getScene().decrementShotMarker();
+        player.currentRole.getSet().decrementShotMarker();
 
       }
 
@@ -67,12 +68,11 @@ public class Player{
           System.out.println("Since player " + player.ID + " was off-scene, they have gained 1 cash.");
         }
       }
+////////////////////////////////////////////////// Needs fixing (Wrap scene)
+    //  if(player.currentRole.getSet().getShotMarker() == 0)
+      //  player.currentRole.getSet().wrapScene();
+        ////////////////////////////////////////////////////////
 
-      if(player.currentRole.getScene().getShotMarker() == 0) {
-
-        player.currentRole.getScene().wrapScene();
-
-      }
 
       player.isTurn = false;
       System.out.println("Player " + player.ID + "'s turn has ended.");
@@ -81,7 +81,14 @@ public class Player{
     public void rehearse(Player player)
     {
 
-      if(player.rehearsalTok == player.currentRole.getScene().getBudget() - 1) {
+      if(player.currentRole == null) {
+
+        System.out.println("Not on a scene!");
+        return;
+
+      }
+
+      if(player.rehearsalTok == player.currentRole.getLevel() - 1) {
         System.out.println("You have too many rehearsal tokens and you must act.");
         return;
       }
@@ -100,6 +107,11 @@ public class Player{
 
     public int getID(){
       return this.ID;
+    }
+
+    public Space getLocation()
+    {
+      return this.currentSpace;
     }
 
     public int getFame(){
@@ -140,6 +152,16 @@ public class Player{
 
     public void setTurn(boolean turn){
       this.isTurn = turn;
+    }
+
+    public void setRole(Role role)
+    {
+      this.currentRole = role;
+    }
+
+    public void setSpace(Space space)
+    {
+      this.currentSpace = space;
     }
 
 }

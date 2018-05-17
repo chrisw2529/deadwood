@@ -31,6 +31,20 @@ public class Deadwood{
 
     Board board = new Board();
     board.setupBoard(board);
+    Player player = new Player(1);
+    Set space = new Set("dog", 10);
+    Role role = new Role("cat","puppy",2,space,true);
+    Card card = new Card("zebra", 3);
+    role.setBudget(3);
+    card.addRoles(role);
+    space.setCard(card);
+    //space.addRoles(role);
+    player.setRole(role);
+    player.setSpace(space);
+    player.rehearse(player);
+    player.act(player);
+
+    System.out.println(player.getLocation().getName());
   //  board.printSets();
   }
 
