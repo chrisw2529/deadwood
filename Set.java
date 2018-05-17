@@ -6,6 +6,7 @@ public class Set extends Space
     ArrayList<Role> roles = new ArrayList<Role>();
     Card card;
     int budget;
+    boolean isWrapped = false;
 
     public Set(String name, int shotMarker)
     {
@@ -30,9 +31,18 @@ public class Set extends Space
       return this.budget;
     }
 
+    public boolean getIsWrapped(){
+      return this.isWrapped;
+    }
+
     public Card getCard()
     {
       return this.card;
+    }
+
+    public void setIsWrapped()
+    {
+      this.isWrapped = true;
     }
 
     public void setCard(Card card)
