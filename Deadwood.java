@@ -55,7 +55,8 @@ public class Deadwood{
       }
       else if(c.contains("act")){
         Player player = board.activePlayer();
-        player.act();
+        //player.setSpace
+        player.act(player);
       }
     }
     //String command = System.in();
