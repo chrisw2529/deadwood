@@ -29,10 +29,13 @@ public class Player{
           ArrayList<String> neighbors = currentSpace.getNeighbors();
           for(int i = 0; i < neighbors.size(); i++){
             if(neighbors.get(i).equals(destination) && moved == false){
+
+
+
               currentSpace = board.getSpaceMap().get(neighbors.get(i));
               moved = true;
               System.out.println("player " + player.getID() + " has moved to " + currentSpace.getName());
-              takeRole(player, board);
+              takeRole(player, board, false);
               break;
             }
           }
@@ -65,99 +68,154 @@ public class Player{
       return null;
     }
 
-    public void takeRole(Player player, Board board){
+    public void takeRole(Player player, Board board, Boolean alreadyOnSet){
       Scanner sc = new Scanner(System.in);
-      String c = "";
+      String c = "y";
+
+      if(player.currentRole != null) {
+        System.out.println("Already on a role!");
+        return;
+      }
+
+      if(player.currentSpace.getName() == "Casting Office" || player.currentSpace.getName() == "Trailer") {
+        System.out.println("You cannot take a role on this space!");
+        return;
+      }
+
+
+
       if(spaceToSet(player, board).getIsWrapped() == false){
-        System.out.println("would you like to take a role? (y/n)");
-        c = sc.nextLine();
-        if(c.equals("y")){
-          System.out.println("which role would you like to take? or press q to cancel");
-          Set set = spaceToSet(player, board);
-          ArrayList<Role> off = set.getRoles();
-          ArrayList<Role> on = set.getCard().getRoles();
-          System.out.println("off");
-          System.out.println("size of off is " + off.size());
-          for (int  i = 0 ; i < off.size() ; i++ ) {
-            System.out.println("( "+ (i+ 1) +" ) "+ off.get(i).getName() + " requires rank " + off.get(i).getLevel());
-          }
-          System.out.println("on");
-          for (int  i = 0 ; i < on.size() ; i++ ) {
-            System.out.println("( "+ (i+1) +" ) " + on.get(i).getName() + " requires rank " + on.get(i).getLevel());
-          }
-          Boolean notDone = true;
 
-          while(notDone){
+        if (alreadyOnSet == false) {
+          System.out.println("would you like to take a role? (y/n)");
+          c = sc.nextLine();
+        }
+
+        Boolean chooseWisely = true;
+
+        while(chooseWisely == true){
+
+          if(c.equals("y")){
+            System.out.println("which role would you like to take? or press end to cancel");
+            Set set = spaceToSet(player, board);
+            ArrayList<Role> off = set.getRoles();
+            ArrayList<Role> on = set.getCard().getRoles();
+            System.out.println("off");
+            System.out.println("size of off is " + off.size());
+            for (int  i = 0 ; i < off.size() ; i++ ) {
+              System.out.println("( "+ (i+ 1) +" ) "+ off.get(i).getName() + " requires rank " + off.get(i).getLevel());
+            }
+            System.out.println("on");
+            for (int  i = 0 ; i < on.size() ; i++ ) {
+              System.out.println("( "+ (i+1) +" ) " + on.get(i).getName() + " requires rank " + on.get(i).getLevel());
+            }
+
+            Boolean notDone = true;
+
+            while(notDone){
+              c = sc.nextLine();
+              if(c.equals("on 1")){
+                notDone = (!roleQualificationCheck(player, on.get(0)));
+                chooseWisely = false;
+              }
+              else if(c.equals("on 2")){
+                if(on.get(1)!= null){
+                  notDone = (!roleQualificationCheck(player, on.get(1)));
+                  chooseWisely = false;
+                }
+                else{
+                  System.out.println("role DNE!");
+                }
+              }
+              else if(c.equals("on 3")){
+                if(on.get(2)!= null){
+                  notDone = (!roleQualificationCheck(player, on.get(2)));
+                  chooseWisely = false;
+                }
+                else{
+                  System.out.println("role DNE!");
+                }
+              }
+              else if(c.equals("on 4")){
+                if(on.get(3)!= null){
+                  notDone = (!roleQualificationCheck(player, on.get(3)));
+                  chooseWisely = false;
+                }
+                else{
+                  System.out.println("role DNE!");
+                }
+              }
+              else if(c.equals("off 1")){
+                notDone = (!roleQualificationCheck(player, off.get(0)));
+                chooseWisely = false;
+              }
+              else if(c.equals("off 2")){
+                notDone = (!roleQualificationCheck(player, off.get(1)));
+                chooseWisely = false;
+              }
+              else if(c.equals("off 3")){
+                if(off.get(2)!= null){
+                  notDone = (!roleQualificationCheck(player, on.get(2)));
+                  chooseWisely = false;
+
+                }
+                else{
+                  System.out.println("role DNE!");
+                }
+              }
+              else if(c.equals("off 4")){
+                if(off.get(3)!= null){
+                  notDone = (!roleQualificationCheck(player, off.get(3)));
+                  chooseWisely = false;
+
+                }
+                else{
+                  System.out.println("role DNE!");
+                }
+              }
+              else if(c.equals("end")){
+                if(alreadyOnSet != true) {
+                  endTurn(player, board);
+                }
+                else {
+                  System.out.println("What would you like to do?");
+                }
+                notDone = false;
+                chooseWisely = false;
+              }
+
+              else{
+                System.out.println("Not a valid entry, use the format 'off (num)'");
+                System.out.println("For example, 'off 1'");
+                System.out.println("If you decide you don't want to take a role afterall, type 'end'");
+              }
+            }
+
+
+
+          }
+          else if(c.equals("n")){
+            System.out.println("you have decided not to take a role ending turn");
+            chooseWisely = false;
+            endTurn(player, board);
+          }
+
+          else if(c.equals("end")){
+            System.out.println("you have decided not to take a role ending turn");
+            chooseWisely = false;
+            endTurn(player, board);
+          }
+
+          else {
+            System.out.println("Invalid entry, use 'y', 'n'");
             c = sc.nextLine();
-            if(c.equals("on 1")){
-              notDone = (!roleQualificationCheck(player, on.get(0)));
-            }
-            else if(c.equals("on 2")){
-              if(on.get(1)!= null){
-                notDone = (!roleQualificationCheck(player, on.get(1)));
-              }
-              else{
-                System.out.println("role DNE!");
-              }
-            }
-            else if(c.equals("on 3")){
-              if(on.get(2)!= null){
-                notDone = (!roleQualificationCheck(player, on.get(2)));
-              }
-              else{
-                System.out.println("role DNE!");
-              }
-            }
-            else if(c.equals("on 4")){
-              if(on.get(3)!= null){
-                notDone = (!roleQualificationCheck(player, on.get(3)));
-              }
-              else{
-                System.out.println("role DNE!");
-              }
-            }
-            else if(c.equals("off 1")){
-              notDone = (!roleQualificationCheck(player, off.get(0)));
-            }
-            else if(c.equals("off 2")){
-              notDone = (!roleQualificationCheck(player, off.get(1)));
-            }
-            else if(c.equals("off 3")){
-              if(off.get(2)!= null){
-                notDone = (!roleQualificationCheck(player, on.get(2)));
-
-              }
-              else{
-                System.out.println("role DNE!");
-              }
-            }
-            else if(c.equals("off 4")){
-              if(off.get(3)!= null){
-                notDone = (!roleQualificationCheck(player, off.get(3)));
-
-              }
-              else{
-                System.out.println("role DNE!");
-              }
-            }
-            else if(c.equals("end")){
-              endTurn(player, board);
-              notDone = false;
-            }
-            else{
-              System.out.println("invalid entry");
-            }
           }
 
-
-
         }
-        else if(c.equals("n")){
-          System.out.println("you have decided not to take a role ending turn");
-          endTurn(player, board);
-        }
+
 
       }
+
       else{
         System.out.println("scene is wrapped ending turn");
         endTurn(player, board);

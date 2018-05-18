@@ -59,12 +59,12 @@ public class Deadwood{
 
       //must be able to take scene if already on a set
 
-      else if(c.equals("active player")){
-        player.getPlayerInfo(board.activePlayer(), board);
+      else if(c.equals("take role")){
+        player.takeRole(player, board, true);
       }
 
-      else if(c.equals("show location of active player")){
-        System.out.println("the active player is player " + player.getID() + " they are currently at the " + player.getSpace().getName());
+      else if(c.equals("active player")){
+        player.getPlayerInfo(board.activePlayer(), board);
       }
 
       else if(c.contains("rank up")){
