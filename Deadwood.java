@@ -79,9 +79,18 @@ public class Deadwood{
         player.getPlayerInfo(board.activePlayer(), board);
       }
 
-      else if(c.equals("rank up")){
-        player.setFame(19);
-        player.rankUpUsingFame(player, 3);
+      else if(c.contains("ru cash")){
+        if(c.substring(6, c.length()) != null)
+          int rankTo = c.substring(6, c.length());
+
+        player.rankUpUsingCash(player, rankTo);
+      }
+
+      else if(c.contains("ru fame")){
+        if(c.substring(6, c.length()) != null)
+          int rankTo = c.substring(6, c.length());
+
+        player.rankUpUsingFame(player, rankTo);
       }
 
       else if(c.equals("act")){
