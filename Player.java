@@ -1,5 +1,7 @@
 import java.util.Random;
 import java.util.ArrayList;
+import java.util.*;
+
 
 
 public class Player{
@@ -21,30 +23,163 @@ public class Player{
 
     public void move(Player player, String destination, Board board)
     {
-      Boolean moved = false;
-      if(player.isTurn == true) {
-        ArrayList<String> neighbors = currentSpace.getNeighbors();
-        for(int i = 0; i < neighbors.size(); i++){
-          if(neighbors.get(i).equals(destination) && moved == false){
-            currentSpace = board.getSpaceMap().get(neighbors.get(i));
-            moved = true;
-            System.out.println("player " + player.getID() + " has moved to " + currentSpace.getName());
-            break;
+      if(player.currentRole == null){
+        Boolean moved = false;
+        if(player.isTurn == true) {
+          ArrayList<String> neighbors = currentSpace.getNeighbors();
+          for(int i = 0; i < neighbors.size(); i++){
+            if(neighbors.get(i).equals(destination) && moved == false){
+              currentSpace = board.getSpaceMap().get(neighbors.get(i));
+              moved = true;
+              System.out.println("player " + player.getID() + " has moved to " + currentSpace.getName());
+              takeRole(player, board);
+              break;
+            }
           }
-        }
-        if(moved == false){
-          System.out.println("you can't move there!");
-        }
+          if(moved == false){
+            System.out.println("you can't move there!");
+          }
 
+        }
+        else{
+          System.out.println("Not your turn!");
+          return;
+        }
       }
       else{
-        System.out.println("Not your turn!");
-        return;
+        System.out.println("cannot move while on a role");
+      }
+
+
+
+
+    }
+    public Set spaceToSet(Player player, Board board){
+      ArrayList<Set> sets = board.getSetList();
+      for (int i = 0 ; i < sets.size() ; i++) {
+        if(sets.get(i).getName().equals(player.currentSpace.getName())){
+          return sets.get(i);
+        }
+      }
+      System.out.println("Error: set does not exist");
+      return null;
+    }
+    public void takeRole(Player player, Board board){
+      Scanner sc = new Scanner(System.in);
+      String c = "";
+      if(spaceToSet(player, board).getIsWrapped() == false){
+        System.out.println("would you like to take a role?");
+        c = sc.nextLine();
+        if(c.equals("yes")){
+          System.out.println("which role would you like to take? or press q to cancel");
+          Set set = spaceToSet(player, board);
+          ArrayList<Role> off = set.getRoles();
+          ArrayList<Role> on = set.getCard().getRoles();
+          System.out.println("off");
+          System.out.println("size of off is " + off.size());
+          for (int  i = 0 ; i < off.size() ; i++ ) {
+            System.out.println("( "+ (i+ 1) +" ) "+ off.get(i).getName() + " requires rank " + off.get(i).getLevel());
+          }
+          System.out.println("on");
+          for (int  i = 0 ; i < on.size() ; i++ ) {
+            System.out.println("( "+ (i+1) +" ) " + on.get(i).getName() + " requires rank " + on.get(i).getLevel());
+          }
+          Boolean notDone = true;
+
+          while(notDone){
+            c = sc.nextLine();
+            if(c.equals("on 1")){
+              notDone = (!roleQualificationCheck(player, on.get(0)));
+            }
+            else if(c.equals("on 2")){
+              if(on.get(1)!= null){
+                notDone = (!roleQualificationCheck(player, on.get(1)));
+              }
+              else{
+                System.out.println("role DNE!");
+              }
+            }
+            else if(c.equals("on 3")){
+              if(on.get(2)!= null){
+                notDone = (!roleQualificationCheck(player, on.get(2)));
+              }
+              else{
+                System.out.println("role DNE!");
+              }
+            }
+            else if(c.equals("on 4")){
+              if(on.get(3)!= null){
+                notDone = (!roleQualificationCheck(player, on.get(3)));
+              }
+              else{
+                System.out.println("role DNE!");
+              }
+            }
+            else if(c.equals("off 1")){
+              notDone = (!roleQualificationCheck(player, off.get(0)));
+            }
+            else if(c.equals("off 2")){
+              notDone = (!roleQualificationCheck(player, off.get(1)));
+            }
+            else if(c.equals("off 3")){
+              if(off.get(2)!= null){
+                notDone = (!roleQualificationCheck(player, on.get(2)));
+
+              }
+              else{
+                System.out.println("role DNE!");
+              }
+            }
+            else if(c.equals("off 4")){
+              if(off.get(3)!= null){
+                notDone = (!roleQualificationCheck(player, on.get(3)));
+
+              }
+              else{
+                System.out.println("role DNE!");
+              }
+            }
+            else if(c.equals("q")){
+              endTurn(player, board);
+              notDone = false;
+            }
+            else{
+              System.out.println("invalid entry");
+            }
+          }
+
+
+
+        }
+        else{
+          System.out.println("scene is wrapped");
+        }
       }
 
     }
+    public boolean roleQualificationCheck(Player player, Role role){
+      System.out.println("level is : " + role.getName()+ role.getLevel());
+      System.out.println("p levle ; " + player.rank );
+      if(role.takenBy != null){
+        System.out.println("role is takenBy another player");
+        return false;
+      }
+      else{
+        if(player.rank >= role.getLevel()){
+          player.currentRole = role;
+          role.setPlayer(player);
+          System.out.println("you accepted the role of " + player.currentRole.getName());
+          return true;
+        }
+        else{
+          System.out.println("you are not ranked high enough");
+          return false;
 
-    public void act(Player player)
+        }
+      }
+
+    }
+    public void act(Player player, Board board)
     {
 
       if(player.currentRole == null) {
@@ -57,7 +192,7 @@ public class Player{
       int dieRoll = Board.roleDie();
       System.out.println(dieRoll);
 
-      if(dieRoll >= player.currentRole.getBudget()) {
+      if(dieRoll >= spaceToSet(player, board).getBudget()) {
 
         if(player.currentRole.onScene == true) {
           player.fame += 2;
@@ -72,8 +207,8 @@ public class Player{
           System.out.println("Player " + player.ID + "has " + player.fame + " fame(s), $" + player.cash + ", and is rank " + player.rank);
 
         }
-
-        player.currentRole.getSet().decrementShotMarker();
+        System.out.println(player.spaceToSet(player, board).getName());
+        player.spaceToSet(player,board).decrementShotMarker();
 
       }
 
@@ -89,13 +224,13 @@ public class Player{
         }
       }
 //////////////////////////////////////////////// Needs fixing (Wrap scene)
-    if(player.currentRole.getSet().getShotMarker() == 0)
-      player.currentRole.getSet().getCard().wrapScene();
+    if(player.spaceToSet(player, board).getShotMarker() == 0)
+      player.spaceToSet(player,board).getCard().wrapScene();
         //////////////////////////////////////////////////////
-        endTurn(player);
+        endTurn(player, board);
     }
 
-    public void rehearse(Player player)
+    public void rehearse(Player player, Board board)
     {
 
       if(player.currentRole == null) {
@@ -112,7 +247,7 @@ public class Player{
 
       player.rehearsalTok++;
       System.out.println("Player " + player.ID + " has increased their rehearsal tokens to " + player.getRehearsal());
-      endTurn(player);
+      endTurn(player, board);
 
     }
 
@@ -171,10 +306,25 @@ public class Player{
     }
 
 
-    public void endTurn(Player player) {
+    public void endTurn(Player player, Board board) {
 
       System.out.println("Player " + player.ID + "'s turn has ended.");
       player.isTurn = false;
+      ArrayList<Player> players = board.getPlayers();
+      for(int i = 0; i < players.size(); i++){
+        if(players.get(i).getID() == player.ID){
+          if(i == players.size()- 1){
+            players.get(0).setTurn(true);
+            System.out.println("it is now player 1's turn ");
+          }
+          else{
+            players.get(i+1).setTurn(true);
+            System.out.println("it is now player" + (i + 2) +"'s turn ");
+
+
+          }
+        }
+      }
 
     }
 

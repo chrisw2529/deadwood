@@ -28,6 +28,9 @@ public class Deadwood{
     String c = "";
     while(!c.equals("e")){
       c = sc.nextLine();
+      Player player = board.activePlayer();
+
+
       //c.toLower();
       if(c.equals("show location of all players")){
         ArrayList<Player> players = board.getPlayers();
@@ -36,27 +39,35 @@ public class Deadwood{
         }
       }
       else if(c.contains("move to")){
-        Player player = board.activePlayer();
         String loc = c.substring(8, c.length());
         player.move(player, loc, board);
       }
       else if(c.equals("active player")){
-        Player player = board.activePlayer();
         System.out.println("the active player is player " + player.getID() + " they have " + player.getCash() + " Dollars and " +player.getFame()+ " Fame and they are rank " + player.getRank());
       }
       else if(c.equals("show location of active player")){
-        Player player = board.activePlayer();
         System.out.println("the active player is player " + player.getID() + " they are currently at the " + player.getSpace().getName());
       }
       else if(c.contains("rank up")){
-        Player player = board.activePlayer();
         player.setFame(19);
         player.rankUpUsingFame(player, 3);
       }
       else if(c.contains("act")){
-        Player player = board.activePlayer();
         //player.setSpace
-        player.act(player);
+        player.act(player, board);
+      }
+      else if(c.contains("rehearse")){
+        //player.setSpace
+        player.rehearse(player, board);
+      }
+      else if(c.contains("where CIM")){
+        System.out.println("player "+ player.getID()+ " can move to ");
+        ArrayList<String> neighbors =  player.getSpace().getNeighbors();
+        // /HashMap<String,Space> spaceMap = board.getSpaceMap();
+        for (int i = 0; i< neighbors.size(); i++) {
+
+          System.out.println(neighbors.get(i));
+        }
       }
     }
     //String command = System.in();

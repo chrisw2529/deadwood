@@ -40,9 +40,9 @@ public class Set extends Space
       return this.card;
     }
 
-    public void setIsWrapped()
+    public void setIsWrapped(boolean bool)
     {
-      this.isWrapped = true;
+      this.isWrapped = bool;
     }
 
     public void setCard(Card card)

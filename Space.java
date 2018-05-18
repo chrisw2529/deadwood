@@ -7,6 +7,7 @@ public class Space
     ArrayList<String> neighbors = new ArrayList<String>();
     ArrayList<Player> players = new ArrayList<Player>();
 
+
     public Space(String name)
     {
         this.name = name;
@@ -20,6 +21,7 @@ public class Space
         return this.name;
     }
     public ArrayList<String> getNeighbors(){
+
         return this.neighbors;
     }
 

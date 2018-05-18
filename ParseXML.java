@@ -105,7 +105,7 @@ public class ParseXML{
                 String w = "";
 
                 NodeList moreChildren = sub.getChildNodes();
-
+                int lvl = -1;
                 for (int k = 0; k < moreChildren.getLength(); k++ ) {
 
                     Node subsub = moreChildren.item(k);
@@ -130,12 +130,13 @@ public class ParseXML{
                 // System.out.println("Area: " + x + ", " + y + ", " + h + ", " + w);
                 // System.out.println();
 
-                int lvl = Integer.parseInt(level);
+                lvl = Integer.parseInt(level);
 
-                Role newRole = new Role(partName, line, lvl, newSet, false);
-                newSet.addRoles(newRole);
+
 
             }
+            Role newRole = new Role(partName, line, lvl, newSet, false);
+            newSet.addRoles(newRole);
             // System.out.println("\n");
 
         }

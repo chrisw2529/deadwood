@@ -39,8 +39,10 @@ public class Board {
 
     Collections.shuffle(cards);
 
-    for (int i = 0; i < sets.size(); i++)
+    for (int i = 0; i < sets.size(); i++){
       sets.get(i).setCard(cards.get(i));
+      cards.get(i).setSet(sets.get(i));
+    }
 
   }
 
@@ -79,7 +81,7 @@ public class Board {
     for(int i = 1; i < numPlayers + 1; i++){
       Player player = new Player(i);
       players.add(player);
-      player.setSpace(castingOffice);
+      player.setSpace(trailer);
       if(i == 1){
         player.setTurn(true);
       }

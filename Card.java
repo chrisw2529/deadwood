@@ -38,7 +38,10 @@ public class Card
     public Set getSet(){
       return this.set;
     }
-
+    public ArrayList<Role> getRoles()
+    {
+      return this.roles;
+    }
     public void setDescription(String description)
     {
         this.description = description;
@@ -76,6 +79,7 @@ public class Card
       //Collections.reversep(Arrays.asList(payout));
       System.out.printf("Modified arr[] : %s\n", Arrays.toString(payout));
       int count = 0;
+      //payout on card roles
       while(count < payout.length){
         for(int j = roles.size() - 1; j >= 0; j--){
           Player payTo = roles.get(j).getPlayer();
@@ -90,11 +94,26 @@ public class Card
           }
         }
       }
-
+      //reset roles for off scene
       for (int i = 0; i < set.getRoles().size(); i++) {
-        if(set.getRoles().get(i).takenBy != null)
-          set.getRoles().get(i).takenBy.setRehearsal(0);
+        if(set.getRoles().get(i).getplayer() != null)
+        System.out.println("player is " + set.getRoles().get(i).getplayer());
+          set.getRoles().get(i).getplayer().setRehearsal(0);
+          set.getRoles().get(i).getplayer().setRole(null);
+          set.getRoles().get(i).getplayer() = null;
       }
+      //reset roles for on scene
+
+      for (int i = 0; i < roles.size(); i++) {
+        if(roles.get(i).takenBy != null)
+          roles.get(i).getplayer().setRehearsal(0);
+          roles.get(i).getplayer().setRole(null);
+          roles.get(i).getplayer() = null;
+      }
+
+      //wrap set
+      Set set = getSet();
+      set.setIsWrapped(true);
 
       System.out.println("scene wrapped");
 
