@@ -261,7 +261,6 @@ public class Player{
 
       int dieRoll = Board.roleDie();
       System.out.println(dieRoll);
-      System.out.println("what does it sya: "+spaceToSet(player, board).getBudget());
 
 
       if(dieRoll >= spaceToSet(player, board).getCard().getBudget()) {
@@ -312,7 +311,7 @@ public class Player{
       }
 
       //somthing is wrong here
-      if(player.rehearsalTok == player.currentRole.getBudget() - 1) {
+      if(player.rehearsalTok == player.spaceToSet(player, board).getCard().getBudget() - 1) {
         System.out.println("You have too many rehearsal tokens and you must act.");
         return;
       }
