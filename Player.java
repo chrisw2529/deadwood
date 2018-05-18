@@ -64,6 +64,7 @@ public class Player{
       System.out.println("Error: set does not exist");
       return null;
     }
+
     public void takeRole(Player player, Board board){
       Scanner sc = new Scanner(System.in);
       String c = "";
@@ -163,6 +164,7 @@ public class Player{
       }
 
     }
+
     public boolean roleQualificationCheck(Player player, Role role){
       System.out.println("level is : " + role.getName()+ role.getLevel());
       System.out.println("p levle ; " + player.rank );
@@ -185,6 +187,7 @@ public class Player{
       }
 
     }
+
     public void act(Player player, Board board)
     {
 
@@ -245,6 +248,7 @@ public class Player{
         return;
 
       }
+      
       //somthing is wrong here
       if(player.rehearsalTok == player.currentRole.getLevel() - 1) {
         System.out.println("You have too many rehearsal tokens and you must act.");
@@ -357,6 +361,21 @@ public class Player{
 
     public int getRehearsal(){
       return this.rehearsalTok;
+    }
+
+    public void getPlayerInfo(Player player, Board board)
+    {
+
+        System.out.println("the active player is player " + player.ID + " they have $" + player.cash + " and " +player.fame+ " Fame and they are rank " + player.getRank());
+
+        if(currentRole != null) {
+          System.out.println("They are working on " + player.currentRole.getName()  + ", \"" + player.currentRole.getLine() + " \"" );
+        }
+
+        else {
+          System.out.println("They are on " + player.currentSpace.getName());
+        }
+
     }
 
     public boolean isTurn(){

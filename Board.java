@@ -20,7 +20,7 @@ import java.util.Collections;
 
 public class Board {
 
-  int day = 0;
+  int day = 1;
   int remainingScenes = 10;
   ArrayList<Player> players = new ArrayList<Player>();
   ArrayList<Set> sets = new ArrayList<Set>();
@@ -28,6 +28,7 @@ public class Board {
   HashMap<String,Space> spaceMap = new HashMap<String, Space>();
   Trailer trailer;
   CastingOffice castingOffice;
+
   public void setupBoard(Board board){
 
     createScene(board);
@@ -105,7 +106,11 @@ public class Board {
 
   }
 
-  private static void printAllPlayerLocation(){
+  public void printAllPlayerLocation(){
+
+    for (int i = 0; i < players.size(); i++ ) {
+      System.out.println("player " +players.get(i).getID() + " is currently at the "+ players.get(i).getSpace().getName());
+    }
 
   }
   public static int roleDie(){
@@ -150,6 +155,7 @@ public class Board {
   public ArrayList<Set> getSetList(){
     return this.sets;
   }
+
   public Trailer getTrailer(){
     return this.trailer;
   }
@@ -174,6 +180,13 @@ public class Board {
     for (int i = 0; i < sets.size() ; i++ ) {
       System.out.println(sets.get(i).getName());
       sets.get(i).getRoles();
+    }
+  }
+
+  public void printScenes()
+  {
+    for (int i = 0; i < sets.size() ; i++ ) {
+      System.out.println(sets.get(i).getCard().getName() + " on " + sets.get(i).getName());
     }
   }
 

@@ -26,6 +26,10 @@ public class Card
 
     }
 
+    public String getName()
+    {
+      return this.name;
+    }
 
     public int getShotMarker(){
       return this.shotMarker;
