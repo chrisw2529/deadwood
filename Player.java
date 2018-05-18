@@ -87,14 +87,11 @@ public class Player{
 
         }
       }
-////////////////////////////////////////////////// Needs fixing (Wrap scene)
-    //if(player.currentRole.getSet().getShotMarker() == 0)
-//player.currentRole.getSet().wrapScene();
-        ////////////////////////////////////////////////////////
-
-
-      player.isTurn = false;
-      System.out.println("Player " + player.ID + "'s turn has ended.");
+//////////////////////////////////////////////// Needs fixing (Wrap scene)
+    if(player.currentRole.getSet().getShotMarker() == 0)
+      player.currentRole.getSet().getCard().wrapScene();
+        //////////////////////////////////////////////////////
+        endTurn(player);
     }
 
     public void rehearse(Player player)
@@ -114,6 +111,7 @@ public class Player{
 
       player.rehearsalTok++;
       System.out.println("Player " + player.ID + " has increased their rehearsal tokens to " + player.getRehearsal());
+      endTurn(player);
 
     }
 
