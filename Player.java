@@ -292,7 +292,7 @@ public class Player{
     if(player.spaceToSet(player, board).getShotMarker() == 0)
       player.spaceToSet(player,board).getCard().wrapScene(board);
         //////////////////////////////////////////////////////
-        board.endTurn(player, board);
+        endTurn(player, board);
     }
     //NOT working
     public void rehearse(Player player, Board board)

@@ -120,7 +120,6 @@ public class Card
       }
 
       //wrap set
-<<<<<<< HEAD
       Set set = getSet();
       set.setIsWrapped(true);
       board.setRemainingScenes(board.getRemainingScenes() - 1);
@@ -128,7 +127,6 @@ public class Card
         board.endDay();
       }
       System.out.println("scene wrapped");
-=======
       // Set set = getSet();
       // set.setIsWrapped(true);
       // board.setRemainingScenes(board.getRemainingScenes() - 1);
@@ -136,7 +134,6 @@ public class Card
       //   endDay();
       // }
       // System.out.println("scene wrapped");
->>>>>>> 4c370d2570f909ce3511768caf295b926839e032
 
     }
 
