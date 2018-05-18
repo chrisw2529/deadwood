@@ -67,7 +67,7 @@ public class Card
     //$$$$$$$
     //to do
     //$$$$$$$
-    public void wrapScene()
+    public void wrapScene(Board board)
     {
       int[] payout = new int[getBudget()];
       for(int i = 0; i< payout.length; i++){
@@ -124,7 +124,7 @@ public class Card
       set.setIsWrapped(true);
       board.setRemainingScenes(board.getRemainingScenes() - 1);
       if(board.getRemainingScenes() <= 1){
-        endDay();
+        board.endDay();
       }
       System.out.println("scene wrapped");
 

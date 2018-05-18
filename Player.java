@@ -235,9 +235,9 @@ public class Player{
       }
 //////////////////////////////////////////////// Needs fixing (Wrap scene)
     if(player.spaceToSet(player, board).getShotMarker() == 0)
-      player.spaceToSet(player,board).getCard().wrapScene();
+      player.spaceToSet(player,board).getCard().wrapScene(board);
         //////////////////////////////////////////////////////
-        endTurn(player, board);
+        board.endTurn(player, board);
     }
     //NOT working
     public void rehearse(Player player, Board board)
