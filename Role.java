@@ -42,12 +42,12 @@ public class Role {
 
   public Set getSet()
   {
-    return setImOn;
+    return this.setImOn;
   }
 
   public int getBudget()
   {
-    return budget;
+    return this.budget;
   }
 
   public void setBudget(int budget)

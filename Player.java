@@ -34,7 +34,7 @@ public class Player{
               moved = true;
               System.out.println("player " + player.ID + " has moved to " + player.currentSpace.getName());
 
-              if(player.currentSpace.getName() != "office" || player.currentSpace.getName() != "trailer") {
+              if(player.currentSpace.getName() != "office" && player.currentSpace.getName() != "trailer") {
                 takeRole(player, board, false);
               }
 
@@ -103,7 +103,7 @@ public class Player{
             ArrayList<Role> off = set.getRoles();
             ArrayList<Role> on = set.getCard().getRoles();
             System.out.println("off");
-            System.out.println("size of off is " + off.size());
+            //System.out.println("size of off is " + off.size());
             for (int  i = 0 ; i < off.size() ; i++ ) {
               System.out.println("( "+ (i+ 1) +" ) "+ off.get(i).getName() + " requires rank " + off.get(i).getLevel());
             }
@@ -226,8 +226,8 @@ public class Player{
     }
 
     public boolean roleQualificationCheck(Player player, Role role){
-      System.out.println("level is : " + role.getName()+ role.getLevel());
-      System.out.println("p levle ; " + player.rank );
+    //  System.out.println("level is : " + role.getName()+ role.getLevel());
+    //  System.out.println("p levle ; " + player.rank );
       if(role.takenBy != null){
         System.out.println("role is taken by another player");
         return false;
@@ -261,8 +261,9 @@ public class Player{
 
       int dieRoll = Board.roleDie();
       System.out.println(dieRoll);
+      System.out.println("what does it sya: "+spaceToSet(player, board).getBudget());
 
-      if(dieRoll >= spaceToSet(player, board).getBudget()) {
+      if((dieRoll + player.rehearsalTok) >= spaceToSet(player, board).getBudget()) {
 
         if(player.currentRole.onScene == true) {
           player.fame += 2;
@@ -311,7 +312,7 @@ public class Player{
       }
 
       //somthing is wrong here
-      if(player.rehearsalTok == player.currentRole.getLevel() - 1) {
+      if(player.rehearsalTok == player.currentRole.getBudget() - 1) {
         System.out.println("You have too many rehearsal tokens and you must act.");
         return;
       }
