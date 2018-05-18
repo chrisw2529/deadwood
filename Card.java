@@ -120,13 +120,13 @@ public class Card
       }
 
       //wrap set
-      Set set = getSet();
-      set.setIsWrapped(true);
-      board.setRemainingScenes(board.getRemainingScenes() - 1);
-      if(board.getRemainingScenes() <= 1){
-        endDay();
-      }
-      System.out.println("scene wrapped");
+      // Set set = getSet();
+      // set.setIsWrapped(true);
+      // board.setRemainingScenes(board.getRemainingScenes() - 1);
+      // if(board.getRemainingScenes() <= 1){
+      //   endDay();
+      // }
+      // System.out.println("scene wrapped");
 
     }
 

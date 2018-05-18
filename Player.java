@@ -29,12 +29,9 @@ public class Player{
           ArrayList<String> neighbors = currentSpace.getNeighbors();
           for(int i = 0; i < neighbors.size(); i++){
             if(neighbors.get(i).equals(destination) && moved == false){
-
-
-
               currentSpace = board.getSpaceMap().get(neighbors.get(i));
               moved = true;
-              System.out.println("player " + player.getID() + " has moved to " + currentSpace.getName());
+              System.out.println("player " + player.getID() + " has moved to " + player.currentSpace.getName());
               takeRole(player, board, false);
               break;
             }
@@ -77,7 +74,7 @@ public class Player{
         return;
       }
 
-      if(player.currentSpace.getName() == "Casting Office" || player.currentSpace.getName() == "Trailer") {
+      if(player.currentSpace.getName() == "office" || player.currentSpace.getName() == "trailer") {
         System.out.println("You cannot take a role on this space!");
         return;
       }

@@ -32,23 +32,23 @@ public class Deadwood{
 
 
       //c.toLower();
-      if(c.equals("show location of all players")){
+      if(c.equals("show all")){
         board.printAllPlayerLocation();
       }
 
-      else if(c.contains("get day")){
+      else if(c.equals("get day")){
         System.out.println(board.getDay());
       }
 
-      else if(c.contains("get rs")){
+      else if(c.equals("get rs")){
         System.out.println(board.getRemainingScenes());
       }
 
-      else if(c.contains("get sets")){
+      else if(c.equals("get sets")){
         board.printSets();
       }
 
-      else if(c.contains("get scenes")){
+      else if(c.equals("get scenes")){
         board.printScenes();
       }
 
@@ -67,22 +67,22 @@ public class Deadwood{
         player.getPlayerInfo(board.activePlayer(), board);
       }
 
-      else if(c.contains("rank up")){
+      else if(c.equals("rank up")){
         player.setFame(19);
         player.rankUpUsingFame(player, 3);
       }
 
-      else if(c.contains("act")){
+      else if(c.equals("act")){
         //player.setSpace
         player.act(player, board);
       }
 
-      else if(c.contains("rehearse")){
+      else if(c.equals("rehearse")){
         //player.setSpace
         player.rehearse(player, board);
       }
 
-      else if(c.contains("where CIM")){
+      else if(c.equals("where CIM")){
         System.out.println("player "+ player.getID()+ " can move to ");
         ArrayList<String> neighbors =  player.getSpace().getNeighbors();
         // /HashMap<String,Space> spaceMap = board.getSpaceMap();
@@ -92,7 +92,7 @@ public class Deadwood{
         }
       }
 
-      else if(c.contains("e")){
+      else if(c.equals("e")){
         break;
       }
 
