@@ -121,9 +121,6 @@ public class Board {
 
   }
 
-  private static void printAllPlayerLocation(){
-
-  }
   public static int roleDie(){
     Random rand = new Random();
     int dieRoll = (rand.nextInt(6) + 1);
@@ -191,6 +188,21 @@ public class Board {
       System.out.println(sets.get(i).getName());
       sets.get(i).getRoles();
     }
+  }
+
+  public void printScenes()
+  {
+    for (int i = 0; i < sets.size() ; i++ ) {
+      System.out.println(sets.get(i).getCard().getName() + " on " + sets.get(i).getName());
+    }
+  }
+
+  public void printAllPlayerLocation(){
+
+    for (int i = 0; i < players.size(); i++ ) {
+      System.out.println("player " +players.get(i).getID() + " is currently at the "+ players.get(i).getSpace().getName());
+    }
+
   }
 
   public void setRemainingScenes(int remainingScenes){
