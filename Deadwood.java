@@ -11,6 +11,9 @@ import org.w3c.dom.Node;
 import org.w3c.dom.Element;
 
 import java.io.File;
+import java.lang.Object;
+import java.lang.System;
+import java.util.Scanner;
 
 public class Deadwood{
   public static void main(String[] args){
@@ -20,6 +23,9 @@ public class Deadwood{
     Board board = new Board();
     board.setupBoard(board);
     board.initializePlayers(2);
+    Scanner sc = new Scanner();
+    sc = System.in();
+    String command = sc;
     //String command = System.in();
     // Player player = new Player(1);
     // Set space = new Set("dog", 10);
