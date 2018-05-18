@@ -97,7 +97,7 @@ public class Board {
     return null;
   }
 
-  public void endDay(){
+  public static void endDay(){
     //reset all shot markers to there inital value
     day++;
     if(day >= 3){
