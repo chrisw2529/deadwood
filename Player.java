@@ -25,14 +25,19 @@ public class Player{
     {
       if(player.currentRole == null){
         Boolean moved = false;
+
         if(player.isTurn == true) {
-          ArrayList<String> neighbors = currentSpace.getNeighbors();
+          ArrayList<String> neighbors = player.currentSpace.getNeighbors();
           for(int i = 0; i < neighbors.size(); i++){
             if(neighbors.get(i).equals(destination) && moved == false){
-              currentSpace = board.getSpaceMap().get(neighbors.get(i));
+              player.currentSpace = board.getSpaceMap().get(neighbors.get(i));
               moved = true;
-              System.out.println("player " + player.getID() + " has moved to " + player.currentSpace.getName());
-              takeRole(player, board, false);
+              System.out.println("player " + player.ID + " has moved to " + player.currentSpace.getName());
+
+              if(player.currentSpace.getName() != "office" || player.currentSpace.getName() != "trailer") {
+                takeRole(player, board, false);
+              }
+
               break;
             }
           }

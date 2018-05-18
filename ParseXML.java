@@ -210,6 +210,7 @@ public class ParseXML{
 
         }
         b.setTrailer(trailer);
+        b.addToMap(trailer.getName(), trailer);
 
       //  System.out.println("Area: " + x + ", " + y + ", " + h + ", " + w);
 
@@ -301,7 +302,9 @@ public class ParseXML{
             }
 
         }
+
         b.setCastingOffice(office);
+        b.addToMap(office.getName(), office);
 
 
     }
