@@ -5,7 +5,7 @@ public class Space
 
     String name; //scene names, casting office, trailer
     ArrayList<String> neighbors = new ArrayList<String>();
-    ArrayList<Player> players = new ArrayList<Player>();
+    //ArrayList<Player> players = new ArrayList<Player>();
 
 
     public Space(String name)

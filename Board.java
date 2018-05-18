@@ -21,7 +21,7 @@ import java.util.Collections;
 public class Board {
 
   int day = 1;
-  int remainingScenes = 10;
+  int remainingScenes = 2;
   ArrayList<Player> players = new ArrayList<Player>();
   ArrayList<Set> sets = new ArrayList<Set>();
   ArrayList<Card> cards = new ArrayList<Card>();
@@ -43,7 +43,7 @@ public class Board {
       sets.get(i).setCard(cards.get(i));
       cards.get(i).setSet(sets.get(i));
     }
-
+    System.out.println("it is not day " + day);
   }
 
 
@@ -99,26 +99,41 @@ public class Board {
 
   public void endDay(){
     //reset all shot markers to there inital value
+    System.out.println("ending day");
     day++;
     if(day >= 3){
       endGame();
     }
     else{
+      //reset sets
       for (int i = 0; i < sets.size();i++ ) {
         sets.get(i).resetShotMarkers();
+        sets.get(i).setIsWrapped(false);
+        sets.get(i).setCard(null);
+        for(int j = 0; j < sets.get(i).getRoles().size(); j++){
+          sets.get(i).getRoles().get(j).setPlayer(null);
+        }
+      }
+      //reset cards
+      for (int i = 0; i < cards.size();i++ ) {
+        cards.get(i).setSet(null);
+        for(int j = 0; j < cards.get(i).getRoles().size(); j++){
+          cards.get(i).getRoles().get(j).setPlayer(null);
+        }
       }
       for(int i = 0; i< players.size(); i++){
         players.get(i).setRehearsal(0);
         players.get(i).setRole(null);
         players.get(i).setSpace(trailer);
       }
+      remainingScenes = 10;
       startday();
     }
 
   }
 
   private static void endGame(){
-
+    System.out.println("The Game is over!");
   }
 
   public static int roleDie(){

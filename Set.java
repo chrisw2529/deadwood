@@ -6,7 +6,7 @@ public class Set extends Space
     int shotMarker;
     ArrayList<Role> roles = new ArrayList<Role>();
     Card card;
-    int budget;
+    //int budget;
     boolean isWrapped = false;
 
     public Set(String name, int shotMarker)
@@ -28,10 +28,10 @@ public class Set extends Space
       return this.shotMarker;
     }
 
-    public int getBudget()
-    {
-      return this.budget;
-    }
+    // public int getBudget()
+    // {
+    //   return this.budget;
+    // }
 
     public boolean getIsWrapped(){
       return this.isWrapped;
@@ -46,11 +46,15 @@ public class Set extends Space
     {
       this.isWrapped = bool;
     }
+    // public void setBudget(int bug)
+    // {
+    //   this.budget = bug;
+    // }
 
     public void setCard(Card card)
     {
       this.card = card;
-      this.budget = card.getBudget();
+      //this.budget = card.getBudget();
     }
 
     public void decrementShotMarker(){

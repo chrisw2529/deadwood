@@ -263,8 +263,8 @@ public class Player{
       System.out.println(dieRoll);
       System.out.println("what does it sya: "+spaceToSet(player, board).getBudget());
 
-      if((dieRoll + player.rehearsalTok) >= spaceToSet(player, board).getBudget()) {
 
+      if(dieRoll >= spaceToSet(player, board).getCard().getBudget()) {
         if(player.currentRole.onScene == true) {
           player.fame += 2;
           System.out.println("Player " + player.ID + " has acted successfully and has gained 2 fames.");
