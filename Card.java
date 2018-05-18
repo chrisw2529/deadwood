@@ -90,6 +90,12 @@ public class Card
           }
         }
       }
+
+      for (int i = 0; i < set.getRoles().size(); i++) {
+        if(set.getRoles().get(i).takenBy != null)
+          set.getRoles().get(i).takenBy.setRehearsal(0);
+      }
+
       System.out.println("scene wrapped");
 
     }

@@ -50,19 +50,21 @@ public class Player{
 
       int dieRoll = Board.roleDie();
       System.out.println(dieRoll);
-      System.out.println("budget " + player.currentRole.getBudget());
 
       if(dieRoll >= player.currentRole.getBudget()) {
 
         if(player.currentRole.onScene == true) {
           player.fame += 2;
           System.out.println("Player " + player.ID + " has acted successfully and has gained 2 fames.");
+          System.out.println("Player " + player.ID + "has " + player.fame + " fame(s), $" + player.cash + ", and is rank " + player.rank);
         }
 
         else {
           player.fame++;
           player.cash++;
           System.out.println("Player " + player.ID + " has acted successfully and has gained 1 fame and 1 cash.");
+          System.out.println("Player " + player.ID + "has " + player.fame + " fame(s), $" + player.cash + ", and is rank " + player.rank);
+
         }
 
         player.currentRole.getSet().decrementShotMarker();
@@ -76,6 +78,8 @@ public class Player{
         if(player.currentRole.onScene == false) {
           player.cash++;
           System.out.println("Since player " + player.ID + " was off-scene, they have gained 1 cash.");
+          System.out.println("Player " + player.ID + "has " + player.fame + " fame(s), $" + player.cash + ", and is rank " + player.rank);
+
         }
       }
 ////////////////////////////////////////////////// Needs fixing (Wrap scene)
