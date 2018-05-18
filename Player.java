@@ -19,11 +19,18 @@ public class Player{
     public void move(Player player, String destination)
     {
 
-      if(player.isTurn == false) {
+      if(player.isTurn == true) {
+        ArrayList<String> neighbors = currentSpace.getNeighbors()
+        for(int i = 0; i < neighbors.size(); i++){
+          if(neighbors.get(i).equals(destination)){
+            currentSpace = 
+          }
+        }
 
+      }
+      else{
         System.out.println("Not your turn!");
         return;
-
       }
 
     }
