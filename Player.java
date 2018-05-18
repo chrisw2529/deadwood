@@ -257,7 +257,7 @@ public class Player{
       int dieRoll = Board.roleDie();
       System.out.println(dieRoll);
 
-      if(dieRoll >= spaceToSet(player, board).getBudget()) {
+      if(dieRoll >= spaceToSet(player, board).getCard().getBudget()) {
 
         if(player.currentRole.onScene == true) {
           player.fame += 2;

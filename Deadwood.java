@@ -53,8 +53,20 @@ public class Deadwood{
       }
 
       else if(c.contains("move to")){
-        String loc = c.substring(8, c.length());
-        player.move(player, loc, board);
+        if(c.length() <= 8){
+          System.out.println("please specify where to move");
+        }
+        else{
+          if(c.substring(8, c.length()) != null){
+            String loc = c.substring(8, c.length());
+            player.move(player, loc, board);
+          }
+          else{
+            System.out.println("Not a valid move entry try again");
+          }
+        }
+
+
       }
 
       //must be able to take scene if already on a set

@@ -5,7 +5,7 @@ public class Role {
   String line;
   boolean onScene;
   Set setImOn;
-  int budget;
+  //int budget;
   Player takenBy = null;
 
   public Role(String name, String line, int level, Set setImOn, boolean onScene){
@@ -45,15 +45,15 @@ public class Role {
     return setImOn;
   }
 
-  public int getBudget()
-  {
-    return budget;
-  }
+  // public int getBudget()
+  // {
+  //   return budget;
+  // }
 
-  public void setBudget(int budget)
-  {
-    this.budget = budget;
-  }
+  // public void setBudget(int budget)
+  // {
+  //   this.budget = budget;
+  // }
 
 
   public void setPlayer(Player player)
