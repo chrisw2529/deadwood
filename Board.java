@@ -93,7 +93,7 @@ public class Board {
         return players.get(i);
       }
     }
-    System.out.println("it is no ones turn rn!");
+    System.out.println("error: it is no ones turn rn!");
     return null;
   }
 

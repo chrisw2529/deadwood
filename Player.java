@@ -327,8 +327,12 @@ public class Player{
     * takes a player and ranks
     */
     public static void rankUpUsingCash(Player player, int desiredRank){
-      if(!player.getSpace().getName().equals("Casting Office")){
+
+      if(!player.getSpace().getName().equals("office")){
         System.out.println("You can only rank up while in the Casting Office!");
+      }
+      else if(desiredRank > 6){
+        System.out.println("the maximum rank you can be is 6");
       }
       else{
         int cash = player.getCash();
@@ -347,8 +351,11 @@ public class Player{
       int fame = player.getFame();
       int reqFame = fameNeeded(desiredRank, 0);
 
-      if(!player.getSpace().getName().equals("Casting Office")){
+      if(!player.getSpace().getName().equals("office")){
         System.out.println("You can only rank up while in the Casting Office!");
+      }
+      else if(desiredRank > 6){
+        System.out.println("the maximum rank you can be is 6");
       }
       else{
         if(fame >= reqFame){
