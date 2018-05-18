@@ -68,9 +68,9 @@ public class Player{
       Scanner sc = new Scanner(System.in);
       String c = "";
       if(spaceToSet(player, board).getIsWrapped() == false){
-        System.out.println("would you like to take a role?");
+        System.out.println("would you like to take a role? (y/n)");
         c = sc.nextLine();
-        if(c.equals("yes")){
+        if(c.equals("y")){
           System.out.println("which role would you like to take? or press q to cancel");
           Set set = spaceToSet(player, board);
           ArrayList<Role> off = set.getRoles();
@@ -151,9 +151,15 @@ public class Player{
 
 
         }
-        else{
-          System.out.println("scene is wrapped");
+        else if(c.equals("n")){
+          System.out.println("you have decided not to take a role ending turn");
+          endTurn(player, board);
         }
+
+      }
+      else{
+        System.out.println("scene is wrapped ending turn");
+        endTurn(player, board);
       }
 
     }
@@ -161,7 +167,7 @@ public class Player{
       System.out.println("level is : " + role.getName()+ role.getLevel());
       System.out.println("p levle ; " + player.rank );
       if(role.takenBy != null){
-        System.out.println("role is takenBy another player");
+        System.out.println("role is taken by another player");
         return false;
       }
       else{
@@ -229,7 +235,7 @@ public class Player{
         //////////////////////////////////////////////////////
         endTurn(player, board);
     }
-
+    //NOT working
     public void rehearse(Player player, Board board)
     {
 
@@ -239,7 +245,7 @@ public class Player{
         return;
 
       }
-
+      //somthing is wrong here
       if(player.rehearsalTok == player.currentRole.getLevel() - 1) {
         System.out.println("You have too many rehearsal tokens and you must act.");
         return;

@@ -69,6 +69,9 @@ public class Deadwood{
           System.out.println(neighbors.get(i));
         }
       }
+      else{
+        System.out.println("not a valid entry try again");
+      }
     }
     //String command = System.in();
     // Player player = new Player(1);

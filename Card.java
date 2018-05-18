@@ -96,19 +96,23 @@ public class Card
       }
       //reset roles for off scene
       for (int i = 0; i < set.getRoles().size(); i++) {
-        if(set.getRoles().get(i).getplayer() != null)
-        System.out.println("player is " + set.getRoles().get(i).getplayer());
-          set.getRoles().get(i).getplayer().setRehearsal(0);
-          set.getRoles().get(i).getplayer().setRole(null);
-          set.getRoles().get(i).getplayer() = null;
+        if(set.getRoles().get(i).getPlayer() != null){
+          System.out.println("player ID is: " + set.getRoles().get(i).getPlayer().getID());
+          set.getRoles().get(i).getPlayer().setRehearsal(0);
+          set.getRoles().get(i).getPlayer().setRole(null);
+          set.getRoles().get(i).setPlayer(null);
+        }
+
       }
       //reset roles for on scene
 
       for (int i = 0; i < roles.size(); i++) {
-        if(roles.get(i).takenBy != null)
-          roles.get(i).getplayer().setRehearsal(0);
-          roles.get(i).getplayer().setRole(null);
-          roles.get(i).getplayer() = null;
+        if(roles.get(i).takenBy != null){
+          roles.get(i).getPlayer().setRehearsal(0);
+          roles.get(i).getPlayer().setRole(null);
+          roles.get(i).setPlayer(null);
+        }
+
       }
 
       //wrap set

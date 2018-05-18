@@ -1,5 +1,4 @@
-public class Trailer
-extends Space
+public class Trailer extends Space
 {
 
   public Trailer(String name)
