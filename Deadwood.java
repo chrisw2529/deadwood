@@ -28,14 +28,17 @@ public class Deadwood{
     String c = "";
     while(!c.equals("e")){
       c = sc.nextLine();
+      //c.toLower();
       if(c.equals("show location of all players")){
         ArrayList<Player> players = board.getPlayers();
         for (int i = 0; i < players.size(); i++ ) {
           System.out.println("player " +players.get(i).getID() + " is currently at the "+ players.get(i).getSpace().getName());
         }
       }
-      else if(c.equals("move")){
-
+      else if(c.contains("move to")){
+        Player player = board.activePlayer();
+        String loc = c.substring(8, c.length());
+        player.move(player, loc, board);
       }
       else if(c.equals("active player")){
         Player player = board.activePlayer();

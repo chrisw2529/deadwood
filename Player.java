@@ -21,13 +21,18 @@ public class Player{
 
     public void move(Player player, String destination, Board board)
     {
-
+      Boolean moved = false;
       if(player.isTurn == true) {
         ArrayList<String> neighbors = currentSpace.getNeighbors();
         for(int i = 0; i < neighbors.size(); i++){
-          if(neighbors.get(i).equals(destination)){
+          if(neighbors.get(i).equals(destination) && moved == false){
             currentSpace = board.getSpaceMap().get(neighbors.get(i));
+            moved = true;
+            break;
           }
+        }
+        if(moved == false){
+          System.out.println("you can't move there!");
         }
 
       }
