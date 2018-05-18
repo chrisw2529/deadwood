@@ -28,7 +28,6 @@ public class Board {
   HashMap<String,Space> spaceMap = new HashMap<String, Space>();
   Trailer trailer;
   CastingOffice castingOffice;
-
   public void setupBoard(Board board){
 
     createScene(board);
@@ -98,7 +97,23 @@ public class Board {
     return null;
   }
 
-  private static void endDay(){
+  public static void endDay(){
+    //reset all shot markers to there inital value
+    day++;
+    if(day >= 3){
+      endGame();
+    }
+    else{
+      for (int i = 0; i < sets.size();i++ ) {
+        sets.get(i).resetShotMarkers();
+      }
+      for(int i = 0; i< players.size(); i++){
+        players.get(i).setRehearsal(0);
+        players.get(i).setRole(null);
+        players.get(i).setSpace(trailer);
+      }
+      startday();
+    }
 
   }
 
@@ -106,11 +121,7 @@ public class Board {
 
   }
 
-  public void printAllPlayerLocation(){
-
-    for (int i = 0; i < players.size(); i++ ) {
-      System.out.println("player " +players.get(i).getID() + " is currently at the "+ players.get(i).getSpace().getName());
-    }
+  private static void printAllPlayerLocation(){
 
   }
   public static int roleDie(){
@@ -155,7 +166,6 @@ public class Board {
   public ArrayList<Set> getSetList(){
     return this.sets;
   }
-
   public Trailer getTrailer(){
     return this.trailer;
   }
@@ -180,13 +190,6 @@ public class Board {
     for (int i = 0; i < sets.size() ; i++ ) {
       System.out.println(sets.get(i).getName());
       sets.get(i).getRoles();
-    }
-  }
-
-  public void printScenes()
-  {
-    for (int i = 0; i < sets.size() ; i++ ) {
-      System.out.println(sets.get(i).getCard().getName() + " on " + sets.get(i).getName());
     }
   }
 

@@ -2,6 +2,7 @@ import java.util.ArrayList;
 
 public class Set extends Space
 {
+    final int initialShotMarker;
     int shotMarker;
     ArrayList<Role> roles = new ArrayList<Role>();
     Card card;
@@ -13,6 +14,7 @@ public class Set extends Space
         super(name);
         Space office = new Space(name);
         this.shotMarker = shotMarker;
+        this.initialShotMarker = shotMarker;
     }
 
 
@@ -57,6 +59,9 @@ public class Set extends Space
 
     public void addRoles(Role role){
       roles.add(role);
+    }
+    public void resetShotMarkers(){
+      this.shotMarker = this.initialShotMarker;
     }
 
 
