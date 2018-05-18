@@ -57,6 +57,8 @@ public class Deadwood{
         player.move(player, loc, board);
       }
 
+      //must be able to take scene if already on a set
+
       else if(c.equals("active player")){
         player.getPlayerInfo(board.activePlayer(), board);
       }

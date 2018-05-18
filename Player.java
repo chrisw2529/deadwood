@@ -133,14 +133,14 @@ public class Player{
             }
             else if(c.equals("off 4")){
               if(off.get(3)!= null){
-                notDone = (!roleQualificationCheck(player, on.get(3)));
+                notDone = (!roleQualificationCheck(player, off.get(3)));
 
               }
               else{
                 System.out.println("role DNE!");
               }
             }
-            else if(c.equals("q")){
+            else if(c.equals("end")){
               endTurn(player, board);
               notDone = false;
             }
@@ -181,6 +181,7 @@ public class Player{
         }
         else{
           System.out.println("you are not ranked high enough");
+          System.out.println("If you cannot take a role due to your low rank, you must end your turn by typing 'end'");
           return false;
 
         }
@@ -248,7 +249,7 @@ public class Player{
         return;
 
       }
-      
+
       //somthing is wrong here
       if(player.rehearsalTok == player.currentRole.getLevel() - 1) {
         System.out.println("You have too many rehearsal tokens and you must act.");
@@ -367,13 +368,10 @@ public class Player{
     {
 
         System.out.println("the active player is player " + player.ID + " they have $" + player.cash + " and " +player.fame+ " Fame and they are rank " + player.getRank());
+        System.out.println("They are on " + player.currentSpace.getName());
 
         if(currentRole != null) {
           System.out.println("They are working on " + player.currentRole.getName()  + ", \"" + player.currentRole.getLine() + " \"" );
-        }
-
-        else {
-          System.out.println("They are on " + player.currentSpace.getName());
         }
 
     }
