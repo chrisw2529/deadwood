@@ -43,7 +43,7 @@ public class Board {
       sets.get(i).setCard(cards.get(i));
       cards.get(i).setSet(sets.get(i));
     }
-    System.out.println("it is not day " + day);
+    System.out.println("it is now day " + day);
   }
 
 
