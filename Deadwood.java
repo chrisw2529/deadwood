@@ -16,41 +16,30 @@ public class Deadwood{
   public static void main(String[] args){
 
     ParseXML p = new ParseXML();
-
-    // try {
-    //   Document d = p.getDocFromFile("board.xml");
-    // //  p.readForTrailer(d);
-    // //  p.readForOffice(d);
-    //   //p.readCardData(d);
-    //   p.readSceneData(d);
-    // }
-    // catch(ParserConfigurationException ex) {
-    //   System.out.println("par C E");
-    //
-    // }
+    Card c = new Card("hello", 4);
 
     Board board = new Board();
-    //board.setupBoard(board);
-    Player player = new Player(1);
-    Set space = new Set("dog", 10);
-    Role role = new Role("cat","puppy",1,space,true);
-    Role role2 = new Role("rabbit","carrot",4,space,false);
-
-    role.setPlayer(player);
-    Card card = new Card("zebra", 5);
-    role.setBudget(3);
-    card.addRoles(role);
-    space.addRoles(role2);
-
-    space.setCard(card);
-    //space.addRoles(role);
-    player.setRole(role);
-    player.setSpace(space);
-    card.wrapScene();
-    //player.rehearse(player);
-    //player.act(player);
-
-    System.out.println(player.getLocation().getName());
+    board.setupBoard(board);
+    // Player player = new Player(1);
+    // Set space = new Set("dog", 10);
+    // Role role = new Role("cat","puppy",1,space,true);
+    // Role role2 = new Role("rabbit","carrot",4,space,false);
+    //
+    // role.setPlayer(player);
+    // Card card = new Card("zebra", 5);
+    // role.setBudget(3);
+    // card.addRoles(role);
+    // space.addRoles(role2);
+    //
+    // space.setCard(card);
+    // //space.addRoles(role);
+    // player.setRole(role);
+    // player.setSpace(space);
+    // card.wrapScene();
+    // //player.rehearse(player);
+    // //player.act(player);
+    //
+    // System.out.println(player.getLocation().getName());
   //  board.printSets();
   }
 

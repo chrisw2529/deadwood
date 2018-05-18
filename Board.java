@@ -14,6 +14,9 @@ import org.w3c.dom.Node;
 import org.w3c.dom.Element;
 
 import java.io.File;
+import java.util.Random;
+import java.lang.Object;
+import java.util.Collections;
 
 public class Board {
 
@@ -21,14 +24,27 @@ public class Board {
   int remainingScenes = 10;
   ArrayList<Player> players = new ArrayList<Player>();
   ArrayList<Set> sets = new ArrayList<Set>();
-  HashMap<Set,String> setMap = new HashMap<>();
+  ArrayList<Card> cards = new ArrayList<Card>();
+  HashMap<String,Space> spaceMap = new HashMap<String, Space>();
 
-  public Board(){
+  public void setupBoard(Board board){
 
+    createScene(board);
 
   }
 
-  public void setupBoard(Board board){
+  public void startday()
+  {
+
+    Collections.shuffle(cards);
+
+    for (int i = 0; i < sets.size(); i++)
+      sets.get(i).setCard(cards.get(i));
+
+  }
+
+
+  private static void createScene(Board board){
 
     ParseXML p = new ParseXML();
 
@@ -43,9 +59,18 @@ public class Board {
 
     }
 
-  }
 
-  private static void createScene(){
+
+    try {
+      Document d = p.getDocFromFile("cards.xml");
+      p.readCardData(d, board);
+    }
+    catch(ParserConfigurationException ex) {
+      System.out.println("file not found");
+
+    }
+
+
 
   }
 
@@ -78,8 +103,26 @@ public class Board {
     this.sets.add(set);
   }
 
+  public void addToCards(Card card)
+  {
+    this.cards.add(card);
+  }
+
+  public void addToMap(String name, Space space)
+  {
+    this.spaceMap.put(name, space);
+  }
+
   public int getRemainingScenes(){
     return this.remainingScenes;
+  }
+
+  public ArrayList<Card> getCardList(){
+    return this.cards;
+  }
+
+  public ArrayList<Set> getSetList(){
+    return this.sets;
   }
 
   public void setDay(int day){

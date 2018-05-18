@@ -19,6 +19,9 @@ public class Space
     public String getName(){
         return this.name;
     }
+    public ArrayList<String> getNeighbors(){
+        return this.neighbors;
+    }
 
 
 }
