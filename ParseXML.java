@@ -154,6 +154,7 @@ public class ParseXML{
             }
 
             board.addToSets(newSet);
+            board.addToMap(newSet.getName(), newSet);
 
         }
 
@@ -302,24 +303,24 @@ public class ParseXML{
     }
 
 
-    public void readCardData(Document d, Card c)
+    public void readCardData(Document d, Board b)
     {
 
         Element root = d.getDocumentElement();
         NodeList cardList = root.getElementsByTagName("card");
+        Card c;
 
         for (int i=0; i<cardList.getLength();i++){
 
-            System.out.println("Printing information for cardList "+(i+1));
+            // System.out.println("Printing information for cardList "+(i+1));
             Node card = cardList.item(i);
 
             String cardName = card.getAttributes().getNamedItem("name").getNodeValue();
             String budget = card.getAttributes().getNamedItem("budget").getNodeValue();
             String img = card.getAttributes().getNamedItem("img").getNodeValue();
 
-            System.out.println("card name = "+cardName);
-            System.out.println("budget = "+budget);
-
+            // System.out.println("card name = "+cardName);
+            // System.out.println("budget = "+budget);
             c = new Card(cardName, Integer.parseInt(budget));
 
             NodeList children = card.getChildNodes();
@@ -336,8 +337,8 @@ public class ParseXML{
                     String sceneNum =  sub.getAttributes().getNamedItem("number").getNodeValue();
                     String description = sub.getTextContent();
 
-                    System.out.println("Scene description = " + description);
-                    System.out.println("sceneNum = "+ sceneNum);
+                    // System.out.println("Scene description = " + description);
+                    // System.out.println("sceneNum = "+ sceneNum);
 
                     c.setSceneNum(Integer.parseInt(sceneNum));
                     c.setDescription(description);
@@ -377,16 +378,17 @@ public class ParseXML{
                     Role cardRoles = new Role(partName, line, Integer.parseInt(level), c.getSet(), true);
                     c.addRoles(cardRoles);
 
-                    System.out.print("Part name = " + partName + ", ");
-                    System.out.println("Level = " + level);
-                    System.out.println("Line = " + line);
-                    System.out.println("Area: " + x + ", " + y + ", " + h + ", " + w);
+                    // System.out.print("Part name = " + partName + ", ");
+                    // System.out.println("Level = " + level);
+                    // System.out.println("Line = " + line);
+                    // System.out.println("Area: " + x + ", " + y + ", " + h + ", " + w);
 
                 }
 
             } //for childnodes
 
-            System.out.println("\n");
+            b.addToCards(c);
+          //  System.out.println("\n");
 
         }
 
