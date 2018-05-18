@@ -48,6 +48,15 @@ public class Deadwood{
         Player player = board.activePlayer();
         System.out.println("the active player is player " + player.getID() + " they are currently at the " + player.getSpace().getName());
       }
+      else if(c.contains("rank up")){
+        Player player = board.activePlayer();
+        player.setFame(19);
+        player.rankUpUsingFame(player, 3);
+      }
+      else if(c.contains("act")){
+        Player player = board.activePlayer();
+        player.act();
+      }
     }
     //String command = System.in();
     // Player player = new Player(1);

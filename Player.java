@@ -28,6 +28,7 @@ public class Player{
           if(neighbors.get(i).equals(destination) && moved == false){
             currentSpace = board.getSpaceMap().get(neighbors.get(i));
             moved = true;
+            System.out.println("player " + player.getID() + " has moved to " + currentSpace.getName());
             break;
           }
         }
@@ -116,6 +117,61 @@ public class Player{
       System.out.println("Player " + player.ID + " has increased their rehearsal tokens to " + player.getRehearsal());
 
     }
+
+
+    /* rankUpUsingCash(Player player)
+    * takes a player and ranks
+    */
+    public static void rankUpUsingCash(Player player, int desiredRank){
+      if(!player.getSpace().getName().equals("Casting Office")){
+        System.out.println("You can only rank up while in the Casting Office!");
+      }
+      else{
+        int cash = player.getCash();
+        if(desiredRank * 5 <= cash){
+          player.setCash(cash - desiredRank * 5);
+          player.setRank(desiredRank);
+          System.out.println("CONGRATULATIONS!! you are now rank " + desiredRank);
+        }
+        else{
+          System.out.println("don't have enough cash to rank up cash needed is: "+ desiredRank*5);
+        }
+      }
+
+    }
+    public static void rankUpUsingFame(Player player, int desiredRank){
+      int fame = player.getFame();
+      int reqFame = fameNeeded(desiredRank, 0);
+
+      if(!player.getSpace().getName().equals("Casting Office")){
+        System.out.println("You can only rank up while in the Casting Office!");
+      }
+      else{
+        if(fame >= reqFame){
+          player.setFame(fame - reqFame);
+          player.setRank(desiredRank);
+          System.out.println("CONGRATULATIONS!! you are now rank " + desiredRank);
+
+        }
+        else{
+          System.out.println("don't have enough fame to rank up fame needed is: "+ reqFame);
+        }
+      }
+
+    }
+    private static int fameNeeded(int rank, int fame){
+      int ret;
+
+
+      if(rank <= 1){
+        return 4;
+      }
+      else{
+        ret =  fameNeeded(rank -1 , fame) +(rank * 2) + 2;
+      }
+      return ret;
+    }
+
 
     public void endTurn(Player player) {
 
