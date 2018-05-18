@@ -26,11 +26,12 @@ public class Board {
   ArrayList<Set> sets = new ArrayList<Set>();
   ArrayList<Card> cards = new ArrayList<Card>();
   HashMap<String,Space> spaceMap = new HashMap<String, Space>();
-
+  Trailer trailer;
+  CastingOffice castingOffice;
   public void setupBoard(Board board){
 
     createScene(board);
-
+    startday();
   }
 
   public void startday()
@@ -49,7 +50,7 @@ public class Board {
     ParseXML p = new ParseXML();
 
     try {
-      Document d = p.getDocFromFile("board.xml");
+      Document d = p.getDocFromFile("XML_Files/board.xml");
       p.readSceneData(d, board);
       p.readForOffice(d, board);
       p.readForTrailer(d, board);
@@ -62,7 +63,7 @@ public class Board {
 
 
     try {
-      Document d = p.getDocFromFile("cards.xml");
+      Document d = p.getDocFromFile("XML_Files/cards.xml");
       p.readCardData(d, board);
     }
     catch(ParserConfigurationException ex) {
@@ -74,8 +75,12 @@ public class Board {
 
   }
 
-  private static void createPlayer(){
-
+  public void initializePlayers(int numPlayers){
+    for(int i = 0; i < numPlayers; i++){
+      Player player = new Player(i);
+      players.add(player);
+      player.setSpace(castingOffice);
+    }
   }
 
   private static void endDay(){
@@ -96,6 +101,9 @@ public class Board {
   }
   public int getDay(){
     return this.day;
+  }
+  public  HashMap<String,Space> getSpaceMap(){
+    return this.spaceMap;
   }
 
   public void addToSets(Set set)
@@ -124,9 +132,23 @@ public class Board {
   public ArrayList<Set> getSetList(){
     return this.sets;
   }
+  public Trailer getTrailer(){
+    return this.trailer;
+  }
+  public CastingOffice getCastingOffice(){
+    return this.castingOffice;
+  }
 
   public void setDay(int day){
     this.day = day;
+  }
+
+  public void setTrailer(Trailer trailer){
+    this.trailer = trailer;
+  }
+
+  public void setCastingOffice(CastingOffice castingOffice){
+    this.castingOffice = castingOffice;
   }
 
   public void printSets()

@@ -1,4 +1,6 @@
 import java.util.Random;
+import java.util.ArrayList;
+
 
 public class Player{
 
@@ -7,23 +9,24 @@ public class Player{
     int rank = 0;
     int rehearsalTok = 0;
     int ID = 0;
-    Space currentSpace = null;
+    Space currentSpace;
     Role currentRole = null;
     boolean isTurn = false;
 
     public Player(int id)
     {
         this.ID = id;
+
     }
 
-    public void move(Player player, String destination)
+    public void move(Player player, String destination, Board board)
     {
 
       if(player.isTurn == true) {
-        ArrayList<String> neighbors = currentSpace.getNeighbors()
+        ArrayList<String> neighbors = currentSpace.getNeighbors();
         for(int i = 0; i < neighbors.size(); i++){
           if(neighbors.get(i).equals(destination)){
-            currentSpace = 
+            currentSpace = board.getSpaceMap().get(neighbors.get(i));
           }
         }
 
@@ -116,7 +119,7 @@ public class Player{
       return this.ID;
     }
 
-    public Space getLocation()
+    public Space getSpace()
     {
       return this.currentSpace;
     }

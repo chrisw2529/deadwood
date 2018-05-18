@@ -13,22 +13,34 @@ public class CastingOffice extends Space{
   * takes a player and ranks
   */
   public static void rankUpUsingCash(Player player, int desiredRank){
-    int cash = player.getCash();
-    if(desiredRank * 5 <= cash){
-      player.setCash(cash - desiredRank * 5);
-      player.setRank(desiredRank);
-
+    if(!player.getSpace().getName().equals("Casting Office")){
+      System.out.println("You can only rank up while in the Casting Office!");
     }
+    else{
+      int cash = player.getCash();
+      if(desiredRank * 5 <= cash){
+        player.setCash(cash - desiredRank * 5);
+        player.setRank(desiredRank);
+
+      }
+    }
+
   }
   public static void rankUpUsingFame(Player player, int desiredRank){
     int fame = player.getFame();
     int reqFame = fameNeeded(desiredRank, 0);
 
-    if(fame >= reqFame){
-      player.setFame(fame - reqFame);
-      player.setRank(desiredRank);
-
+    if(!player.getSpace().getName().equals("Casting Office")){
+      System.out.println("You can only rank up while in the Casting Office!");
     }
+    else{
+      if(fame >= reqFame){
+        player.setFame(fame - reqFame);
+        player.setRank(desiredRank);
+
+      }
+    }
+
   }
   private static int fameNeeded(int rank, int fame){
     int ret;

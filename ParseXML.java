@@ -208,6 +208,7 @@ public class ParseXML{
 
 
         }
+        b.setTrailer(trailer);
 
       //  System.out.println("Area: " + x + ", " + y + ", " + h + ", " + w);
 
@@ -229,7 +230,7 @@ public class ParseXML{
         String hUpgrade = "";
         String wUpgrade = "";
 
-        CastingOffice office = new CastingOffice("Office");
+        CastingOffice office = new CastingOffice("Casting Office");
 
 
         for (int k = 0; k < childrenOffice.getLength(); k++ ) {
@@ -299,6 +300,8 @@ public class ParseXML{
             }
 
         }
+        b.setCastingOffice(office);
+
 
     }
 

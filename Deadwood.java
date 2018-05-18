@@ -17,9 +17,10 @@ public class Deadwood{
 
     ParseXML p = new ParseXML();
     Card c = new Card("hello", 4);
-
     Board board = new Board();
     board.setupBoard(board);
+    board.initializePlayers(2);
+    //String command = System.in();
     // Player player = new Player(1);
     // Set space = new Set("dog", 10);
     // Role role = new Role("cat","puppy",1,space,true);
