@@ -13,19 +13,39 @@ import org.w3c.dom.Element;
 import java.io.File;
 import java.lang.Object;
 import java.lang.System;
-import java.util.Scanner;
+import java.lang.*;
+
+import java.util.*;
 
 public class Deadwood{
   public static void main(String[] args){
 
     ParseXML p = new ParseXML();
-    Card c = new Card("hello", 4);
     Board board = new Board();
     board.setupBoard(board);
     board.initializePlayers(2);
-    Scanner sc = new Scanner();
-    sc = System.in();
-    String command = sc;
+    Scanner sc = new Scanner(System.in);
+    String c = "";
+    while(!c.equals("e")){
+      c = sc.nextLine();
+      if(c.equals("show location of all players")){
+        ArrayList<Player> players = board.getPlayers();
+        for (int i = 0; i < players.size(); i++ ) {
+          System.out.println("player " +players.get(i).getID() + " is currently at the "+ players.get(i).getSpace().getName());
+        }
+      }
+      else if(c.equals("move")){
+
+      }
+      else if(c.equals("active player")){
+        Player player = board.activePlayer();
+        System.out.println("the active player is player " + player.getID() + " they have " + player.getCash() + " Dollars and " +player.getFame()+ " Fame and they are rank " + player.getRank());
+      }
+      else if(c.equals("show location of active player")){
+        Player player = board.activePlayer();
+        System.out.println("the active player is player " + player.getID() + " they are currently at the " + player.getSpace().getName());
+      }
+    }
     //String command = System.in();
     // Player player = new Player(1);
     // Set space = new Set("dog", 10);

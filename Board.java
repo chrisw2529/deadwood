@@ -76,11 +76,23 @@ public class Board {
   }
 
   public void initializePlayers(int numPlayers){
-    for(int i = 0; i < numPlayers; i++){
+    for(int i = 1; i < numPlayers + 1; i++){
       Player player = new Player(i);
       players.add(player);
       player.setSpace(castingOffice);
+      if(i == 1){
+        player.setTurn(true);
+      }
     }
+  }
+  public Player activePlayer(){
+    for (int i = 0; i< players.size() ; i++ ) {
+      if (players.get(i).isTurn()){
+        return players.get(i);
+      }
+    }
+    System.out.println("it is no ones turn rn!");
+    return null;
   }
 
   private static void endDay(){
@@ -123,6 +135,10 @@ public class Board {
 
   public int getRemainingScenes(){
     return this.remainingScenes;
+  }
+
+  public ArrayList<Player> getPlayers(){
+    return this.players;
   }
 
   public ArrayList<Card> getCardList(){

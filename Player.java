@@ -6,9 +6,9 @@ public class Player{
 
     int fame = 0;
     int cash = 0;
-    int rank = 0;
+    int rank = 1;
     int rehearsalTok = 0;
-    int ID = 0;
+    int ID;
     Space currentSpace;
     Role currentRole = null;
     boolean isTurn = false;
