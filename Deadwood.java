@@ -20,12 +20,38 @@ import java.util.*;
 public class Deadwood{
   public static void main(String[] args){
 
-    ParseXML p = new ParseXML();
+    Boolean beginGame = false;
+    int howManyPlayers = -1;
     Board board = new Board();
     board.setupBoard(board);
-    board.initializePlayers(2);
     Scanner sc = new Scanner(System.in);
+
+    System.out.println("Welcome to Deadwood.java, please indicate if you would like to play with 2 or 3 players ");
+
+    while(!beginGame) {
+
+      try{
+
+        howManyPlayers = Integer.parseInt(sc.nextLine());
+
+        if(howManyPlayers == 2 || howManyPlayers == 3)
+          beginGame = true;
+        else
+          System.out.println("Only available players is 2 or 3!");
+
+      }catch (NumberFormatException ex) {
+
+        System.out.println("Please enter an integer!");
+
+      }
+
+    }
+
+    board.initializePlayers(howManyPlayers);
+    System.out.println("You have chosen to play with " + howManyPlayers + " players.");
+    System.out.println();
     String c = "";
+
     while(!c.equals("e")){
       c = sc.nextLine();
       Player player = board.activePlayer();
@@ -43,6 +69,9 @@ public class Deadwood{
       else if(c.equals("get rs")){
         System.out.println(board.getRemainingScenes());
       }
+      else if(c.equals("get rehearse")) {
+        System.out.println(player.getRehearsal());
+      }
 
       else if(c.equals("get sets")){
         board.printSets();
@@ -54,7 +83,7 @@ public class Deadwood{
 
       else if(c.contains("move to")){
         if(c.length() <= 8){
-          System.out.println("please specify where to move");
+          System.out.println("Please specify where to move");
         }
         else{
           if(c.substring(8, c.length()) != null){
@@ -83,18 +112,21 @@ public class Deadwood{
         int rankTo = 0;
 
         if(c.length() <= 7){
-          System.out.println("please specify what rank you would like to get to");
+          System.out.println("Please specify what rank you would like to get to");
         }
 
         else {
 
-          if(c.substring(7, c.length()) != null){
+          try{
+
             rankTo = Integer.parseInt(c.substring(8, c.length()));
             player.rankUpUsingCash(player, rankTo);
-          }
 
-          else
+          }catch (NumberFormatException ex) {
+
             System.out.println("Not a valid entry try again");
+
+          }
         }
 
       }
@@ -103,19 +135,23 @@ public class Deadwood{
         int rankTo = 0;
 
         if(c.length() <= 7){
-          System.out.println("please specify what rank you would like to get to");
+          System.out.println("Please specify what rank you would like to get to");
         }
 
         else {
 
-          if(c.substring(7, c.length()) != null){
+          try{
+
             rankTo = Integer.parseInt(c.substring(8, c.length()));
             player.rankUpUsingFame(player, rankTo);
-          }
 
-          else
+          }catch (NumberFormatException ex) {
+
             System.out.println("Not a valid entry try again");
+
+          }
         }
+
 
       }
 
@@ -130,7 +166,7 @@ public class Deadwood{
       }
 
       else if(c.equals("where CIM")){
-        System.out.println("player "+ player.getID()+ " can move to ");
+        System.out.println("Player "+ player.getID()+ " can move to ");
         ArrayList<String> neighbors =  player.getSpace().getNeighbors();
         // /HashMap<String,Space> spaceMap = board.getSpaceMap();
         for (int i = 0; i< neighbors.size(); i++) {
@@ -144,7 +180,7 @@ public class Deadwood{
       }
 
       else{
-        System.out.println("not a valid entry try again");
+        System.out.println("Not a valid entry try again");
       }
     }
     //String command = System.in();

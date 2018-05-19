@@ -348,7 +348,7 @@ public class Player{
           System.out.println("CONGRATULATIONS!! you are now rank " + desiredRank);
         }
         else{
-          System.out.println("don't have enough cash to rank up cash needed is: "+ (desiredRank-1)*5);
+          System.out.println("Don't have enough cash to rank up cash needed is: "+ (desiredRank-1)*5);
         }
       }
 
@@ -361,7 +361,7 @@ public class Player{
         System.out.println("You can only rank up while in the Casting Office!");
       }
       else if(desiredRank > 6){
-        System.out.println("the maximum rank you can be is 6");
+        System.out.println("The maximum rank you can be is 6");
       }
 
       else if(desiredRank <= player.rank){
