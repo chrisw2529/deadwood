@@ -126,7 +126,7 @@ public class Board {
         players.get(i).setRole(null);
         players.get(i).setSpace(trailer);
       }
-      remainingScenes = 10;
+      remainingScenes = 2;
       startday();
     }
 
@@ -134,6 +134,21 @@ public class Board {
 
   private static void endGame(){
     System.out.println("The Game is over!");
+    int highestScore = -1;
+    int highestScoreingPlayer = -1;
+    for (int i = 0; i < players.size() ; i++) {
+      int fame = player.get(i).getFame();
+      int cash = player.get(i).getCash();
+      int rank = player.get(i).getRank();
+      rank = rank * 5;
+      int score = fame + cash + rank;
+      System.out.println("Player "+ (i+1) + " has " + score + " points");
+      if(highestScore =< score){
+        highestScore = score;
+        highestScoreingPlayer = i+1;
+      }
+    }
+    System.out.println("the winner is player " + (highestScoreingPlayer)+ " they scored " + highestScore + " points!");
   }
 
   public static int roleDie(){
