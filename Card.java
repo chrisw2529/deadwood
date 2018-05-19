@@ -21,11 +21,6 @@ public class Card
         this.budget = budget;
     }
 
-    public void setUpCard(Card card)
-    {
-
-    }
-
     public String getName()
     {
       return this.name;
