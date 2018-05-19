@@ -81,18 +81,42 @@ public class Deadwood{
 
       else if(c.contains("ru cash")){
         int rankTo = 0;
-        if(c.substring(6, c.length()) != null)
-          rankTo = Integer.parseInt(c.substring(6, c.length()));
 
-        player.rankUpUsingCash(player, rankTo);
+        if(c.length() <= 7){
+          System.out.println("please specify what rank you would like to get to");
+        }
+
+        else {
+
+          if(c.substring(7, c.length()) != null){
+            rankTo = Integer.parseInt(c.substring(8, c.length()));
+            player.rankUpUsingCash(player, rankTo);
+          }
+
+          else
+            System.out.println("Not a valid move entry try again");
+        }
+
       }
 
       else if(c.contains("ru fame")){
         int rankTo = 0;
-        if(c.substring(6, c.length()) != null)
-          rankTo = Integer.parseInt(c.substring(6, c.length()));
 
-        player.rankUpUsingFame(player, rankTo);
+        if(c.length() <= 7){
+          System.out.println("please specify what rank you would like to get to");
+        }
+
+        else {
+
+          if(c.substring(7, c.length()) != null){
+            rankTo = Integer.parseInt(c.substring(8, c.length()));
+            player.rankUpUsingFame(player, rankTo);
+          }
+
+          else
+            System.out.println("Not a valid move entry try again");
+        }
+
       }
 
       else if(c.equals("act")){

@@ -334,6 +334,12 @@ public class Player{
       else if(desiredRank > 6){
         System.out.println("the maximum rank you can be is 6");
       }
+
+      else if(desiredRank <= player.rank){
+        System.out.println("you must rank UP");
+        System.out.println("you are current rank " + player.rank);
+      }
+      
       else{
         int cash = player.getCash();
         if(desiredRank * 5 <= cash){
@@ -357,6 +363,12 @@ public class Player{
       else if(desiredRank > 6){
         System.out.println("the maximum rank you can be is 6");
       }
+
+      else if(desiredRank <= player.rank){
+        System.out.println("you must rank UP");
+        System.out.println("you are current rank " + player.rank);
+      }
+
       else{
         if(fame >= reqFame){
           player.setFame(fame - reqFame);
