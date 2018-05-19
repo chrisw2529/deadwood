@@ -80,15 +80,17 @@ public class Deadwood{
       }
 
       else if(c.contains("ru cash")){
+        int rankTo = 0;
         if(c.substring(6, c.length()) != null)
-          int rankTo = c.substring(6, c.length());
+          rankTo = Integer.parseInt(c.substring(6, c.length()));
 
         player.rankUpUsingCash(player, rankTo);
       }
 
       else if(c.contains("ru fame")){
+        int rankTo = 0;
         if(c.substring(6, c.length()) != null)
-          int rankTo = c.substring(6, c.length());
+          rankTo = Integer.parseInt(c.substring(6, c.length()));
 
         player.rankUpUsingFame(player, rankTo);
       }
