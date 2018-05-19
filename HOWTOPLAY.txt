@@ -1,0 +1,33 @@
+DEADWOOD
+Tony Dinh, Chris White
+
+
+How To Play:
+
+Please run Deadwood.java
+The program will ask you to enter the number of players, you can choose either '2' or '3'
+From here, you have many options as Player 1.
+
+'show all' - will show all the current players and their locations
+'active player' - will show the active player and all of their stats
+'get rehearse' - will return the current players rehearsal tokens
+'get day' - will return the current day
+'get rs' - will return the remaining scenes on the board
+'get sets' - will return the remaining sets on the board
+'get scenes' - will return all of the spaces on the board
+
+'move to' - followed by a " " and the specified destination will move you to that space (if it is available)
+--if you don't know where you can move, try 'where CIM' - this will tell you all the destinations available
+
+When you move to a scene, you will be given the option to take the role, your response will either be a 'y' or a 'n'
+If you choose to take the role, you may choose to 'act' or 'rehearse'
+
+If you choose not to act, but on your next turn had a change of heart, use 'take role' to invoke the same message as above!
+
+'ru fame' and 'ru cash', - followed by a " " and the desired rank will give you the ability to rank up. The former will allow you to rank up using your fame, and the latter will allow you to rank up using cash-- remember that you need to be in the casting office to rank up!
+
+
+'e' will end the game early! 
+
+All other available commands should be shown by terminal.
+
