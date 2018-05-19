@@ -94,7 +94,7 @@ public class Deadwood{
           }
 
           else
-            System.out.println("Not a valid move entry try again");
+            System.out.println("Not a valid entry try again");
         }
 
       }
@@ -114,7 +114,7 @@ public class Deadwood{
           }
 
           else
-            System.out.println("Not a valid move entry try again");
+            System.out.println("Not a valid entry try again");
         }
 
       }

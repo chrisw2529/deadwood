@@ -101,7 +101,7 @@ public class Board {
     //reset all shot markers to there inital value
     System.out.println("ending day");
     day++;
-    if(day >= 3){
+    if(day > 3 ){
       endGame();
     }
     else{
@@ -132,23 +132,24 @@ public class Board {
 
   }
 
-  private static void endGame(){
+  private void endGame(){
     System.out.println("The Game is over!");
     int highestScore = -1;
     int highestScoreingPlayer = -1;
     for (int i = 0; i < players.size() ; i++) {
-      int fame = player.get(i).getFame();
-      int cash = player.get(i).getCash();
-      int rank = player.get(i).getRank();
+      int fame = players.get(i).getFame();
+      int cash = players.get(i).getCash();
+      int rank = players.get(i).getRank();
       rank = rank * 5;
       int score = fame + cash + rank;
       System.out.println("Player "+ (i+1) + " has " + score + " points");
-      if(highestScore =< score){
+      if(highestScore <= score){
         highestScore = score;
         highestScoreingPlayer = i+1;
       }
     }
     System.out.println("the winner is player " + (highestScoreingPlayer)+ " they scored " + highestScore + " points!");
+    System.exit(1);
   }
 
   public static int roleDie(){

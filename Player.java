@@ -339,23 +339,23 @@ public class Player{
         System.out.println("you must rank UP");
         System.out.println("you are current rank " + player.rank);
       }
-      
+
       else{
         int cash = player.getCash();
-        if(desiredRank * 5 <= cash){
-          player.setCash(cash - desiredRank * 5);
+        if((desiredRank-1) * 5 <= cash){
+          player.setCash(cash - (desiredRank-1) * 5);
           player.setRank(desiredRank);
           System.out.println("CONGRATULATIONS!! you are now rank " + desiredRank);
         }
         else{
-          System.out.println("don't have enough cash to rank up cash needed is: "+ desiredRank*5);
+          System.out.println("don't have enough cash to rank up cash needed is: "+ (desiredRank-1)*5);
         }
       }
 
     }
     public static void rankUpUsingFame(Player player, int desiredRank){
       int fame = player.getFame();
-      int reqFame = fameNeeded(desiredRank, 0);
+      int reqFame = fameNeeded(desiredRank-1, 0);
 
       if(!player.getSpace().getName().equals("office")){
         System.out.println("You can only rank up while in the Casting Office!");
