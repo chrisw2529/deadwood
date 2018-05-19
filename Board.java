@@ -21,7 +21,7 @@ import java.util.Collections;
 public class Board {
 
   int day = 1;
-  int remainingScenes = 2;
+  int remainingScenes = 10;
   ArrayList<Player> players = new ArrayList<Player>();
   ArrayList<Set> sets = new ArrayList<Set>();
   ArrayList<Card> cards = new ArrayList<Card>();
@@ -126,7 +126,7 @@ public class Board {
         players.get(i).setRole(null);
         players.get(i).setSpace(trailer);
       }
-      remainingScenes = 2;
+      remainingScenes = 10;
       startday();
     }
 
