@@ -121,29 +121,29 @@ public class Player{
                 chooseWisely = false;
               }
               else if(c.equals("on 2")){
-                if(on.get(1)!= null){
-                  notDone = (!roleQualificationCheck(player, on.get(1)));
-                  chooseWisely = false;
+                try{
+                    notDone = (!roleQualificationCheck(player, on.get(1)));
+                    chooseWisely = false;
                 }
-                else{
+                catch(IndexOutOfBoundsException ex){
                   System.out.println("role DNE!");
                 }
               }
               else if(c.equals("on 3")){
-                if(on.get(2)!= null){
-                  notDone = (!roleQualificationCheck(player, on.get(2)));
-                  chooseWisely = false;
+                try{
+                    notDone = (!roleQualificationCheck(player, on.get(2)));
+                    chooseWisely = false;
                 }
-                else{
+                catch(IndexOutOfBoundsException ex){
                   System.out.println("role DNE!");
                 }
               }
               else if(c.equals("on 4")){
-                if(on.get(3)!= null){
-                  notDone = (!roleQualificationCheck(player, on.get(3)));
-                  chooseWisely = false;
+                try{
+                    notDone = (!roleQualificationCheck(player, on.get(3)));
+                    chooseWisely = false;
                 }
-                else{
+                catch(IndexOutOfBoundsException ex){
                   System.out.println("role DNE!");
                 }
               }
@@ -156,22 +156,20 @@ public class Player{
                 chooseWisely = false;
               }
               else if(c.equals("off 3")){
-                if(off.get(2)!= null){
-                  notDone = (!roleQualificationCheck(player, on.get(2)));
-                  chooseWisely = false;
-
+                try{
+                    notDone = (!roleQualificationCheck(player, off.get(2)));
+                    chooseWisely = false;
                 }
-                else{
+                catch(IndexOutOfBoundsException ex){
                   System.out.println("role DNE!");
                 }
               }
               else if(c.equals("off 4")){
-                if(off.get(3)!= null){
-                  notDone = (!roleQualificationCheck(player, off.get(3)));
-                  chooseWisely = false;
-
+                try{
+                    notDone = (!roleQualificationCheck(player, off.get(3)));
+                    chooseWisely = false;
                 }
-                else{
+                catch(IndexOutOfBoundsException ex){
                   System.out.println("role DNE!");
                 }
               }
