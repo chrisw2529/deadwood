@@ -1,12 +1,21 @@
 public class Trailer extends Space
 {
 
-  public Trailer(String name)
+  private Trailer(String name)
   {
       super(name);
   }
 
 
+  private static class LazyHolder
+  {
+    static final Trailer INSTANCE = new Trailer("trailer");
+  }
+
+  public static Trailer getInstance()
+  {
+    return LazyHolder.INSTANCE;
+  }
 
 
 }

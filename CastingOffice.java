@@ -2,10 +2,20 @@ public class CastingOffice extends Space{
 
 
 
-  public CastingOffice(String name)
+  private CastingOffice(String name)
   {
       super(name);
 
+  }
+
+  private static class LazyHolder
+  {
+    static final CastingOffice INSTANCE = new CastingOffice("office");
+  }
+
+  public static CastingOffice getInstance()
+  {
+    return LazyHolder.INSTANCE;
   }
 
 

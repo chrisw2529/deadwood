@@ -22,7 +22,8 @@ public class Deadwood{
 
     Boolean beginGame = false;
     int howManyPlayers = -1;
-    Board board = new Board();
+    Board board = null;
+    board = board.getInstance();
     board.setupBoard(board);
     Scanner sc = new Scanner(System.in);
 

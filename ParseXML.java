@@ -171,7 +171,8 @@ public class ParseXML{
         Node sub = trailerNode.item(0);
         NodeList childrenTrailer = sub.getChildNodes();
 
-        Trailer trailer = new Trailer("trailer");
+        Trailer trailer = null;
+        trailer = trailer.getInstance();
 
         String x = "";
         String y = "";
@@ -232,8 +233,8 @@ public class ParseXML{
         String hUpgrade = "";
         String wUpgrade = "";
 
-        CastingOffice office = new CastingOffice("office");
-
+        CastingOffice office = null;
+        office = office.getInstance();
 
         for (int k = 0; k < childrenOffice.getLength(); k++ ) {
 

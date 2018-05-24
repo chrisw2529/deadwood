@@ -55,10 +55,8 @@ public class Player{
         System.out.println("cannot move while on a role");
       }
 
-
-
-
     }
+
     public Set spaceToSet(Player player, Board board){
       ArrayList<Set> sets = board.getSetList();
       for (int i = 0 ; i < sets.size() ; i++) {
@@ -380,6 +378,7 @@ public class Player{
       }
 
     }
+
     private static int fameNeeded(int rank, int fame){
       int ret;
 

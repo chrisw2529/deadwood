@@ -20,6 +20,7 @@ import java.util.Collections;
 
 public class Board {
 
+
   int day = 1;
   int remainingScenes = 10;
   ArrayList<Player> players = new ArrayList<Player>();
@@ -28,6 +29,19 @@ public class Board {
   HashMap<String,Space> spaceMap = new HashMap<String, Space>();
   Trailer trailer;
   CastingOffice castingOffice;
+
+  private Board() {}
+
+  private static class LazyHolder
+  {
+    static final Board INSTANCE = new Board();
+  }
+
+  public static Board getInstance()
+  {
+    return LazyHolder.INSTANCE;
+  }
+
   public void setupBoard(Board board){
 
     createScene(board);
