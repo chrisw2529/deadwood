@@ -25,30 +25,21 @@ public class Deadwood{
     Board board = null;
     board = board.getInstance();
     board.setupBoard(board);
+
+    OpeningScreen startGame = new OpeningScreen();
     Scanner sc = new Scanner(System.in);
 
     System.out.println("Welcome to Deadwood.java, please indicate if you would like to play with 2 or 3 players ");
 
-    while(!beginGame) {
-
-      try{
-
-        howManyPlayers = Integer.parseInt(sc.nextLine());
-
-        if(howManyPlayers == 2 || howManyPlayers == 3)
-          beginGame = true;
-        else
-          System.out.println("Only available players is 2 or 3!");
-
-      }catch (NumberFormatException ex) {
-
-        System.out.println("Please enter an integer!");
-
+    while(board.getNumOfPlayers() == 0){
+      try {
+        Thread.sleep(200);
+      } catch(InterruptedException e) {
       }
-
     }
 
-    board.initializePlayers(howManyPlayers);
+    howManyPlayers = board.getNumOfPlayers();
+
     System.out.println("You have chosen to play with " + howManyPlayers + " players.");
     System.out.println();
     String c = "";

@@ -23,6 +23,7 @@ public class Board {
 
   int day = 1;
   int remainingScenes = 10;
+  int playerNum = 0;
   ArrayList<Player> players = new ArrayList<Player>();
   ArrayList<Set> sets = new ArrayList<Set>();
   ArrayList<Card> cards = new ArrayList<Card>();
@@ -92,6 +93,7 @@ public class Board {
   }
 
   public void initializePlayers(int numPlayers){
+    this.playerNum = numPlayers;
     for(int i = 1; i < numPlayers + 1; i++){
       Player player = new Player(i);
       players.add(player);
@@ -199,6 +201,10 @@ public class Board {
 
   public ArrayList<Player> getPlayers(){
     return this.players;
+  }
+
+  public int getNumOfPlayers(){
+    return this.playerNum;
   }
 
   public ArrayList<Card> getCardList(){
