@@ -90,8 +90,6 @@ public class Deadwood{
 
       }
 
-      //must be able to take scene if already on a set
-
       else if(c.equals("take role")){
         player.takeRole(player, board, true);
       }
@@ -175,6 +173,7 @@ public class Deadwood{
         System.out.println("Not a valid entry try again");
       }
     }
+
   }
 
 
