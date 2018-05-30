@@ -57,6 +57,10 @@ public class ParseXML{
             NodeList takeList = neighbors.getElementsByTagName("take");
             NodeList partList = neighbors.getElementsByTagName("part");
             int shot = -1;
+            int x = -1;
+            int y = -1;
+            int h = -1;
+            int w = -1;
 
             for (int j=0; j< takeList.getLength(); j++){
 
@@ -66,10 +70,10 @@ public class ParseXML{
                 if(j == 0)
                   shot = Integer.parseInt(takeNum);
 
-                int x = 0;
-                int y = 0;
-                int h = 0;
-                int w = 0;
+                x = 0;
+                y = 0;
+                h = 0;
+                w = 0;
 
                 NodeList area = sub.getChildNodes();
                 Node subsub = area.item(0);
@@ -101,10 +105,10 @@ public class ParseXML{
                 String partName = sub.getAttributes().getNamedItem("name").getNodeValue();
                 String level = sub.getAttributes().getNamedItem("level").getNodeValue();
                 String line = "";
-                int x = 0;
-                int y = 0;
-                int h = 0;
-                int w = 0;
+                x = 0;
+                y = 0;
+                h = 0;
+                w = 0;
 
                 NodeList moreChildren = sub.getChildNodes();
                 int lvl = -1;
