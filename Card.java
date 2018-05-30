@@ -59,9 +59,10 @@ public class Card
       roles.add(role);
     }
 
-    //$$$$$$$
-    //to do
-    //$$$$$$$
+    /*
+    * wrapScene is called when all of the shot marker count on a scene is equal to zero or when it is the last remaining scene on the board
+    *
+    */
     public void wrapScene(Board board)
     {
       //off card bonuses
@@ -95,7 +96,6 @@ public class Card
           payout[i] = payout[payout.length - i - 1];
           payout[payout.length - i - 1] = temp;
         }
-        //Collections.reversep(Arrays.asList(payout));
         System.out.printf("The die rolls where : %s\n", Arrays.toString(payout));
         int count = 0;
         //payout on card roles
@@ -128,7 +128,6 @@ public class Card
 
       }
       //reset roles for on scene
-
       for (int i = 0; i < roles.size(); i++) {
         if(roles.get(i).takenBy != null){
           roles.get(i).getPlayer().setRehearsal(0);
@@ -146,14 +145,6 @@ public class Card
         board.endDay();
       }
       System.out.println("scene wrapped");
-      // Set set = getSet();
-      // set.setIsWrapped(true);
-      // board.setRemainingScenes(board.getRemainingScenes() - 1);
-      // if(board.getRemainingScenes() <= 1){
-      //   endDay();
-      // }
-      // System.out.println("scene wrapped");
-
     }
 
 }

@@ -33,6 +33,7 @@ public class Board {
 
   private Board() {}
 
+  //Holder for the board
   private static class LazyHolder
   {
     static final Board INSTANCE = new Board();
@@ -42,14 +43,19 @@ public class Board {
   {
     return LazyHolder.INSTANCE;
   }
-
+  /*
+  *takes in the board and calls parseXML and then startDay
+  *
+  */
   public void setupBoard(Board board){
 
-    createScene(board);
-    startday();
+    parseXML(board);
+    startDay();
   }
-
-  public void startday()
+  /*
+  *startDay shuffles all of the cards and places then in random order on the board spaces
+  */
+  public void startDay()
   {
 
     Collections.shuffle(cards);
@@ -61,8 +67,10 @@ public class Board {
     System.out.println("it is now day " + day);
   }
 
-
-  private static void createScene(Board board){
+  /*
+  *parseXML parses the entire XML file and creates all of the scenes, cards and roles along with the casting office and trailer
+  */
+  private static void parseXML(Board board){
 
     ParseXML p = new ParseXML();
 
@@ -91,7 +99,10 @@ public class Board {
 
 
   }
-
+  /*
+  *creates an amount of players specified by the parameter (numPlayers)
+  * it also makes it player 1's turn
+  */
   public void initializePlayers(int numPlayers){
     this.playerNum = numPlayers;
     for(int i = 1; i < numPlayers + 1; i++){
@@ -103,6 +114,10 @@ public class Board {
       }
     }
   }
+
+  /*
+  *returns the player whos turn it currently is
+  */
   public Player activePlayer(){
     for (int i = 0; i< players.size() ; i++ ) {
       if (players.get(i).isTurn()){
@@ -113,6 +128,11 @@ public class Board {
     return null;
   }
 
+  /*
+  * endDay resets the board at the end of the day, it resets all shot markers, wraps the final scene,
+  * and puts all players back in the trailer and calls startDay to reset the cards.
+  * endDay also calls endGame if it is the end of day 3
+  */
   public void endDay(){
     //reset all shot markers to there inital value
     System.out.println("ending day");
@@ -143,11 +163,14 @@ public class Board {
         players.get(i).setSpace(trailer);
       }
       remainingScenes = 10;
-      startday();
+      startDay();
     }
 
   }
 
+  /*
+  * endGame tallies up the scores of all players, anounces the winner, and terminates the program
+  */
   private void endGame(){
     System.out.println("The Game is over!");
     int highestScore = -1;
@@ -168,6 +191,9 @@ public class Board {
     System.exit(1);
   }
 
+  /*
+  * roles on die and return the result of the role
+  */
   public static int roleDie(){
     Random rand = new Random();
     int dieRoll = (rand.nextInt(6) + 1);
@@ -232,7 +258,14 @@ public class Board {
   public void setCastingOffice(CastingOffice castingOffice){
     this.castingOffice = castingOffice;
   }
+  
+  public void setRemainingScenes(int remainingScenes){
+    this.remainingScenes = remainingScenes;
+  }
 
+  /*
+  * prints the name of all of the sets
+  */
   public void printSets()
   {
     for (int i = 0; i < sets.size() ; i++ ) {
@@ -240,7 +273,9 @@ public class Board {
       sets.get(i).getRoles();
     }
   }
-
+  /*
+  * prints the name of all of the scebes and what set there on
+  */
   public void printScenes()
   {
     for (int i = 0; i < sets.size() ; i++ ) {
@@ -248,6 +283,9 @@ public class Board {
     }
   }
 
+  /*
+  * prints the location of all the players
+  */
   public void printAllPlayerLocation(){
 
     for (int i = 0; i < players.size(); i++ ) {
@@ -256,8 +294,6 @@ public class Board {
 
   }
 
-  public void setRemainingScenes(int remainingScenes){
-    this.remainingScenes = remainingScenes;
-  }
+
 
 }

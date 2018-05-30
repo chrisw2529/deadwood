@@ -5,9 +5,11 @@ public class Role {
   String line;
   boolean onScene;
   Set setImOn;
-  //int budget;
   Player takenBy = null;
 
+  /*
+  * creates a role with a specified name, role line, level you need to take the role,
+  */
   public Role(String name, String line, int level, Set setImOn, boolean onScene){
 
     this.name = name;
@@ -44,7 +46,7 @@ public class Role {
   {
     return this.setImOn;
   }
-  
+
   public void setPlayer(Player player)
   {
     this.takenBy = player;
