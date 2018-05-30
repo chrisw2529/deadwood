@@ -66,22 +66,24 @@ public class ParseXML{
                 if(j == 0)
                   shot = Integer.parseInt(takeNum);
 
-                String x = "";
-                String y = "";
-                String h = "";
-                String w = "";
+                int x = 0;
+                int y = 0;
+                int h = 0;
+                int w = 0;
 
                 NodeList area = sub.getChildNodes();
                 Node subsub = area.item(0);
 
                 if("area".equals(subsub.getNodeName())){
 
-                    x = subsub.getAttributes().getNamedItem("x").getNodeValue();
-                    y = subsub.getAttributes().getNamedItem("y").getNodeValue();
-                    h = subsub.getAttributes().getNamedItem("h").getNodeValue();
-                    w = subsub.getAttributes().getNamedItem("w").getNodeValue();
+                    x = Integer.parseInt(subsub.getAttributes().getNamedItem("x").getNodeValue());
+                    y = Integer.parseInt(subsub.getAttributes().getNamedItem("y").getNodeValue());
+                    h = Integer.parseInt(subsub.getAttributes().getNamedItem("h").getNodeValue());
+                    w = Integer.parseInt(subsub.getAttributes().getNamedItem("w").getNodeValue());
 
                 }
+
+
 
                 // System.out.println("takeNum = "+takeNum);
                 // System.out.println("Area: " + x + ", " + y + ", " + h + ", " + w);
@@ -91,7 +93,7 @@ public class ParseXML{
             }
 
 
-            newSet = new Set(sceneName, shot);
+            newSet = new Set(sceneName, shot, x, y, h, w);
 
             for (int j=0; j< partList.getLength(); j++){
 
@@ -99,10 +101,10 @@ public class ParseXML{
                 String partName = sub.getAttributes().getNamedItem("name").getNodeValue();
                 String level = sub.getAttributes().getNamedItem("level").getNodeValue();
                 String line = "";
-                String x = "";
-                String y = "";
-                String h = "";
-                String w = "";
+                int x = 0;
+                int y = 0;
+                int h = 0;
+                int w = 0;
 
                 NodeList moreChildren = sub.getChildNodes();
                 int lvl = -1;
@@ -112,10 +114,10 @@ public class ParseXML{
 
                     if("area".equals(subsub.getNodeName())){
 
-                        x = subsub.getAttributes().getNamedItem("x").getNodeValue();
-                        y = subsub.getAttributes().getNamedItem("y").getNodeValue();
-                        h = subsub.getAttributes().getNamedItem("h").getNodeValue();
-                        w = subsub.getAttributes().getNamedItem("w").getNodeValue();
+                      x = Integer.parseInt(subsub.getAttributes().getNamedItem("x").getNodeValue());
+                      y = Integer.parseInt(subsub.getAttributes().getNamedItem("y").getNodeValue());
+                      h = Integer.parseInt(subsub.getAttributes().getNamedItem("h").getNodeValue());
+                      w = Integer.parseInt(subsub.getAttributes().getNamedItem("w").getNodeValue());
 
                     }
 
@@ -135,7 +137,7 @@ public class ParseXML{
 
 
             }
-            Role newRole = new Role(partName, line, lvl, newSet, false);
+            Role newRole = new Role(partName, line, lvl, newSet, false, x, y, h, w);
             newSet.addRoles(newRole);
             // System.out.println("\n");
 
@@ -359,10 +361,10 @@ public class ParseXML{
 
                     NodeList moreChildren = sub.getChildNodes();
                     String line = "";
-                    String x = "";
-                    String y = "";
-                    String h = "";
-                    String w = "";
+                    int x = 0;
+                    int y = 0;
+                    int h = 0;
+                    int w = 0;
 
                     for (int k = 0; k < moreChildren.getLength(); k++ ) {
 
@@ -370,11 +372,10 @@ public class ParseXML{
 
                         if("area".equals(subsub.getNodeName())){
 
-                            x = subsub.getAttributes().getNamedItem("x").getNodeValue();
-                            y = subsub.getAttributes().getNamedItem("y").getNodeValue();
-                            h = subsub.getAttributes().getNamedItem("h").getNodeValue();
-                            w = subsub.getAttributes().getNamedItem("w").getNodeValue();
-
+                          x = Integer.parseInt(subsub.getAttributes().getNamedItem("x").getNodeValue());
+                          y = Integer.parseInt(subsub.getAttributes().getNamedItem("y").getNodeValue());
+                          h = Integer.parseInt(subsub.getAttributes().getNamedItem("h").getNodeValue());
+                          w = Integer.parseInt(subsub.getAttributes().getNamedItem("w").getNodeValue());
                         }
 
                         if("line".equals(subsub.getNodeName()))
@@ -385,7 +386,7 @@ public class ParseXML{
                     String partName =  sub.getAttributes().getNamedItem("name").getNodeValue();
                     String level =  sub.getAttributes().getNamedItem("level").getNodeValue();
 
-                    Role cardRoles = new Role(partName, line, Integer.parseInt(level), c.getSet(), true);
+                    Role cardRoles = new Role(partName, line, Integer.parseInt(level), c.getSet(), true, x, y, h, w);
                     c.addRoles(cardRoles);
 
                     // System.out.print("Part name = " + partName + ", ");
