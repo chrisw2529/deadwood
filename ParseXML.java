@@ -35,7 +35,7 @@ public class ParseXML{
 
     }
 
-    // reads data from XML file and prints data
+    // reads data from board XML file and imports data to our Board class
     public void readSceneData(Document d, Board board){
 
         Element root = d.getDocumentElement();
@@ -163,6 +163,7 @@ public class ParseXML{
 
     }
 
+    // reads data from board XML file and imports data to our Board class
     public void readForTrailer(Document d, Board b)
     {
 
@@ -217,6 +218,7 @@ public class ParseXML{
 
     }
 
+    // reads data from board XML file and imports data to our Board class
     public void readForOffice(Document d, Board b)
     {
 
@@ -310,7 +312,7 @@ public class ParseXML{
 
     }
 
-
+    // reads data from card XML file and imports data to our Board class
     public void readCardData(Document d, Board b)
     {
 

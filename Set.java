@@ -9,6 +9,12 @@ public class Set extends Space
     //int budget;
     boolean isWrapped = false;
 
+    /*
+    * Set Constructor
+    * @param: String name, indicates what the set name will be
+    * @param: int shotMarker, each set gets their own shotMarker to indicate how many scenes there are
+    */
+
     public Set(String name, int shotMarker)
     {
         super(name);
@@ -28,10 +34,7 @@ public class Set extends Space
       return this.shotMarker;
     }
 
-    // public int getBudget()
-    // {
-    //   return this.budget;
-    // }
+
 
     public boolean getIsWrapped(){
       return this.isWrapped;
@@ -46,15 +49,11 @@ public class Set extends Space
     {
       this.isWrapped = bool;
     }
-    // public void setBudget(int bug)
-    // {
-    //   this.budget = bug;
-    // }
+
 
     public void setCard(Card card)
     {
       this.card = card;
-      //this.budget = card.getBudget();
     }
 
     public void decrementShotMarker(){
