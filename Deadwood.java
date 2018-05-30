@@ -97,7 +97,7 @@ public class Deadwood{
       }
 
       else if(c.equals("active player")){
-        player.getPlayerInfo(board.activePlayer(), board);
+        player.getPlayerInfo(board.activePlayer());
       }
 
       else if(c.contains("ru cash")){
