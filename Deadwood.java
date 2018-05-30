@@ -34,7 +34,8 @@ public class Deadwood{
     while(board.getNumOfPlayers() == 0){
       try {
         Thread.sleep(200);
-      } catch(InterruptedException e) {
+      }
+      catch(InterruptedException e) {
       }
     }
 
@@ -47,9 +48,6 @@ public class Deadwood{
     while(!c.equals("e")){
       c = sc.nextLine();
       Player player = board.activePlayer();
-
-
-      //c.toLower();
       if(c.equals("show all")){
         board.printAllPlayerLocation();
       }
@@ -86,8 +84,6 @@ public class Deadwood{
             System.out.println("Not a valid move entry try again");
           }
         }
-
-
       }
 
       else if(c.equals("take role")){
@@ -123,44 +119,32 @@ public class Deadwood{
 
       else if(c.contains("ru fame")){
         int rankTo = 0;
-
         if(c.length() <= 7){
           System.out.println("Please specify what rank you would like to get to");
         }
 
         else {
-
           try{
-
             rankTo = Integer.parseInt(c.substring(8, c.length()));
             player.rankUpUsingFame(player, rankTo);
-
           }catch (NumberFormatException ex) {
-
             System.out.println("Not a valid entry try again");
-
           }
         }
-
-
       }
 
       else if(c.equals("act")){
-        //player.setSpace
         player.act(player, board);
       }
 
       else if(c.equals("rehearse")){
-        //player.setSpace
         player.rehearse(player, board);
       }
 
       else if(c.equals("where CIM")){
         System.out.println("Player "+ player.getID()+ " can move to ");
         ArrayList<String> neighbors =  player.getSpace().getNeighbors();
-        // /HashMap<String,Space> spaceMap = board.getSpaceMap();
         for (int i = 0; i< neighbors.size(); i++) {
-
           System.out.println(neighbors.get(i));
         }
       }

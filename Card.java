@@ -10,15 +10,23 @@ public class Card
     int sceneNum;
     int shotMarker;
     int budget;
+    int x;
+    int y;
+    int h;
+    int w;
     ArrayList<Role> roles = new ArrayList<Role>();
     Set set = null;
 
 
 
-    public Card(String name, int budget)
+    public Card(String name, int budget, int x, int y, int h, int w)
     {
         this.name = name;
         this.budget = budget;
+        this.x = x;
+        this.y = y;
+        this.h = h;
+        this.w = w;
     }
 
     public String getName()
@@ -57,6 +65,19 @@ public class Card
 
     public void addRoles(Role role){
       roles.add(role);
+    }
+
+    public int getX(){
+      return this.x;
+    }
+    public int getY(){
+      return this.y;
+    }
+    public int getH(){
+      return this.h;
+    }
+    public int getW(){
+      return this.w;
     }
 
     /*
