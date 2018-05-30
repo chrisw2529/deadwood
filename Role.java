@@ -8,7 +8,7 @@ public class Role {
   Player takenBy = null;
 
   /*
-  * creates a role with a specified name, role line, level you need to take the role,
+  * creates a role with a specified name, role line, level you need to take the role, the set the role is on and wether or not the role is an on or off scene role.
   */
   public Role(String name, String line, int level, Set setImOn, boolean onScene){
 

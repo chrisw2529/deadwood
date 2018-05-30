@@ -61,7 +61,7 @@ public class Card
 
     /*
     * wrapScene is called when all of the shot marker count on a scene is equal to zero or when it is the last remaining scene on the board
-    *
+    * wrapScene distributes on and off card wrap bonuses and makes it so that players can no longer take a role on that scene.
     */
     public void wrapScene(Board board)
     {

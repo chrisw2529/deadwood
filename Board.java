@@ -38,14 +38,13 @@ public class Board {
   {
     static final Board INSTANCE = new Board();
   }
-
+  //getter for the board
   public static Board getInstance()
   {
     return LazyHolder.INSTANCE;
   }
   /*
   *takes in the board and calls parseXML and then startDay
-  *
   */
   public void setupBoard(Board board){
 
@@ -258,7 +257,7 @@ public class Board {
   public void setCastingOffice(CastingOffice castingOffice){
     this.castingOffice = castingOffice;
   }
-  
+
   public void setRemainingScenes(int remainingScenes){
     this.remainingScenes = remainingScenes;
   }
