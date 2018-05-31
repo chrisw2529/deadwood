@@ -30,6 +30,7 @@ public class Board {
   HashMap<String,Space> spaceMap = new HashMap<String, Space>();
   Trailer trailer;
   CastingOffice castingOffice;
+  BoardUI boardUI;
 
   private Board() {}
 
@@ -58,10 +59,13 @@ public class Board {
   {
 
     Collections.shuffle(cards);
+    this.boardUI = boardUI.getInstance();
 
     for (int i = 0; i < sets.size(); i++){
       sets.get(i).setCard(cards.get(i));
+      boardUI.setCard(cards.get(i), sets.get(i));
       cards.get(i).setSet(sets.get(i));
+
     }
     System.out.println("it is now day " + day);
   }

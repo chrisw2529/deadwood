@@ -24,19 +24,27 @@ public class BoardUI extends JFrame implements ActionListener {
   private JTextArea text;
   Board board = null;
 
-  public BoardUI() {
+  private BoardUI() {
 
     super("Deadwood");
 
     this.board = board.getInstance();
-
-    initialize();
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     setVisible(true);
-
   }
 
-  private void initialize() {
+  //Holder for the board
+  private static class LazyHolder
+  {
+    static final BoardUI INSTANCE = new BoardUI();
+  }
+  //getter for the board
+  public static BoardUI getInstance()
+  {
+    return LazyHolder.INSTANCE;
+  }
+
+  public void initialize() {
 
     // JPanel toolbar = new JPanel();
     // add(toolbar, BorderLayout.NORTH);
@@ -187,6 +195,11 @@ public class BoardUI extends JFrame implements ActionListener {
     panel.add(button);
     button.addActionListener(this);
 
+  }
+
+  public static void setCard(Card card, Set set)
+  {
+    System.out.println(set.getX());
   }
 
 
