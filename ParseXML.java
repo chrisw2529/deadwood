@@ -42,17 +42,18 @@ public class ParseXML{
         NodeList sceneList = root.getElementsByTagName("set");
         Set newSet;
 
-        System.out.println(sceneList.getLength());
+        // System.out.println(sceneList.getLength());
 
         for (int i=0; i<sceneList.getLength();i++){
 
-            System.out.println("Printing information for sceneList "+(i+1));
+            // System.out.println("Printing information for sceneList "+(i+1));
             Node scene = sceneList.item(i);
             String sceneName = scene.getAttributes().getNamedItem("name").getNodeValue();
-            System.out.println("set name = "+sceneName);
+            // System.out.println("set name = "+sceneName);
 
 
             Element neighbors = (Element) scene;
+            NodeList sceneArea = neighbors.getElementsByTagName("area");
             NodeList neighborList = neighbors.getElementsByTagName("neighbor");
             NodeList takeList = neighbors.getElementsByTagName("take");
             NodeList partList = neighbors.getElementsByTagName("part");
@@ -61,6 +62,15 @@ public class ParseXML{
             int y = -1;
             int h = -1;
             int w = -1;
+            Node asub = sceneArea.item(0);
+            x = Integer.parseInt(asub.getAttributes().getNamedItem("x").getNodeValue());
+            y = Integer.parseInt(asub.getAttributes().getNamedItem("y").getNodeValue());
+            h = Integer.parseInt(asub.getAttributes().getNamedItem("h").getNodeValue());
+            w = Integer.parseInt(asub.getAttributes().getNamedItem("w").getNodeValue());
+
+            newSet = new Set(sceneName, shot, x, y, h, w);
+
+            // System.out.println("Area: " + x + ", " + y + ", " + h + ", " + w);
 
             for (int j=0; j< takeList.getLength(); j++){
 
@@ -89,15 +99,13 @@ public class ParseXML{
 
 
 
-                System.out.println("takeNum = "+takeNum);
-                System.out.println("Area: " + x + ", " + y + ", " + h + ", " + w);
-                System.out.println();
+                // System.out.println("takeNum = "+takeNum);
+                // System.out.println("Area: " + x + ", " + y + ", " + h + ", " + w);
+                // System.out.println();
 
 
             }
 
-
-            newSet = new Set(sceneName, shot, x, y, h, w);
 
             for (int j=0; j< partList.getLength(); j++){
 
@@ -130,11 +138,11 @@ public class ParseXML{
 
 
 
-                System.out.println("partName = "+partName);
-                System.out.println("level = "+level);
-                System.out.println("Line = " + line);
-                System.out.println("Area: " + x + ", " + y + ", " + h + ", " + w);
-                System.out.println();
+                // System.out.println("partName = "+partName);
+                // System.out.println("level = "+level);
+                // System.out.println("Line = " + line);
+                // System.out.println("Area: " + x + ", " + y + ", " + h + ", " + w);
+                // System.out.println();
 
                 lvl = Integer.parseInt(level);
 
