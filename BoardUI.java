@@ -204,8 +204,8 @@ public class BoardUI extends JFrame implements ActionListener {
 
   public void setCard(Card card, Set set, int i)
   {
-    System.out.println(set.getName());
-    System.out.println(set.getX() + " " + set.getY());
+    // System.out.println(set.getName());
+    // System.out.println(set.getX() + " " + set.getY());
     String img = "images/cards/";
 
     if(i < 10)
@@ -213,7 +213,7 @@ public class BoardUI extends JFrame implements ActionListener {
     else
         img += i+".png";
 
-    System.out.println("this is the string: "+img);
+    //System.out.println("this is the string: "+img);
 
     cardlabel = new JLabel();
     ImageIcon cIcon =  new ImageIcon(img);
