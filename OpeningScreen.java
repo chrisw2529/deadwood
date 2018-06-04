@@ -14,6 +14,7 @@ public class OpeningScreen extends JFrame implements ActionListener {
   JLayeredPane bPane;
 
   Board board = null;
+  BoardUI boardUI;
 
   public OpeningScreen() {
 
@@ -71,14 +72,16 @@ public class OpeningScreen extends JFrame implements ActionListener {
 
     if (e.getActionCommand() == "2 Players"){
       board.initializePlayers(2);
-      BoardUI newBoardUI = new BoardUI();
+      this.boardUI = boardUI.getInstance();
+      boardUI.initialize();
       dispose();
     }
 
 
     if (e.getActionCommand() == "3 Players"){
       board.initializePlayers(3);
-      BoardUI newBoardUI = new BoardUI();
+      this.boardUI = boardUI.getInstance();
+      boardUI.initialize();
       dispose();
     }
 

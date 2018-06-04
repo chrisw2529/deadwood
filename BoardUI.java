@@ -18,7 +18,7 @@ public class BoardUI extends JFrame implements ActionListener {
   JLabel playerlabel;
   JLabel mLabel;
 
-  JLayeredPane bPane;
+  JLayeredPane bPane = getLayeredPane();
 
   private JScrollPane scroller;
   private JTextArea text;
@@ -55,7 +55,7 @@ public class BoardUI extends JFrame implements ActionListener {
     // addButton(toolbar, rankUp, "Rank Up");
     // addButton(toolbar, endTurn, "End Turn");
 
-    bPane = getLayeredPane();
+    //bPane = getLayeredPane();
 
     boardlabel = new JLabel();
     ImageIcon icon =  new ImageIcon("images/board.jpg");
@@ -65,21 +65,21 @@ public class BoardUI extends JFrame implements ActionListener {
        // Add the board to the lowest layer
     bPane.add(boardlabel, new Integer(0));
 
-    cardlabel = new JLabel();
-    ImageIcon cIcon =  new ImageIcon("images/01.png");
-    cardlabel.setIcon(cIcon);
-    cardlabel.setBounds(20,65,cIcon.getIconWidth()+2,cIcon.getIconHeight());
-    cardlabel.setOpaque(true);
-
-    // Add the card to the lower layer
-    bPane.add(cardlabel, new Integer(1));
-
-    playerlabel = new JLabel();
-    ImageIcon pIcon = new ImageIcon("images/r2.png");
-    playerlabel.setIcon(pIcon);
-    //playerlabel.setBounds(114,227,pIcon.getIconWidth(),pIcon.getIconHeight());
-    playerlabel.setBounds(114,227,46,46);
-    bPane.add(playerlabel,new Integer(3));
+    // cardlabel = new JLabel();
+    // ImageIcon cIcon =  new ImageIcon("images/01.png");
+    // cardlabel.setIcon(cIcon);
+    // cardlabel.setBounds(20,65,cIcon.getIconWidth()+2,cIcon.getIconHeight());
+    // cardlabel.setOpaque(true);
+    //
+    // // Add the card to the lower layer
+    // bPane.add(cardlabel, new Integer(1));
+    //
+    // playerlabel = new JLabel();
+    // ImageIcon pIcon = new ImageIcon("images/r2.png");
+    // playerlabel.setIcon(pIcon);
+    // //playerlabel.setBounds(114,227,pIcon.getIconWidth(),pIcon.getIconHeight());
+    // playerlabel.setBounds(114,227,46,46);
+    // bPane.add(playerlabel,new Integer(3));
 
        // Set the size of the GUI
     setSize(icon.getIconWidth()+200,icon.getIconHeight());
@@ -135,11 +135,16 @@ public class BoardUI extends JFrame implements ActionListener {
       // Code for the different button clicks
       public void mouseClicked(MouseEvent e) {
 
+        Player player = board.activePlayer();
+
          if (e.getSource()== act){
             System.out.println("Acting is Selected\n");
+            player.act(player, board);
+
          }
          else if (e.getSource()== rehearse){
             System.out.println("Rehearse is Selected\n");
+            player.rehearse(player, board);
          }
          else if (e.getSource()== move){
             System.out.println("Move is Selected\n");
@@ -197,9 +202,27 @@ public class BoardUI extends JFrame implements ActionListener {
 
   }
 
-  public static void setCard(Card card, Set set)
+  public void setCard(Card card, Set set, int i)
   {
-    System.out.println(set.getX());
+    System.out.println(set.getName());
+    System.out.println(set.getX() + " " + set.getY());
+    String img = "images/cards/";
+
+    if(i < 10)
+        img += "0"+i+".png";
+    else
+        img += i+".png";
+
+    System.out.println("this is the string: "+img);
+
+    cardlabel = new JLabel();
+    ImageIcon cIcon =  new ImageIcon(img);
+    cardlabel.setIcon(cIcon);
+    cardlabel.setBounds(set.getX(),set.getY(),cIcon.getIconWidth()+2,cIcon.getIconHeight());
+    cardlabel.setOpaque(true);
+
+    // Add the card to the lower layer
+    bPane.add(cardlabel, new Integer(1));
   }
 
 

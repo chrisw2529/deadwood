@@ -42,14 +42,14 @@ public class ParseXML{
         NodeList sceneList = root.getElementsByTagName("set");
         Set newSet;
 
-        //System.out.println(sceneList.getLength());
+        System.out.println(sceneList.getLength());
 
         for (int i=0; i<sceneList.getLength();i++){
 
-            // System.out.println("Printing information for sceneList "+(i+1));
+            System.out.println("Printing information for sceneList "+(i+1));
             Node scene = sceneList.item(i);
             String sceneName = scene.getAttributes().getNamedItem("name").getNodeValue();
-            // System.out.println("set name = "+sceneName);
+            System.out.println("set name = "+sceneName);
 
 
             Element neighbors = (Element) scene;
@@ -89,9 +89,9 @@ public class ParseXML{
 
 
 
-                // System.out.println("takeNum = "+takeNum);
-                // System.out.println("Area: " + x + ", " + y + ", " + h + ", " + w);
-                // System.out.println();
+                System.out.println("takeNum = "+takeNum);
+                System.out.println("Area: " + x + ", " + y + ", " + h + ", " + w);
+                System.out.println();
 
 
             }
@@ -130,11 +130,11 @@ public class ParseXML{
 
 
 
-                // System.out.println("partName = "+partName);
-                // System.out.println("level = "+level);
-                // System.out.println("Line = " + line);
-                // System.out.println("Area: " + x + ", " + y + ", " + h + ", " + w);
-                // System.out.println();
+                System.out.println("partName = "+partName);
+                System.out.println("level = "+level);
+                System.out.println("Line = " + line);
+                System.out.println("Area: " + x + ", " + y + ", " + h + ", " + w);
+                System.out.println();
 
                 lvl = Integer.parseInt(level);
 

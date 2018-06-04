@@ -34,6 +34,11 @@ public class Card
       return this.budget;
     }
 
+    public int getSceneNum()
+    {
+      return this.sceneNum;
+    }
+
     public Set getSet(){
       return this.set;
     }
