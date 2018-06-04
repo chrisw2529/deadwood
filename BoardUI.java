@@ -225,6 +225,39 @@ public class BoardUI extends JFrame implements ActionListener {
     bPane.add(cardlabel, new Integer(1));
   }
 
+  public void setPlayer(int id, int level){
+    String img = "images/dice/";
+    System.out.println("int set player #############################^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^6");
+    if(level < 1 || level > 6){
+      System.out.println("error: level must be between 1, 6");
+    }
+    else{
+      if(id == 0){
+        img += "r" + level + ".png";
+      }
+      else if(id == 1){
+        img += "b" + level + ".png";
+      }
+      else if(id == 2){
+        img += "g" + level + ".png";
+      }
+      else{
+        System.out.println("error: invalid player ID in setPlayer");
+      }
+      playerlabel = new JLabel();
+      ImageIcon cIcon =  new ImageIcon(img);
+      playerlabel.setIcon(cIcon);
+      Player cp = board.getPlayers().get(id);
+      playerlabel.setBounds(cp.getX(),cp.getY(),cIcon.getIconWidth()+2,cIcon.getIconHeight());
+      playerlabel.setOpaque(true);
+
+      // Add the card to the lower layer
+      bPane.add(playerlabel, new Integer(1));
+    }
+
+
+  }
+
 
 
 }

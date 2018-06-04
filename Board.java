@@ -51,6 +51,9 @@ public class Board {
 
     parseXML(board);
     startDay();
+    for(int i = 0; i < players.size();i++){
+      boardUI.setPlayer(i, 1);
+    }
   }
   /*
   *startDay shuffles all of the cards and places then in random order on the board spaces

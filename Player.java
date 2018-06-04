@@ -14,6 +14,8 @@ public class Player{
     Space currentSpace;
     Role currentRole = null;
     boolean isTurn = false;
+    int x = 991;
+    int y = 248;
 
     /*
     * Player Constructor
@@ -509,6 +511,12 @@ public class Player{
     public int getRehearsal(){
       return this.rehearsalTok;
     }
+    public int getX(){
+      return this.x;
+    }
+    public int getY(){
+      return this.y;
+    }
 
     /*
     * getPlayerInfo method
@@ -559,5 +567,10 @@ public class Player{
     {
       this.currentSpace = space;
     }
-
+    public void setX(int x){
+      this.x = x;
+    }
+    public void getY(int y){
+      this.y = y;
+    }
 }
