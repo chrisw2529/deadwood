@@ -24,7 +24,6 @@ public class Deadwood{
     int howManyPlayers = -1;
     Board board = null;
     board = board.getInstance();
-    board.setupBoard(board);
 
     OpeningScreen startGame = new OpeningScreen();
     Scanner sc = new Scanner(System.in);
@@ -40,7 +39,7 @@ public class Deadwood{
     }
 
     howManyPlayers = board.getNumOfPlayers();
-
+    board.setupBoard(board);
     System.out.println("You have chosen to play with " + howManyPlayers + " players.");
     System.out.println();
     String c = "";

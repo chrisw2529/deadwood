@@ -227,27 +227,47 @@ public class BoardUI extends JFrame implements ActionListener {
 
   public void setPlayer(int id, int level){
     String img = "images/dice/";
-    System.out.println("int set player #############################^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^6");
+    Player cp = board.getPlayers().get(id);
     if(level < 1 || level > 6){
       System.out.println("error: level must be between 1, 6");
     }
     else{
-      if(id == 0){
-        img += "r" + level + ".png";
-      }
-      else if(id == 1){
-        img += "b" + level + ".png";
-      }
-      else if(id == 2){
-        img += "g" + level + ".png";
+      if(level == 1){
+        if(id == 0){
+          img += "r" + level + ".png";
+          System.out.println("player 1 x = " + cp.getX());
+
+        }
+        else if(id == 1){
+          img += "b" + level + ".png";
+          cp.setX(cp.getX() + 42);
+          System.out.println("player 2 x = " + cp.getX());
+        }
+        else if(id == 2){
+          img += "g" + level + ".png";
+          cp.setX(cp.getX() + 84);
+          System.out.println("player 3 x = " + cp.getX());
+
+        }
+        else{
+          System.out.println("error: invalid player ID in setPlayer");
+        }
       }
       else{
-        System.out.println("error: invalid player ID in setPlayer");
+        if(id == 0){
+          img += "r" + level + ".png";
+        }
+        else if(id == 1){
+          img += "b" + level + ".png";
+        }
+        else if(id == 2){
+          img += "g" + level + ".png";
+        }
       }
+
       playerlabel = new JLabel();
       ImageIcon cIcon =  new ImageIcon(img);
       playerlabel.setIcon(cIcon);
-      Player cp = board.getPlayers().get(id);
       playerlabel.setBounds(cp.getX(),cp.getY(),cIcon.getIconWidth()+2,cIcon.getIconHeight());
       playerlabel.setOpaque(true);
 
