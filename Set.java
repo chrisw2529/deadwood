@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Set extends Space
 {
-    final int initialShotMarker;
+    int initialShotMarker;
     int shotMarker;
     ArrayList<Role> roles = new ArrayList<Role>();
     Card card;
@@ -18,12 +18,10 @@ public class Set extends Space
     * @param: int shotMarker, each set gets their own shotMarker to indicate how many scenes there are
     */
 
-    public Set(String name, int shotMarker, int x, int y, int h, int w)
+    public Set(String name, int x, int y, int h, int w)
     {
         super(name);
         Space office = new Space(name);
-        this.shotMarker = shotMarker;
-        this.initialShotMarker = shotMarker;
         this.x = x;
         this.y = y;
         this.h = h;
@@ -61,6 +59,12 @@ public class Set extends Space
     public void setCard(Card card)
     {
       this.card = card;
+    }
+
+    public void setShot(int sm)
+    {
+      this.shotMarker = sm;
+      this.initialShotMarker = sm;
     }
 
     public void decrementShotMarker(){

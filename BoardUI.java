@@ -278,6 +278,13 @@ public class BoardUI extends JFrame implements ActionListener {
 
   }
 
+  public void addShotMarkers(Card card, Set set)
+  {
+
+
+
+  }
+
 
 
 }

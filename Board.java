@@ -51,9 +51,13 @@ public class Board {
 
     parseXML(board);
     startDay();
-    for(int i = 0; i < players.size();i++){
-      boardUI.setPlayer(i, 1);
-    }
+  }
+  
+  public void setUpPlayers(){
+     for(int i = 0; i < players.size();i++){
+       boardUI.setPlayer(i, 1);
+     }
+
   }
   /*
   *startDay shuffles all of the cards and places then in random order on the board spaces
@@ -112,6 +116,7 @@ public class Board {
   public void initializePlayers(int numPlayers){
     this.playerNum = numPlayers;
     for(int i = 1; i < numPlayers + 1; i++){
+      System.out.println("Hello");
       Player player = new Player(i);
       players.add(player);
       player.setSpace(trailer);

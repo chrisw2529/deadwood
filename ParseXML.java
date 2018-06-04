@@ -68,7 +68,7 @@ public class ParseXML{
             h = Integer.parseInt(asub.getAttributes().getNamedItem("h").getNodeValue());
             w = Integer.parseInt(asub.getAttributes().getNamedItem("w").getNodeValue());
 
-            newSet = new Set(sceneName, shot, x, y, h, w);
+            newSet = new Set(sceneName, x, y, h, w);
 
             // System.out.println("Area: " + x + ", " + y + ", " + h + ", " + w);
 
@@ -105,6 +105,8 @@ public class ParseXML{
 
 
             }
+
+            newSet.setShot(shot);
 
 
             for (int j=0; j< partList.getLength(); j++){
@@ -172,8 +174,6 @@ public class ParseXML{
             board.addToMap(newSet.getName(), newSet);
 
         }
-
-        //board.addToSets(newSet);
 
     }
 

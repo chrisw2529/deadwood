@@ -15,6 +15,7 @@ public class Space
 
     public void addNeighbor(String name){
       neighbors.add(name);
+      // System.out.println("Neighbor added.");
     }
 
     public String getName(){
