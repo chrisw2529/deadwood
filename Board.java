@@ -22,7 +22,7 @@ public class Board {
 
 
   int day = 1;
-  int remainingScenes = 10;
+  int remainingScenes = 2;
   int playerNum = 0;
   ArrayList<Player> players = new ArrayList<Player>();
   ArrayList<Set> sets = new ArrayList<Set>();
@@ -51,12 +51,51 @@ public class Board {
 
     parseXML(board);
     startDay();
+    setPlayerPositions();
   }
 
   public void setUpPlayers(){
      for(int i = 0; i < players.size();i++){
        boardUI.setPlayer(i, 1);
      }
+
+  }
+  private void setPlayerPositions(){
+    this.spaceMap.get("Train Station").setXPlayer(21);
+    this.spaceMap.get("Train Station").setYPlayer(69);
+
+    this.spaceMap.get("Secret Hideout").setXPlayer(27);
+    this.spaceMap.get("Secret Hideout").setYPlayer(732);
+
+    this.spaceMap.get("Church").setXPlayer(623);
+    this.spaceMap.get("Church").setYPlayer(734);
+
+    this.spaceMap.get("Hotel").setXPlayer(969);
+    this.spaceMap.get("Hotel").setYPlayer(740);
+
+    this.spaceMap.get("Main Street").setXPlayer(969);
+    this.spaceMap.get("Main Street").setYPlayer(28);
+
+    this.spaceMap.get("Jail").setXPlayer(281);
+    this.spaceMap.get("Jail").setYPlayer(27);
+
+    this.spaceMap.get("General Store").setXPlayer(370);
+    this.spaceMap.get("General Store").setYPlayer(282);
+
+    this.spaceMap.get("Ranch").setXPlayer(252);
+    this.spaceMap.get("Ranch").setYPlayer(478);
+
+    this.spaceMap.get("Bank").setXPlayer(623);
+    this.spaceMap.get("Bank").setYPlayer(475);
+
+    this.spaceMap.get("Saloon").setXPlayer(632);
+    this.spaceMap.get("Saloon").setYPlayer(280);
+
+    this.spaceMap.get("trailer").setXPlayer(991);
+    this.spaceMap.get("trailer").setYPlayer(248);
+
+    this.spaceMap.get("office").setXPlayer(9);
+    this.spaceMap.get("office").setYPlayer(459);
 
   }
   /*
@@ -127,7 +166,7 @@ public class Board {
       System.out.println("Hello");
       Player player = new Player(i);
       players.add(player);
-      player.setSpace(trailer);
+      player.setSpace(castingOffice);
       if(i == 1){
         player.setTurn(true);
       }

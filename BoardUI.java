@@ -271,12 +271,36 @@ public class BoardUI extends JFrame implements ActionListener {
 
       playerlabel = new JLabel();
       ImageIcon cIcon =  new ImageIcon(img);
+      // if(level != 1){
+      //   cp.getIcon().getImage().flush();
+      // }
+      System.out.println("img: " + img);
+      //cp.setImageIcon(cIcon);
+      cp.setJLabel(playerlabel);
       playerlabel.setIcon(cIcon);
       playerlabel.setBounds(cp.getX(),cp.getY(),cIcon.getIconWidth()+2,cIcon.getIconHeight());
       playerlabel.setOpaque(true);
 
       // Add the card to the lower layer
-      bPane.add(playerlabel, new Integer(1));
+      bPane.add(playerlabel, new Integer(2));
+
+
+
+
+
+
+
+
+
+
+      // cardlabel = new JLabel();
+      // ImageIcon cIcon =  new ImageIcon(img);
+      // cardlabel.setIcon(cIcon);
+      // cardlabel.setBounds(set.getX(),set.getY(),cIcon.getIconWidth()+2,cIcon.getIconHeight());
+      // cardlabel.setOpaque(true);
+      //
+      // // Add the card to the lower layer
+      // bPane.add(cardlabel, new Integer(1));
     }
 
 

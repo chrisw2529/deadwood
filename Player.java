@@ -1,6 +1,8 @@
 import java.util.Random;
 import java.util.ArrayList;
 import java.util.*;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 
 
 
@@ -16,7 +18,9 @@ public class Player{
     boolean isTurn = false;
     int x = 991;
     int y = 248;
-    BoardUI bUI;
+    ImageIcon icon;
+    JLabel label;
+    BoardUI boardUI;
 
     /*
     * Player Constructor
@@ -48,7 +52,12 @@ public class Player{
             if(neighbors.get(i).equals(destination) && moved == false){
               player.currentSpace = board.getSpaceMap().get(neighbors.get(i));
               moved = true;
-              System.out.println("player " + player.ID + " has moved to " + player.currentSpace.getName());
+              // System.out.println("player " + player.ID + " has moved to " + player.currentSpace.getName());
+              // System.out.println("Xpos: "+ board.getSpaceMap().get(player.currentSpace.getName()).getXPlayer());
+              player.setX(player.currentSpace.getXPlayer());
+              player.setY(player.currentSpace.getYPlayer());
+              player.label.setBounds(player.getX() - 30, player.getY() -30, 47, 47);
+              System.out.println("player Xpos: " + player.getX());
 
               if(player.currentSpace.getName() != "office" && player.currentSpace.getName() != "trailer") {
                 takeRole(player, board, false);
@@ -371,7 +380,7 @@ public class Player{
     * @param: Integer indicating the desired amount
     * Allows our players to rank up using their cash if they are in the casting office
     */
-    public static void rankUpUsingCash(Player player, int desiredRank){
+    public void rankUpUsingCash(Player player, int desiredRank){
 
       if(!player.getSpace().getName().equals("office")){
         System.out.println("You can only rank up while in the Casting Office!");
@@ -388,9 +397,11 @@ public class Player{
       else{
         int cash = player.getCash();
         if((desiredRank-1) * 5 <= cash){
+          this.boardUI = boardUI.getInstance();
           player.setCash(cash - (desiredRank-1) * 5);
           player.setRank(desiredRank);
           System.out.println("CONGRATULATIONS!! you are now rank " + desiredRank);
+          boardUI.setPlayer(ID, desiredRank);
         }
         else{
           System.out.println("Don't have enough cash to rank up cash needed is: "+ (desiredRank-1)*5);
@@ -405,7 +416,7 @@ public class Player{
     * @param: Integer indicating the desired amount
     * Allows our players to rank up using their fame if they are in the casting office
     */
-    public static void rankUpUsingFame(Player player, int desiredRank){
+    public void rankUpUsingFame(Player player, int desiredRank){
       int fame = player.getFame();
       int reqFame = fameNeeded(desiredRank-1, 0);
 
@@ -423,9 +434,13 @@ public class Player{
 
       else{
         if(fame >= reqFame){
+          this.boardUI = boardUI.getInstance();
+
           player.setFame(fame - reqFame);
           player.setRank(desiredRank);
           System.out.println("CONGRATULATIONS!! you are now rank " + desiredRank);
+          boardUI.setPlayer(ID, desiredRank);
+
 
         }
         else{
@@ -441,7 +456,7 @@ public class Player{
     * @param: int fame
     * Since the ranking system for the fame is non-linear, we needed a method in order to decide if our player was able to rank up
     */
-    private static int fameNeeded(int rank, int fame){
+    private int fameNeeded(int rank, int fame){
       int ret;
 
 
@@ -526,6 +541,12 @@ public class Player{
     public int getY(){
       return this.y;
     }
+    public ImageIcon getIcon(){
+      return this.icon;
+    }
+    public JLabel getJLabel(){
+      return this.label;
+    }
 
     /*
     * getPlayerInfo method
@@ -576,10 +597,16 @@ public class Player{
     {
       this.currentSpace = space;
     }
+    public void setImageIcon(ImageIcon icon){
+      this.icon = icon;
+    }
+    public void setJLabel(JLabel label){
+      this.label = label;
+    }
     public void setX(int x){
       this.x = x;
     }
-    public void getY(int y){
+    public void setY(int y){
       this.y = y;
     }
 }
