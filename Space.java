@@ -5,6 +5,8 @@ public class Space
 
     String name; //scene names, casting office, trailer
     ArrayList<String> neighbors = new ArrayList<String>();
+    int xPlayer;
+    int yPlayer;
     //ArrayList<Player> players = new ArrayList<Player>();
 
 
@@ -25,6 +27,19 @@ public class Space
 
         return this.neighbors;
     }
+    public int getXPlayer(){
+      return this.xPlayer;
+    }
+    public int getYPlayer(){
+      return this.yPlayer;
+    }
 
+    public void setXPlayer(int pos){
+      this.xPlayer = pos;
+    }
+
+    public void setYPlayer(int pos){
+      this.yPlayer = pos;
+    }
 
 }
