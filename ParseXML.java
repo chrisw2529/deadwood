@@ -97,15 +97,15 @@ public class ParseXML{
 
                 }
 
-
-
+                ShotMarker sm = new ShotMarker(x, y);
+                newSet.addShots(sm);
                 // System.out.println("takeNum = "+takeNum);
                 // System.out.println("Area: " + x + ", " + y + ", " + h + ", " + w);
                 // System.out.println();
 
 
             }
-
+          //  System.out.println("shot marker: " + shot);
             newSet.setShot(shot);
 
 

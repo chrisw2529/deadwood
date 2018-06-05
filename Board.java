@@ -52,7 +52,7 @@ public class Board {
     parseXML(board);
     startDay();
   }
-  
+
   public void setUpPlayers(){
      for(int i = 0; i < players.size();i++){
        boardUI.setPlayer(i, 1);
@@ -69,11 +69,19 @@ public class Board {
     this.boardUI = boardUI.getInstance();
 
     for (int i = 0; i < sets.size(); i++){
-      sets.get(i).setCard(cards.get(i));
+      sets.get(i).setCard(cards.get(cards.get(i).getSceneNum()));
       boardUI.setCard(cards.get(i), sets.get(i), cards.get(i).getSceneNum());
       cards.get(i).setSet(sets.get(i));
 
     }
+
+    for (int i = 0; i < sets.size(); i++){
+      for (int j = 0; j < sets.get(i).getShotMarkers().size(); j++) {
+        boardUI.addShotMarkers(sets.get(i).getShotMarkers().get(j));
+      }
+
+    }
+
     System.out.println("it is now day " + day);
   }
 

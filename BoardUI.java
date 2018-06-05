@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 import java.nio.file.*;
+import java.util.*;
 
 public class BoardUI extends JFrame implements ActionListener {
 
@@ -17,6 +18,9 @@ public class BoardUI extends JFrame implements ActionListener {
   JLabel cardlabel;
   JLabel playerlabel;
   JLabel mLabel;
+
+  HashMap<Integer,Integer> sMarkersMap = new HashMap<Integer,Integer>();
+  int countOfShots = 0;
 
   JLayeredPane bPane = getLayeredPane();
 
@@ -278,10 +282,28 @@ public class BoardUI extends JFrame implements ActionListener {
 
   }
 
-  public void addShotMarkers(Card card, Set set)
+  public void addShotMarkers(ShotMarker sm)
   {
 
+    JLabel shotMs = new JLabel();
 
+    ImageIcon cIcon =  new ImageIcon("images/shotMarker.png");
+    shotMs.setIcon(cIcon);
+    shotMs.setBounds(sm.getX(),sm.getY(),47,47);
+    shotMs.setOpaque(false);
+
+    // Add the card to the lower layer
+    bPane.add(shotMs, new Integer(1), countOfShots);
+    sMarkersMap.put(sm.getX()+sm.getY(), countOfShots);
+    countOfShots++;
+
+  }
+
+  public void removeShotMarkers(ShotMarker sm)
+  {
+
+    bPane.remove(sMarkersMap.get(sm.getX()+sm.getY()));
+    System.out.println("SHOT MARKER REMOVED");
 
   }
 

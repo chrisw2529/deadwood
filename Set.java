@@ -5,6 +5,7 @@ public class Set extends Space
     int initialShotMarker;
     int shotMarker;
     ArrayList<Role> roles = new ArrayList<Role>();
+    ArrayList<ShotMarker> shotMarkers = new ArrayList<ShotMarker>();
     Card card;
     boolean isWrapped = false;
     int x;
@@ -35,11 +36,18 @@ public class Set extends Space
       return this.roles;
     }
 
+    public ArrayList<ShotMarker> getShotMarkers()
+    {
+      return this.shotMarkers;
+    }
+
     public int getShotMarker(){
       return this.shotMarker;
     }
 
-
+    public int getInitShotMarker(){
+      return this.initialShotMarker;
+    }
 
     public boolean getIsWrapped(){
       return this.isWrapped;
@@ -74,6 +82,11 @@ public class Set extends Space
     public void addRoles(Role role){
       roles.add(role);
     }
+
+    public void addShots(ShotMarker shot){
+      shotMarkers.add(shot);
+    }
+
     public void resetShotMarkers(){
       this.shotMarker = this.initialShotMarker;
     }

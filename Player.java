@@ -6,7 +6,7 @@ import java.util.*;
 
 public class Player{
 
-    int fame = 0;
+    int fame = 100;
     int cash = 0;
     int rank = 1;
     int rehearsalTok = 0;
@@ -16,6 +16,7 @@ public class Player{
     boolean isTurn = false;
     int x = 991;
     int y = 248;
+    BoardUI bUI;
 
     /*
     * Player Constructor
@@ -126,15 +127,15 @@ public class Player{
             while(notDone){
               c = sc.nextLine();
               if(c.equals("on 1")){
-                notDone = (!roleQualificationCheck(player, on.get(0)));
+                notDone = (!roleQualificationCheck(player, on.get(0), board));
                 chooseWisely = false;
-                endTurn(player, board);
+                // endTurn(player, board);
               }
               else if(c.equals("on 2")){
                 try{
-                    notDone = (!roleQualificationCheck(player, on.get(1)));
+                    notDone = (!roleQualificationCheck(player, on.get(1), board));
                     chooseWisely = false;
-                    endTurn(player, board);
+                    // endTurn(player, board);
                 }
                 catch(IndexOutOfBoundsException ex){
                   System.out.println("role DNE!");
@@ -142,9 +143,9 @@ public class Player{
               }
               else if(c.equals("on 3")){
                 try{
-                    notDone = (!roleQualificationCheck(player, on.get(2)));
+                    notDone = (!roleQualificationCheck(player, on.get(2), board));
                     chooseWisely = false;
-                    endTurn(player, board);
+                    // endTurn(player, board);
                 }
                 catch(IndexOutOfBoundsException ex){
                   System.out.println("role DNE!");
@@ -152,29 +153,29 @@ public class Player{
               }
               else if(c.equals("on 4")){
                 try{
-                    notDone = (!roleQualificationCheck(player, on.get(3)));
+                    notDone = (!roleQualificationCheck(player, on.get(3), board));
                     chooseWisely = false;
-                    endTurn(player, board);
+                    // endTurn(player, board);
                 }
                 catch(IndexOutOfBoundsException ex){
                   System.out.println("role DNE!");
                 }
               }
               else if(c.equals("off 1")){
-                notDone = (!roleQualificationCheck(player, off.get(0)));
+                notDone = (!roleQualificationCheck(player, off.get(0), board));
                 chooseWisely = false;
-                endTurn(player, board);
+                // endTurn(player, board);
               }
               else if(c.equals("off 2")){
-                notDone = (!roleQualificationCheck(player, off.get(1)));
+                notDone = (!roleQualificationCheck(player, off.get(1), board));
                 chooseWisely = false;
-                endTurn(player, board);
+                // endTurn(player, board);
               }
               else if(c.equals("off 3")){
                 try{
-                    notDone = (!roleQualificationCheck(player, off.get(2)));
+                    notDone = (!roleQualificationCheck(player, off.get(2), board));
                     chooseWisely = false;
-                    endTurn(player, board);
+                    // endTurn(player, board);
                 }
                 catch(IndexOutOfBoundsException ex){
                   System.out.println("role DNE!");
@@ -182,9 +183,9 @@ public class Player{
               }
               else if(c.equals("off 4")){
                 try{
-                    notDone = (!roleQualificationCheck(player, off.get(3)));
+                    notDone = (!roleQualificationCheck(player, off.get(3), board));
                     chooseWisely = false;
-                    endTurn(player, board);
+                    // endTurn(player, board);
                 }
                 catch(IndexOutOfBoundsException ex){
                   System.out.println("role DNE!");
@@ -246,7 +247,7 @@ public class Player{
     * @param: Board object, used to check if there's already a player on the chosen role
     * Checks the attributes of the current player and tells them if they're allowed to
     */
-    public boolean roleQualificationCheck(Player player, Role role){
+    public boolean roleQualificationCheck(Player player, Role role, Board board){
     //  System.out.println("level is : " + role.getName()+ role.getLevel());
     //  System.out.println("p levle ; " + player.rank );
       if(role.takenBy != null){
@@ -258,6 +259,7 @@ public class Player{
           player.currentRole = role;
           role.setPlayer(player);
           System.out.println("you accepted the role of " + player.currentRole.getName());
+          endTurn(player, board);
           return true;
         }
         else{
@@ -278,6 +280,8 @@ public class Player{
     */
     public void act(Player player, Board board)
     {
+
+      bUI = bUI.getInstance();
 
       if(player.currentRole == null) {
 
@@ -304,8 +308,13 @@ public class Player{
           System.out.println("Player " + player.ID + "has " + player.fame + " fame(s), $" + player.cash + ", and is rank " + player.rank);
 
         }
-        System.out.println(player.spaceToSet(player, board).getName());
+
+        int sm = player.spaceToSet(player,board).getShotMarkers().size();
+        int ism = player.spaceToSet(player,board).getInitShotMarker();
         player.spaceToSet(player,board).decrementShotMarker();
+        bUI.removeShotMarkers(player.spaceToSet(player,board).getShotMarkers().get(ism-sm));
+        player.spaceToSet(player,board).getShotMarkers().remove(sm-1);
+
 
       }
 
