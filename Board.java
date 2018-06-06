@@ -115,12 +115,17 @@ public class Board {
 
     }
 
-    for (int i = 0; i < sets.size(); i++){
-      for (int j = 0; j < sets.get(i).getShotMarkers().size(); j++) {
-        boardUI.addShotMarkers(sets.get(i).getShotMarkers().get(j));
+    if(this.day == 1){
+
+      for (int i = 0; i < sets.size(); i++){
+        for (int j = 0; j < sets.get(i).getShotMarkers().size(); j++) {
+          boardUI.addShotMarkers(sets.get(i), sets.get(i).getShotMarkers().get(j));
+        }
+
       }
 
     }
+
 
     System.out.println("it is now day " + day);
   }
@@ -222,6 +227,7 @@ public class Board {
         players.get(i).setSpace(trailer);
       }
       remainingScenes = 10;
+      boardUI.resetSM();
       startDay();
     }
 
