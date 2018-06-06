@@ -286,7 +286,7 @@ public class BoardUI extends JFrame implements ActionListener {
       playerlabel.setOpaque(true);
 
       // Add the card to the lower layer
-      bPane.add(playerlabel, new Integer(2));
+      bPane.add(playerlabel, new Integer(3));
 
 
 
