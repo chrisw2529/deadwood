@@ -345,8 +345,9 @@ public class ParseXML{
 
             // System.out.println("card name = "+cardName);
             // System.out.println("budget = "+budget);
+            //System.out.println(img);
             c = new Card(cardName, Integer.parseInt(budget));
-
+            c.setImg(img);
             NodeList children = card.getChildNodes();
 
 
@@ -366,6 +367,7 @@ public class ParseXML{
 
                     c.setSceneNum(Integer.parseInt(sceneNum));
                     c.setDescription(description);
+
 
                 }
 

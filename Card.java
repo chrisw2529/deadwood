@@ -10,6 +10,7 @@ public class Card
     int sceneNum;
     int shotMarker;
     int budget;
+    int img;
     ArrayList<Role> roles = new ArrayList<Role>();
     Set set = null;
 
@@ -39,16 +40,28 @@ public class Card
       return this.sceneNum;
     }
 
+    public int getImg()
+    {
+      return this.img;
+    }
+
     public Set getSet(){
       return this.set;
     }
+
     public ArrayList<Role> getRoles()
     {
       return this.roles;
     }
+
     public void setDescription(String description)
     {
         this.description = description;
+    }
+
+    public void setImg(String img)
+    {
+        this.img = Integer.parseInt(img.substring(0,2));
     }
 
     public void setSceneNum(int sceneNum)

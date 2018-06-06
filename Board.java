@@ -109,8 +109,8 @@ public class Board {
     this.boardUI = boardUI.getInstance();
 
     for (int i = 0; i < sets.size(); i++){
-      sets.get(i).setCard(cards.get(cards.get(i).getSceneNum()));
-      boardUI.setCard(cards.get(i), sets.get(i), cards.get(i).getSceneNum());
+      sets.get(i).setCard(cards.get(i));
+      boardUI.setCard(cards.get(i), sets.get(i), cards.get(i).getImg());
       cards.get(i).setSet(sets.get(i));
 
     }
