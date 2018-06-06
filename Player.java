@@ -33,7 +33,7 @@ public class Player{
     public Player(int id)
     {
         this.ID = id;
-        board = board.getInstance();
+        this.boardUI = boardUI.getInstance();
 
     }
 
@@ -46,6 +46,8 @@ public class Player{
     */
     public void move(Player player, String destination, Board board)
     {
+
+
       if(player.currentRole == null){
         Boolean moved = false;
 
@@ -60,11 +62,10 @@ public class Player{
               player.setX(player.currentSpace.getXPlayer());
               player.setY(player.currentSpace.getYPlayer());
               int offset = player.getX() -50 + (40 * player.ID);
-
               player.label.setBounds(offset, player.getY() -10, 40, 40);
               System.out.println("player Xpos: " + player.getX() + "Ypos: " + player.getY());
-              //boardUI.removeBack(player.spaceToSet(player, board));
-
+              Set currSet = spaceToSet(player, board);
+              boardUI.removeBack(currSet);
               if(player.currentSpace.getName() != "office" && player.currentSpace.getName() != "trailer") {
                 takeRole(player, board, false);
               }
@@ -316,7 +317,7 @@ public class Player{
 
       }
 
-      int dieRoll = Board.roleDie();
+      int dieRoll = Board.roleDie() + player.rehearsalTok;
       System.out.println(dieRoll);
 
 
@@ -339,7 +340,8 @@ public class Player{
       //  int ism = player.spaceToSet(player,board).getInitShotMarker();
        //player.spaceToSet(player,board).decrementShotMarker();
       //  board.decrementShotMarker();
-      boardUI.removeShotMarkers(player.spaceToSet(player,board), player.spaceToSet(player,board).getShotMarkers().get(0));
+      int whichShotMarker = player.spaceToSet(player,board).getInitShotMarker() - player.spaceToSet(player,board).getShotMarker();
+      boardUI.removeShotMarkers(player.spaceToSet(player,board), player.spaceToSet(player,board).getShotMarkers().get(whichShotMarker));
         //player.spaceToSet(player,board).getShotMarkers().remove(sm-1);
 
 
@@ -520,7 +522,9 @@ public class Player{
     */
     public Set spaceToSet(Player player, Board board){
       ArrayList<Set> sets = board.getSetList();
+      //System.out.println("Here?");
       for (int i = 0 ; i < sets.size() ; i++) {
+        //System.out.println("Here?");
         if(sets.get(i).getName().equals(player.currentSpace.getName())){
           return sets.get(i);
         }

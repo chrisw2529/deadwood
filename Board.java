@@ -111,7 +111,10 @@ public class Board {
     for (int i = 0; i < sets.size(); i++){
       sets.get(i).setCard(cards.get(i));
       boardUI.setCard(cards.get(i), sets.get(i), cards.get(i).getImg());
-      boardUI.setCardBacks(cards.get(i), sets.get(i));
+
+      if(this.day == 1)
+        boardUI.setCardBacks(cards.get(i), sets.get(i));
+
       cards.get(i).setSet(sets.get(i));
 
     }
@@ -173,7 +176,7 @@ public class Board {
       System.out.println("Hello");
       Player player = new Player(i);
       players.add(player);
-      player.setSpace(castingOffice);
+      player.setSpace(trailer);
       if(i == 1){
         player.setTurn(true);
       }
@@ -228,7 +231,7 @@ public class Board {
         players.get(i).setSpace(trailer);
       }
       remainingScenes = 10;
-      boardUI.resetSM();
+      boardUI.resetBoard();
       startDay();
     }
 
