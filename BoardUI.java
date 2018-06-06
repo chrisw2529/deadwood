@@ -21,12 +21,8 @@ public class BoardUI extends JFrame implements ActionListener {
 
   HashMap<Integer,JLabel> playerLabels = new HashMap<Integer,JLabel>();
   HashMap<Integer,JLabel> sMarkersMap = new HashMap<Integer,JLabel>();
-<<<<<<< HEAD
   HashMap<Integer,JLabel> cardBacks = new HashMap<Integer,JLabel>();
   ArrayList<JLabel> cards = new ArrayList<JLabel>();
-
-=======
->>>>>>> 74622a5f577dabb0c68130cdf05ed25d9c9954b1
   JLayeredPane bPane = getLayeredPane();
 
   private JScrollPane scroller;
@@ -306,7 +302,7 @@ public class BoardUI extends JFrame implements ActionListener {
         //start here remove jlabel
         //$$$$$$$$$$$$$$$$$
 
-        
+
         //playerLabels.get(cp.getID()).remove();
 
         playerLabels.remove(cp.getID());
