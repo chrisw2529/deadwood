@@ -58,6 +58,18 @@ public class Set extends Space
       return this.card;
     }
 
+    public int getX(){
+      return this.x;
+    }
+    public int getY(){
+      return this.y;
+    }
+    public int getH(){
+      return this.h;
+    }
+    public int getW(){
+      return this.w;
+    }
     public void setIsWrapped(boolean bool)
     {
       this.isWrapped = bool;
@@ -91,18 +103,6 @@ public class Set extends Space
       this.shotMarker = this.initialShotMarker;
     }
 
-    public int getX(){
-      return this.x;
-    }
-    public int getY(){
-      return this.y;
-    }
-    public int getH(){
-      return this.h;
-    }
-    public int getW(){
-      return this.w;
-    }
 
 
 }

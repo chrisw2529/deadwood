@@ -20,6 +20,7 @@ public class BoardUI extends JFrame implements ActionListener {
   JLabel mLabel;
 
   HashMap<Integer,Integer> sMarkersMap = new HashMap<Integer,Integer>();
+  ArrayList<JLabel> playerLabels = new ArrayList<JLabel>();
   int countOfShots = 0;
 
   JLayeredPane bPane = getLayeredPane();
@@ -286,7 +287,7 @@ public class BoardUI extends JFrame implements ActionListener {
       playerlabel.setOpaque(true);
 
       // Add the card to the lower layer
-      bPane.add(playerlabel, new Integer(3));
+      bPane.add(playerlabel, new Integer(5));
 
 
 
