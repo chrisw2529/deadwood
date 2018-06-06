@@ -231,23 +231,23 @@ public class BoardUI extends JFrame implements ActionListener {
 
   public void setPlayer(int id, int level){
     String img = "images/dice/";
-    Player cp = board.getPlayers().get(id);
+    Player cp = board.getPlayers().get(id - 1);
     if(level < 1 || level > 6){
       System.out.println("error: level must be between 1, 6");
     }
     else{
       if(level == 1){
-        if(id == 0){
+        if(cp.getID() == 1){
           img += "r" + level + ".png";
           System.out.println("player 1 x = " + cp.getX());
 
         }
-        else if(id == 1){
+        else if(cp.getID() == 2){
           img += "b" + level + ".png";
           cp.setX(cp.getX() + 42);
           System.out.println("player 2 x = " + cp.getX());
         }
-        else if(id == 2){
+        else if(cp.getID() == 3){
           img += "g" + level + ".png";
           cp.setX(cp.getX() + 84);
           System.out.println("player 3 x = " + cp.getX());
@@ -258,13 +258,16 @@ public class BoardUI extends JFrame implements ActionListener {
         }
       }
       else{
-        if(id == 0){
+        if(cp.getID() == 1){
           img += "r" + level + ".png";
+          //cp.setImageIcon(null);
+          cp.getJLabel().setIcon(null);
+
         }
-        else if(id == 1){
+        else if(cp.getID() == 2){
           img += "b" + level + ".png";
         }
-        else if(id == 2){
+        else if(cp.getID() == 3){
           img += "g" + level + ".png";
         }
       }
@@ -275,7 +278,8 @@ public class BoardUI extends JFrame implements ActionListener {
       //   cp.getIcon().getImage().flush();
       // }
       System.out.println("img: " + img);
-      //cp.setImageIcon(cIcon);
+      System.out.println("player x: "+ cp.getX() + " y: " + cp.getY());
+      cp.setImageIcon(cIcon);
       cp.setJLabel(playerlabel);
       playerlabel.setIcon(cIcon);
       playerlabel.setBounds(cp.getX(),cp.getY(),cIcon.getIconWidth()+2,cIcon.getIconHeight());
@@ -303,6 +307,12 @@ public class BoardUI extends JFrame implements ActionListener {
       // bPane.add(cardlabel, new Integer(1));
     }
 
+
+  }
+  public void movePlayerImage(Player player, int x , int y){
+    player.setX(x);
+    player.setY(y);
+    player.getJLabel().setBounds(x, y,player.getIcon().getIconWidth()+2,player.getIcon().getIconHeight());
 
   }
 

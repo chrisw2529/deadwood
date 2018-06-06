@@ -56,7 +56,7 @@ public class Player{
               // System.out.println("Xpos: "+ board.getSpaceMap().get(player.currentSpace.getName()).getXPlayer());
               player.setX(player.currentSpace.getXPlayer());
               player.setY(player.currentSpace.getYPlayer());
-              player.label.setBounds(player.getX() - 30, player.getY() -30, 47, 47);
+              player.label.setBounds(player.getX() - 20, player.getY() -20, 47, 47);
               System.out.println("player Xpos: " + player.getX());
 
               if(player.currentSpace.getName() != "office" && player.currentSpace.getName() != "trailer") {
@@ -268,6 +268,10 @@ public class Player{
           player.currentRole = role;
           role.setPlayer(player);
           System.out.println("you accepted the role of " + player.currentRole.getName());
+          System.out.println("role position X, Y: "+ role.getX()+ ",   " +role.getY());
+          System.out.println("player is player: " + player.getID());
+          this.boardUI = boardUI.getInstance();
+          boardUI.movePlayerImage(player, role.getX() + 3, role.getY()+ 3);
           endTurn(player, board);
           return true;
         }
@@ -290,7 +294,7 @@ public class Player{
     public void act(Player player, Board board)
     {
 
-      bUI = bUI.getInstance();
+      boardUI = boardUI.getInstance();
 
       if(player.currentRole == null) {
 
@@ -321,7 +325,7 @@ public class Player{
         int sm = player.spaceToSet(player,board).getShotMarkers().size();
         int ism = player.spaceToSet(player,board).getInitShotMarker();
         player.spaceToSet(player,board).decrementShotMarker();
-        bUI.removeShotMarkers(player.spaceToSet(player,board).getShotMarkers().get(ism-sm));
+        boardUI.removeShotMarkers(player.spaceToSet(player,board).getShotMarkers().get(ism-sm));
         player.spaceToSet(player,board).getShotMarkers().remove(sm-1);
 
 
@@ -510,6 +514,8 @@ public class Player{
       System.out.println("Error: set does not exist");
       return null;
     }
+
+
 
     public int getID(){
       return this.ID;

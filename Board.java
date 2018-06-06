@@ -55,7 +55,8 @@ public class Board {
   }
 
   public void setUpPlayers(){
-     for(int i = 0; i < players.size();i++){
+    System.out.println("size is: " + players.size());
+     for(int i = 1; i < players.size() + 1; i++){
        boardUI.setPlayer(i, 1);
      }
 
