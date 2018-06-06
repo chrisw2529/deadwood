@@ -333,10 +333,11 @@ public class BoardUI extends JFrame implements ActionListener {
 
   }
 
-  public void removeShotMarkers(ShotMarker sm)
+  public void removeShotMarkers()
   {
 
-    bPane.remove(sMarkersMap.get(sm.getX()+sm.getY()));
+    //bPane.remove(sMarkersMap.get(sm.getX()+sm.getY()));
+    bPane.remove(4);
     System.out.println("SHOT MARKER REMOVED");
 
   }
