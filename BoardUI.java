@@ -21,6 +21,12 @@ public class BoardUI extends JFrame implements ActionListener {
 
   HashMap<Integer,JLabel> playerLabels = new HashMap<Integer,JLabel>();
   HashMap<Integer,JLabel> sMarkersMap = new HashMap<Integer,JLabel>();
+<<<<<<< HEAD
+  HashMap<Integer,JLabel> cardBacks = new HashMap<Integer,JLabel>();
+  ArrayList<JLabel> cards = new ArrayList<JLabel>();
+
+=======
+>>>>>>> 74622a5f577dabb0c68130cdf05ed25d9c9954b1
   JLayeredPane bPane = getLayeredPane();
 
   private JScrollPane scroller;
@@ -227,6 +233,35 @@ public class BoardUI extends JFrame implements ActionListener {
     // Add the card to the lower layer
     bPane.add(cardlabel, new Integer(1));
   }
+
+  public void setCardBacks(Card card, Set set)
+  {
+
+    cardlabel = new JLabel();
+    ImageIcon cIcon =  new ImageIcon("images/cards/back.png");
+    cardlabel.setIcon(cIcon);
+    cardlabel.setBounds(set.getX(),set.getY(),cIcon.getIconWidth()+2,cIcon.getIconHeight());
+    cardlabel.setOpaque(true);
+//FOR WHEN A PLAYER HOPS ON A SET    cardlabel.setVisible(false);
+    sMarkersMap.put(set.getX()%set.getY(),cardlabel);
+    bPane.add(cardlabel, new Integer(2));
+  }
+
+  public void removeBack(Set set)
+  {
+    cardBacks.get(set.getX()%set.getY()).setVisible(false);
+    //bPane.repaint();
+  }
+
+
+
+
+
+
+
+
+
+
 
   public void setPlayer(int id, int level){
     String img = "images/dice/";

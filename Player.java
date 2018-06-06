@@ -58,6 +58,7 @@ public class Player{
               player.setY(player.currentSpace.getYPlayer());
               player.label.setBounds(player.getX() - 20, player.getY() -20, 47, 47);
               System.out.println("player Xpos: " + player.getX());
+              boardUI.removeBack(player.spaceToSet(player, board));
 
               if(player.currentSpace.getName() != "office" && player.currentSpace.getName() != "trailer") {
                 takeRole(player, board, false);
