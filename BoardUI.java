@@ -19,10 +19,14 @@ public class BoardUI extends JFrame implements ActionListener {
   JLabel playerlabel;
   JLabel mLabel;
 
+  ArrayList<JLabel> playerLabels = new ArrayList<JLabel>();
   HashMap<Integer,JLabel> sMarkersMap = new HashMap<Integer,JLabel>();
+<<<<<<< HEAD
   HashMap<Integer,JLabel> cardBacks = new HashMap<Integer,JLabel>();
   ArrayList<JLabel> cards = new ArrayList<JLabel>();
 
+=======
+>>>>>>> 74622a5f577dabb0c68130cdf05ed25d9c9954b1
   JLayeredPane bPane = getLayeredPane();
 
   private JScrollPane scroller;
@@ -315,7 +319,9 @@ public class BoardUI extends JFrame implements ActionListener {
       playerlabel.setBounds(cp.getX(),cp.getY(),cIcon.getIconWidth()+2,cIcon.getIconHeight());
       playerlabel.setOpaque(true);
 
-      bPane.add(playerlabel, new Integer(3));
+      // Add the card to the lower layer
+      bPane.add(playerlabel, new Integer(5));
+
 
     }
 

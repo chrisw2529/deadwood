@@ -272,7 +272,14 @@ public class Player{
           System.out.println("role position X, Y: "+ role.getX()+ ",   " +role.getY());
           System.out.println("player is player: " + player.getID());
           this.boardUI = boardUI.getInstance();
-          boardUI.movePlayerImage(player, role.getX() + 3, role.getY()+ 3);
+          //System.out.println("get x: " + role.getSet().getName());
+          if(role.onScene){
+            boardUI.movePlayerImage(player, role.getCard().getSet().getX()  + role.getX(), role.getCard().getSet().getY() + role.getY());
+
+          }
+          else{
+            boardUI.movePlayerImage(player, role.getX() + 3, role.getY()+ 3);
+          }
           endTurn(player, board);
           return true;
         }

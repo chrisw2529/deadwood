@@ -151,7 +151,7 @@ public class ParseXML{
 
 
             }
-            Role newRole = new Role(partName, line, lvl, newSet, false, x, y, h, w);
+            Role newRole = new Role(partName, line, lvl, newSet, null, false, x, y, h, w);
             newSet.addRoles(newRole);
             // System.out.println("\n");
 
@@ -400,7 +400,7 @@ public class ParseXML{
                     String partName =  sub.getAttributes().getNamedItem("name").getNodeValue();
                     String level =  sub.getAttributes().getNamedItem("level").getNodeValue();
 
-                    Role cardRoles = new Role(partName, line, Integer.parseInt(level), c.getSet(), true, x, y, h, w);
+                    Role cardRoles = new Role(partName, line, Integer.parseInt(level), null, c, true, x, y, h, w);
                     c.addRoles(cardRoles);
 
                     // System.out.print("Part name = " + partName + ", ");
