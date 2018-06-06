@@ -22,7 +22,7 @@ public class Board {
 
 
   int day = 1;
-  int remainingScenes = 2;
+  int remainingScenes = 3;
   int playerNum = 0;
   ArrayList<Player> players = new ArrayList<Player>();
   ArrayList<Set> sets = new ArrayList<Set>();

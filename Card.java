@@ -141,6 +141,7 @@ public class Card
         if(set.getRoles().get(i).getPlayer() != null){
           set.getRoles().get(i).getPlayer().setRehearsal(0);
           set.getRoles().get(i).getPlayer().setRole(null);
+        //  set.getRoles().get(i).getPlayer().move(set.getRoles().get(i).getPlayer(), this.set.getName(), board);
           set.getRoles().get(i).setPlayer(null);
         }
 
@@ -150,6 +151,7 @@ public class Card
         if(roles.get(i).takenBy != null){
           roles.get(i).getPlayer().setRehearsal(0);
           roles.get(i).getPlayer().setRole(null);
+          //roles.get(i).getPlayer().move(roles.get(i).getPlayer(), this.set.getName(), board);
           roles.get(i).setPlayer(null);
         }
 
@@ -162,6 +164,7 @@ public class Card
       if(board.getRemainingScenes() <= 1){
         board.endDay();
       }
+
       System.out.println("scene wrapped");
     }
 

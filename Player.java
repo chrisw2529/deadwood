@@ -18,9 +18,11 @@ public class Player{
     boolean isTurn = false;
     int x = 991;
     int y = 248;
+    Board board;
     ImageIcon icon;
     JLabel label;
     BoardUI boardUI;
+
 
     /*
     * Player Constructor
@@ -31,6 +33,7 @@ public class Player{
     public Player(int id)
     {
         this.ID = id;
+        board = board.getInstance();
 
     }
 
@@ -56,9 +59,11 @@ public class Player{
               // System.out.println("Xpos: "+ board.getSpaceMap().get(player.currentSpace.getName()).getXPlayer());
               player.setX(player.currentSpace.getXPlayer());
               player.setY(player.currentSpace.getYPlayer());
-              player.label.setBounds(player.getX() - 20, player.getY() -20, 47, 47);
-              System.out.println("player Xpos: " + player.getX());
-              boardUI.removeBack(player.spaceToSet(player, board));
+              int offset = player.getX() -50 + (40 * player.ID);
+
+              player.label.setBounds(offset, player.getY() -10, 40, 40);
+              System.out.println("player Xpos: " + player.getX() + "Ypos: " + player.getY());
+              //boardUI.removeBack(player.spaceToSet(player, board));
 
               if(player.currentSpace.getName() != "office" && player.currentSpace.getName() != "trailer") {
                 takeRole(player, board, false);

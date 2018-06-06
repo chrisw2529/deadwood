@@ -245,8 +245,8 @@ public class BoardUI extends JFrame implements ActionListener {
 
   public void removeBack(Set set)
   {
-    cardBacks.get(set.getX()%set.getY()).setVisible(false);
-    //bPane.repaint();
+    // cardBacks.get(set.getX()%set.getY()).setVisible(false);
+    // //bPane.repaint();
   }
 
 
@@ -303,7 +303,7 @@ public class BoardUI extends JFrame implements ActionListener {
         //$$$$$$$$$$$$$$$$$
 
 
-        //playerLabels.get(cp.getID()).remove();
+        bPane.remove(playerLabels.get(cp.getID()));
 
         playerLabels.remove(cp.getID());
         System.out.println("repainting");
@@ -315,15 +315,12 @@ public class BoardUI extends JFrame implements ActionListener {
       ImageIcon cIcon =  new ImageIcon(img);
 
       playerLabels.put(cp.getID(), playerlabel);
-      // if(level != 1){
-      //   cp.getIcon().getImage().flush();
-      // }
       System.out.println("img: " + img);
       System.out.println("player x: "+ cp.getX() + " y: " + cp.getY());
       cp.setImageIcon(cIcon);
       cp.setJLabel(playerlabel);
       playerlabel.setIcon(cIcon);
-      playerlabel.setBounds(cp.getX(),cp.getY(),cIcon.getIconWidth()+2,cIcon.getIconHeight());
+      playerlabel.setBounds(cp.getX() -10,cp.getY()-10,cIcon.getIconWidth()+2,cIcon.getIconHeight());
       playerlabel.setOpaque(true);
 
       // Add the card to the lower layer
