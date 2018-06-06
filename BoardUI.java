@@ -20,9 +20,9 @@ public class BoardUI extends JFrame implements ActionListener {
   JLabel mLabel;
 
   HashMap<Integer,JLabel> playerLabels = new HashMap<Integer,JLabel>();
-  HashMap<Integer,JLabel> sMarkersMap = new HashMap<Integer,JLabel>();
-  HashMap<Integer,JLabel> cardBacks = new HashMap<Integer,JLabel>();
-  ArrayList<JLabel> cards = new ArrayList<JLabel>();
+  HashMap<String,JLabel> sMarkersMap = new HashMap<String,JLabel>();
+  HashMap<String,JLabel> cardBacks = new HashMap<String,JLabel>();
+  HashMap<String,JLabel> cardsMap = new HashMap<String,JLabel>();
   JLayeredPane bPane = getLayeredPane();
 
   private JScrollPane scroller;
@@ -227,6 +227,7 @@ public class BoardUI extends JFrame implements ActionListener {
     cardlabel.setOpaque(true);
 
     // Add the card to the lower layer
+    cardsMap.put(set.getName(), cardlabel);
     bPane.add(cardlabel, new Integer(1));
   }
 
@@ -239,25 +240,17 @@ public class BoardUI extends JFrame implements ActionListener {
     cardlabel.setBounds(set.getX(),set.getY(),cIcon.getIconWidth()+2,cIcon.getIconHeight());
     cardlabel.setOpaque(true);
 //FOR WHEN A PLAYER HOPS ON A SET    cardlabel.setVisible(false);
-    sMarkersMap.put(set.getX()%set.getY(),cardlabel);
+    cardBacks.put(set.getName(),cardlabel);
     bPane.add(cardlabel, new Integer(2));
   }
 
   public void removeBack(Set set)
   {
-    cardBacks.get(set.getX()%set.getY()).setVisible(false);
+    System.out.println(set.getName());
+
+    cardBacks.get(set.getName()).setVisible(false);
     //bPane.repaint();
   }
-
-
-
-
-
-
-
-
-
-
 
   public void setPlayer(int id, int level){
     String img = "images/dice/";
@@ -352,8 +345,8 @@ public class BoardUI extends JFrame implements ActionListener {
 
     // Add the card to the lower layer
     bPane.add(shotMs, new Integer(1));
-    System.out.println(sm.getX()%sm.getY());
-    sMarkersMap.put(sm.getX()%sm.getY(), shotMs);
+    //System.out.println(sm.getID());
+    sMarkersMap.put(sm.getID(), shotMs);
 
   }
 
@@ -361,21 +354,47 @@ public class BoardUI extends JFrame implements ActionListener {
   {
 
     //bPane.remove(sMarkersMap.get(sm.getX()+sm.getY()));
-    sMarkersMap.get(shot.getX()%shot.getY()).setVisible(false);
-    bPane.repaint();
+    sMarkersMap.get(shot.getID()).setVisible(false);
+    System.out.println("Setting this to INVIS!!"+shot.getX()%shot.getY());
+    //bPane.repaint();
     set.decrementShotMarker();
-    set.getShotMarkers().remove(0);
+    System.out.println(set.getShotMarker());
+    //set.getShotMarkers().remove(0);
     System.out.println("SHOT MARKER REMOVED");
 
   }
 
-  public void resetSM()
+  public void wrapSceneUI(Set set)
   {
-    Iterator iterator =sMarkersMap.keySet().iterator();
+
+    bPane.remove(cardsMap.get(set.getName()));
+    bPane.revalidate();
+    bPane.repaint();
+  }
+
+  public void resetBoard()
+  {
+    Iterator iterator = sMarkersMap.keySet().iterator();
 
     while (iterator.hasNext()) {
-      Integer key = (Integer) iterator.next();
+      String key = (String) iterator.next();
       sMarkersMap.get(key).setVisible(true);
+    }
+
+    Iterator iterator1 = cardBacks.keySet().iterator();
+
+    while (iterator1.hasNext()) {
+      String key = (String) iterator1.next();
+      cardBacks.get(key).setVisible(true);
+    }
+
+    Iterator iterator2 = cardsMap.keySet().iterator();
+
+    while (iterator2.hasNext()) {
+      String key = (String) iterator2.next();
+      //cardsMap.get(key).setVisible(true);
+      bPane.remove(cardsMap.get(key));
+      bPane.repaint();
     }
   }
 

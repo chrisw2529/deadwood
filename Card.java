@@ -13,13 +13,14 @@ public class Card
     int img;
     ArrayList<Role> roles = new ArrayList<Role>();
     Set set = null;
-
+    BoardUI boardUI;
 
 
     public Card(String name, int budget)
     {
         this.name = name;
         this.budget = budget;
+        boardUI = boardUI.getInstance();
     }
 
     public String getName()
@@ -83,6 +84,8 @@ public class Card
     */
     public void wrapScene(Board board)
     {
+
+      boardUI.wrapSceneUI(getSet());
       //off card bonuses
       for (int i = 0 ; i < set.getRoles().size() ;i++ ) {
         if(set.getRoles().get(i).getPlayer() != null){
