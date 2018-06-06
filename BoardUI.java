@@ -20,6 +20,8 @@ public class BoardUI extends JFrame implements ActionListener {
   JLabel mLabel;
 
   HashMap<Integer,JLabel> sMarkersMap = new HashMap<Integer,JLabel>();
+  HashMap<Integer,JLabel> cardBacks = new HashMap<Integer,JLabel>();
+  ArrayList<JLabel> cards = new ArrayList<JLabel>();
 
   JLayeredPane bPane = getLayeredPane();
 
@@ -227,6 +229,35 @@ public class BoardUI extends JFrame implements ActionListener {
     // Add the card to the lower layer
     bPane.add(cardlabel, new Integer(1));
   }
+
+  public void setCardBacks(Card card, Set set)
+  {
+
+    cardlabel = new JLabel();
+    ImageIcon cIcon =  new ImageIcon("images/cards/back.png");
+    cardlabel.setIcon(cIcon);
+    cardlabel.setBounds(set.getX(),set.getY(),cIcon.getIconWidth()+2,cIcon.getIconHeight());
+    cardlabel.setOpaque(true);
+//FOR WHEN A PLAYER HOPS ON A SET    cardlabel.setVisible(false);
+    sMarkersMap.put(set.getX()%set.getY(),cardlabel);
+    bPane.add(cardlabel, new Integer(2));
+  }
+
+  public void removeBack(Set set)
+  {
+    cardBacks.get(set.getX()%set.getY()).setVisible(false);
+    //bPane.repaint();
+  }
+
+
+
+
+
+
+
+
+
+
 
   public void setPlayer(int id, int level){
     String img = "images/dice/";

@@ -111,6 +111,7 @@ public class Board {
     for (int i = 0; i < sets.size(); i++){
       sets.get(i).setCard(cards.get(i));
       boardUI.setCard(cards.get(i), sets.get(i), cards.get(i).getImg());
+      boardUI.setCardBacks(cards.get(i), sets.get(i));
       cards.get(i).setSet(sets.get(i));
 
     }
