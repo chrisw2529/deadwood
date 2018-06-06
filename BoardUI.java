@@ -19,7 +19,7 @@ public class BoardUI extends JFrame implements ActionListener {
   JLabel playerlabel;
   JLabel mLabel;
 
-  ArrayList<JLabel> playerLabels = new ArrayList<JLabel>();
+  HashMap<Integer,JLabel> playerLabels = new HashMap<Integer,JLabel>();
   HashMap<Integer,JLabel> sMarkersMap = new HashMap<Integer,JLabel>();
   JLayeredPane bPane = getLayeredPane();
 
@@ -259,9 +259,6 @@ public class BoardUI extends JFrame implements ActionListener {
       else{
         if(cp.getID() == 1){
           img += "r" + level + ".png";
-          //cp.setImageIcon(null);
-          cp.getJLabel().setIcon(null);
-
         }
         else if(cp.getID() == 2){
           img += "b" + level + ".png";
@@ -269,10 +266,24 @@ public class BoardUI extends JFrame implements ActionListener {
         else if(cp.getID() == 3){
           img += "g" + level + ".png";
         }
+
+        //$$$$$$$$$$$$$$$$
+        //start here remove jlabel
+        //$$$$$$$$$$$$$$$$$
+
+        
+        //playerLabels.get(cp.getID()).remove();
+
+        playerLabels.remove(cp.getID());
+        System.out.println("repainting");
+        bPane.repaint();
+
       }
 
       playerlabel = new JLabel();
       ImageIcon cIcon =  new ImageIcon(img);
+
+      playerLabels.put(cp.getID(), playerlabel);
       // if(level != 1){
       //   cp.getIcon().getImage().flush();
       // }
