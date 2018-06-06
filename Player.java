@@ -331,8 +331,9 @@ public class Player{
 
       //  int sm = player.spaceToSet(player,board).getShotMarkers().size();
       //  int ism = player.spaceToSet(player,board).getInitShotMarker();
-       player.spaceToSet(player,board).decrementShotMarker();
+       //player.spaceToSet(player,board).decrementShotMarker();
       //  board.decrementShotMarker();
+      boardUI.removeShotMarkers(player.spaceToSet(player,board), player.spaceToSet(player,board).getShotMarkers().get(0));
         //player.spaceToSet(player,board).getShotMarkers().remove(sm-1);
 
 

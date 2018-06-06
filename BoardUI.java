@@ -19,10 +19,8 @@ public class BoardUI extends JFrame implements ActionListener {
   JLabel playerlabel;
   JLabel mLabel;
 
-  HashMap<Integer,Integer> sMarkersMap = new HashMap<Integer,Integer>();
   ArrayList<JLabel> playerLabels = new ArrayList<JLabel>();
-  int countOfShots = 0;
-
+  HashMap<Integer,JLabel> sMarkersMap = new HashMap<Integer,JLabel>();
   JLayeredPane bPane = getLayeredPane();
 
   private JScrollPane scroller;
@@ -290,22 +288,6 @@ public class BoardUI extends JFrame implements ActionListener {
       bPane.add(playerlabel, new Integer(5));
 
 
-
-
-
-
-
-
-
-
-      // cardlabel = new JLabel();
-      // ImageIcon cIcon =  new ImageIcon(img);
-      // cardlabel.setIcon(cIcon);
-      // cardlabel.setBounds(set.getX(),set.getY(),cIcon.getIconWidth()+2,cIcon.getIconHeight());
-      // cardlabel.setOpaque(true);
-      //
-      // // Add the card to the lower layer
-      // bPane.add(cardlabel, new Integer(1));
     }
 
 
@@ -317,30 +299,42 @@ public class BoardUI extends JFrame implements ActionListener {
 
   }
 
-  public void addShotMarkers(ShotMarker sm)
+  public void addShotMarkers(Set set, ShotMarker sm)
   {
 
     JLabel shotMs = new JLabel();
-
     ImageIcon cIcon =  new ImageIcon("images/shotMarker.png");
     shotMs.setIcon(cIcon);
     shotMs.setBounds(sm.getX(),sm.getY(),47,47);
     shotMs.setOpaque(false);
 
     // Add the card to the lower layer
-    bPane.add(shotMs, new Integer(1), countOfShots);
-    sMarkersMap.put(sm.getX()+sm.getY(), countOfShots);
-    countOfShots++;
+    bPane.add(shotMs, new Integer(1));
+    System.out.println(sm.getX()%sm.getY());
+    sMarkersMap.put(sm.getX()%sm.getY(), shotMs);
 
   }
 
-  public void removeShotMarkers()
+  public void removeShotMarkers(Set set, ShotMarker shot)
   {
 
     //bPane.remove(sMarkersMap.get(sm.getX()+sm.getY()));
-    bPane.remove(4);
+    sMarkersMap.get(shot.getX()%shot.getY()).setVisible(false);
+    bPane.repaint();
+    set.decrementShotMarker();
+    set.getShotMarkers().remove(0);
     System.out.println("SHOT MARKER REMOVED");
 
+  }
+
+  public void resetSM()
+  {
+    Iterator iterator =sMarkersMap.keySet().iterator();
+
+    while (iterator.hasNext()) {
+      Integer key = (Integer) iterator.next();
+      sMarkersMap.get(key).setVisible(true);
+    }
   }
 
 
