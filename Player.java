@@ -58,7 +58,7 @@ public class Player{
             if(neighbors.get(i).equals(destination) && moved == false){
               player.currentSpace = board.getSpaceMap().get(neighbors.get(i));
               moved = true;
-              //System.out.println("player " + player.ID + " has moved to " + player.currentSpace.getName());
+              // System.out.println("player " + player.ID + " has moved to " + player.currentSpace.getName());
               // System.out.println("Xpos: "+ board.getSpaceMap().get(player.currentSpace.getName()).getXPlayer());
               player.setX(player.currentSpace.getXPlayer());
               player.setY(player.currentSpace.getYPlayer());
@@ -98,6 +98,7 @@ public class Player{
     * Takes a role and calls roleQualificationCheck in order to determine if the player is allowed to take the role
     */
     public void takeRole(Player player, Board board, Boolean alreadyOnSet){
+<<<<<<< HEAD
       // Scanner sc = new Scanner(System.in);
       // String c = "y";
       //
@@ -327,7 +328,6 @@ public class Player{
           player.fame += 2;
           System.out.println("Player " + player.ID + " has acted successfully and has gained 2 fames.");
           System.out.println("Player " + player.ID + "has " + player.fame + " fame(s), $" + player.cash + ", and is rank " + player.rank);
-          boardUI.updateStats();
         }
 
         else {
@@ -335,7 +335,6 @@ public class Player{
           player.cash++;
           System.out.println("Player " + player.ID + " has acted successfully and has gained 1 fame and 1 cash.");
           System.out.println("Player " + player.ID + "has " + player.fame + " fame(s), $" + player.cash + ", and is rank " + player.rank);
-          boardUI.updateStats();
 
         }
 

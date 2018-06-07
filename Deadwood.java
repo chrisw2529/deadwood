@@ -44,6 +44,7 @@ public class Deadwood{
     System.out.println();
     String c = "";
 
+
   //   while(!c.equals("e")){
   //     c = sc.nextLine();
   //     Player player = board.activePlayer();
@@ -158,6 +159,7 @@ public class Deadwood{
   //   }
   //
    }
+
 
 
 }

@@ -224,6 +224,17 @@ public class BoardUI extends JFrame {
             //Object selected = moveTo.getSelectedItem();
             //player.move(player, selected.toString(), board);
           }
+          // else if (e.getSource()== rankUp){
+          //   if(board.activePlayer().getSpace().getName().equals("office")){
+          //       for (int i = 0; i < 5 ; i++) {
+          //         item = new JMenuItem("use fame to rank");
+          //         item.addActionListener(new MenuActionListener());
+          //         moveTo.add(item);                }
+          //   }
+          //   else{
+          //     System.out.println("must be on casting Office");
+          //   }
+          // }
 
           else if (e.getSource()== takeRole){
 
