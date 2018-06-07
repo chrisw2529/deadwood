@@ -40,6 +40,9 @@ public class BoardUI extends JFrame {
   JPopupMenu moveTo;
   JPopupMenu rankTo;
   JPopupMenu roles;
+  Boolean moveToOpen = false;
+  Boolean rankUpOpen = false;
+  Boolean rolesOpen = false;
   JMenuItem item;
   ActionListener menuListener;
   private boolean clicked = false;
@@ -174,13 +177,27 @@ public class BoardUI extends JFrame {
 
 
          if (e.getSource()== act){
-            System.out.println("Acting is Selected\n");
+
+           if(player.currentRole == null) {
+
+             System.out.println("Not on a scene!");
+
+           }
+
+           else
             player.act(player, board);
 
          }
 
          else if (e.getSource()== rehearse){
-            System.out.println("Rehearse is Selected\n");
+
+           if(player.currentRole == null) {
+
+             System.out.println("Not on a scene!");
+
+           }
+
+          else
             player.rehearse(player, board);
          }
 
@@ -188,16 +205,24 @@ public class BoardUI extends JFrame {
 
            System.out.println("Move clicked");
 
-           ArrayList neighbors = player.getSpace().getNeighbors();
+           if(player.moved == false){
+             ArrayList neighbors = player.getSpace().getNeighbors();
 
-            for (int i = 0; i < player.getSpace().getNeighbors().size(); i++) {
-              item = new JMenuItem(neighbors.get(i).toString());
-              item.addActionListener(new MenuActionListener());
-              moveTo.add(item);
+              for (int i = 0; i < neighbors.size(); i++) {
+                item = new JMenuItem(neighbors.get(i).toString());
+                item.addActionListener(new MenuActionListener());
+                moveTo.add(item);
 
-            }
+              }
 
-            moveTo.show(move, move.getWidth()/2, move.getHeight()/2);
+              moveTo.show(move, move.getWidth()/2, move.getHeight()/2);
+              moveToOpen = true;
+           }
+
+           else {
+             System.out.println("Can't move twice!");
+           }
+
 
             //Object selected = moveTo.getSelectedItem();
             //player.move(player, selected.toString(), board);
@@ -224,33 +249,49 @@ public class BoardUI extends JFrame {
 
           else if (e.getSource()== takeRole){
 
-            System.out.println("Taking role");
+              if(player.currentRole != null) {
+                System.out.println("Already on a role!");
 
-            ArrayList<Role> offCard = player.spaceToSet(player,board).getRoles();
-            ArrayList<Role> onCard = player.spaceToSet(player,board).getCard().getRoles();
+              }
 
-            item = new JMenuItem("Off Card Roles");
-            roles.add(item);
+              else if(player.currentSpace.getName() == "office" || player.currentSpace.getName() == "trailer") {
+                System.out.println("You cannot take a role on this space!");
+                return;
+              }
 
-            for (int i = 0; i < player.getSpace().getNeighbors().size(); i++) {
+              else if(player.spaceToSet(player, board).getIsWrapped() == true) {
+                System.out.println("Scene already wrapped!");
+              }
 
-              item = new JMenuItem(offCard.get(i).getName() + ". Required rank: " + offCard.get(i).getLevel());
-              item.addActionListener(new MenuActionListener());
-              roles.add(item);
+              else {
+                System.out.println("Taking role");
 
-            }
+                ArrayList<Role> offCard = player.spaceToSet(player,board).getRoles();
+                ArrayList<Role> onCard = player.spaceToSet(player,board).getCard().getRoles();
 
-            item = new JMenuItem("On Card Roles");
-            roles.add(item);
+                item = new JMenuItem("Off Card Roles");
+                roles.add(item);
 
-            for (int i = 0; i < player.getSpace().getNeighbors().size(); i++) {
-              item = new JMenuItem(onCard.get(i).getName() + ". Required rank: " + onCard.get(i).getLevel());
-              item.addActionListener(new MenuActionListener());
-              roles.add(item);
+                for (int i = 0; i < offCard.size(); i++) {
 
-            }
+                  item = new JMenuItem(offCard.get(i).getName() + ". Required rank: " + offCard.get(i).getLevel());
+                  item.addActionListener(new MenuActionListener());
+                  roles.add(item);
 
-              roles.show(takeRole, takeRole.getWidth(), takeRole.getHeight());
+                }
+
+                item = new JMenuItem("On Card Roles");
+                roles.add(item);
+
+                for (int i = 0; i < onCard.size(); i++) {
+                  item = new JMenuItem(onCard.get(i).getName() + ". Required rank: " + onCard.get(i).getLevel());
+                  item.addActionListener(new MenuActionListener());
+                  roles.add(item);
+
+                }
+
+                  roles.show(takeRole, takeRole.getWidth(), takeRole.getHeight());
+              }
 
 
            }
@@ -264,6 +305,8 @@ public class BoardUI extends JFrame {
         moveTo.removeAll();
         rankTo.removeAll();
         roles.removeAll();
+        moveToOpen = false;
+        rolesOpen = false;
       }
       public void mouseEntered(MouseEvent e) {
       }
@@ -272,30 +315,28 @@ public class BoardUI extends JFrame {
    }
 
 
-
-  // public void actionPerformed (ActionEvent e) {
-  //
-  //   System.out.println(e.getActionCommand() + " pressed");
-  //
-  //   Player activePlayer = board.activePlayer();
-  //
-  //
-  //   System.out.println("Popup menu item ["
-  //   + e.getActionCommand() + "] was pressed.");
-  //
-  //
-  // }
-
   class MenuActionListener implements ActionListener {
   //  @Override
   public void actionPerformed(ActionEvent e) {
-    clicked = true;
+
+
+    //clicked = true;
     System.out.println(e.getActionCommand() + " pressed");
-    Player player = board.activePlayer();
-    player.move(player, e.getActionCommand(), board);
-    clicked = false;
-    System.out.println("Print");
+
+    if(moveToOpen == true){
+      System.out.println("Should be true;");
+      Player player = board.activePlayer();
+      player.move(player, e.getActionCommand(), board);
+      player.moved = true;
+      //clicked = false;
+      System.out.println("Print");
+    }
+
+    if(rolesOpen == true){
+      System.out.println("You have chosen..." + e.getActionCommand());
+    }
   }
+
 }
 
 
@@ -355,6 +396,11 @@ public class BoardUI extends JFrame {
 
   public void removeBack(Set set)
   {
+
+    if(set.getName() == "office" || set.getName() == "trailer") {
+      return;
+    }
+
     System.out.println(set.getName());
     cardBacks.get(set.getName()).setVisible(false);
   }

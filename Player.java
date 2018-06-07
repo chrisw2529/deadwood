@@ -16,6 +16,7 @@ public class Player{
     Space currentSpace;
     Role currentRole = null;
     boolean isTurn = false;
+    boolean moved = false;
     int x = 991;
     int y = 248;
     Board board;
@@ -97,30 +98,30 @@ public class Player{
     * Takes a role and calls roleQualificationCheck in order to determine if the player is allowed to take the role
     */
     public void takeRole(Player player, Board board, Boolean alreadyOnSet){
-        //Scanner sc = new Scanner(System.in);
-      String c = "y";
-
-      if(player.currentRole != null) {
-        System.out.println("Already on a role!");
-        return;
-      }
-
-      if(player.currentSpace.getName() == "office" || player.currentSpace.getName() == "trailer") {
-        System.out.println("You cannot take a role on this space!");
-        return;
-      }
-
-
-
-      if(spaceToSet(player, board).getIsWrapped() == false){
-
-        if (alreadyOnSet == false) {
-           //System.out.println("would you like to take a role? (y/n)");
-          // c = sc.nextLine();
-        }
-
-        Boolean chooseWisely = true;
-      }
+      // Scanner sc = new Scanner(System.in);
+      // String c = "y";
+      //
+      // if(player.currentRole != null) {
+      //   System.out.println("Already on a role!");
+      //   return;
+      // }
+      //
+      // if(player.currentSpace.getName() == "office" || player.currentSpace.getName() == "trailer") {
+      //   System.out.println("You cannot take a role on this space!");
+      //   return;
+      // }
+      //
+      //
+      //
+      // if(spaceToSet(player, board).getIsWrapped() == false){
+      //
+      //   if (alreadyOnSet == false) {
+      //     System.out.println("would you like to take a role? (y/n)");
+      //     c = sc.nextLine();
+      //   }
+      //
+      //   Boolean chooseWisely = true;
+      //
       //   while(chooseWisely == true){
       //
       //     if(c.equals("y")){
@@ -498,6 +499,7 @@ public class Player{
 
       System.out.println("Player " + player.ID + "'s turn has ended.");
       player.isTurn = false;
+      player.moved = false;
       ArrayList<Player> players = board.getPlayers();
       for(int i = 0; i < players.size(); i++){
         if(players.get(i).getID() == player.ID){
