@@ -59,7 +59,7 @@ public class Board {
      for(int i = 1; i < players.size() + 1; i++){
        boardUI.setPlayer(i, 1);
      }
-
+     boardUI.statsInit();
   }
   private void setPlayerPositions(){
     this.spaceMap.get("Train Station").setXPlayer(21);

@@ -326,6 +326,7 @@ public class Player{
           player.fame += 2;
           System.out.println("Player " + player.ID + " has acted successfully and has gained 2 fames.");
           System.out.println("Player " + player.ID + "has " + player.fame + " fame(s), $" + player.cash + ", and is rank " + player.rank);
+          boardUI.updateStats();
         }
 
         else {
@@ -333,6 +334,7 @@ public class Player{
           player.cash++;
           System.out.println("Player " + player.ID + " has acted successfully and has gained 1 fame and 1 cash.");
           System.out.println("Player " + player.ID + "has " + player.fame + " fame(s), $" + player.cash + ", and is rank " + player.rank);
+          boardUI.updateStats();
 
         }
 

@@ -20,6 +20,12 @@ public class BoardUI extends JFrame {
   JLabel cardlabel;
   JLabel playerlabel;
   JLabel mLabel;
+  JLabel activePlayer1;
+  JLabel activePlayer2;
+  JLabel fame;
+  JLabel cash;
+
+  ImageIcon icon;
 
   HashMap<Integer,JLabel> playerLabels = new HashMap<Integer,JLabel>();
   HashMap<String,JLabel> sMarkersMap = new HashMap<String,JLabel>();
@@ -54,7 +60,7 @@ public class BoardUI extends JFrame {
   public void initialize() {
 
     boardlabel = new JLabel();
-    ImageIcon icon =  new ImageIcon("images/board.jpg");
+    icon =  new ImageIcon("images/board.jpg");
     boardlabel.setIcon(icon);
     boardlabel.setBounds(0,0,icon.getIconWidth(),icon.getIconHeight());
 
@@ -116,6 +122,34 @@ public class BoardUI extends JFrame {
 
   }
 
+  public void statsInit(){
+    activePlayer1 = new JLabel("Active Player: ");
+    activePlayer2 = new JLabel("Player " + board.activePlayer().getID());
+    fame = new JLabel("Fame: " + 0);
+    cash = new JLabel("Cash: " + 0);
+
+
+    activePlayer1.setBounds(icon.getIconWidth()+10,400,130,20);
+    activePlayer2.setBounds(icon.getIconWidth()+10,410,130,20);
+    fame.setBounds(icon.getIconWidth()+10,420,130,20);
+    cash.setBounds(icon.getIconWidth()+10,430,130,20);
+
+    bPane.add(activePlayer1, new Integer(6));
+    bPane.add(activePlayer2, new Integer(6));
+    bPane.add(fame, new Integer(6));
+    bPane.add(cash, new Integer(6));
+
+
+
+  }
+  public void updateStats(){
+    activePlayer2.setText("Player " + board.activePlayer().getID());
+    fame.setText("fame " + board.activePlayer().getFame());
+    cash.setText("cash " + board.activePlayer().getCash());
+    bPane.repaint();
+
+  }
+
   class boardMouseListener implements MouseListener{
 
       // Code for the different button clicks
@@ -146,6 +180,8 @@ public class BoardUI extends JFrame {
             Object selected = moveTo.getSelectedItem();
             player.move(player, selected.toString(), board);
           }
+
+          updateStats();
 
       }
       public void mousePressed(MouseEvent e) {
