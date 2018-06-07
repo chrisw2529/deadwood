@@ -22,7 +22,7 @@ public class Board {
 
 
   int day = 1;
-  int remainingScenes = 3;
+  int remainingScenes = 2;
   int playerNum = 0;
   ArrayList<Player> players = new ArrayList<Player>();
   ArrayList<Set> sets = new ArrayList<Set>();
@@ -176,7 +176,7 @@ public class Board {
       System.out.println("Hello");
       Player player = new Player(i);
       players.add(player);
-      player.setSpace(trailer);
+      player.setSpace(castingOffice);
       if(i == 1){
         player.setTurn(true);
       }
@@ -209,6 +209,17 @@ public class Board {
       endGame();
     }
     else{
+      //reset players
+      for(Player player: players){
+        player.setX(trailer.getX());
+        player.setY(trailer.getY());
+        int offset = player.getX() -50 + (40 * player.ID);
+        player.label.setBounds(offset, player.getY() -10, 40, 40);
+      }
+
+
+
+
       //reset sets
       for (int i = 0; i < sets.size();i++ ) {
         sets.get(i).resetShotMarkers();

@@ -289,11 +289,6 @@ public class BoardUI extends JFrame implements ActionListener {
           img += "g" + level + ".png";
         }
 
-        //$$$$$$$$$$$$$$$$
-        //start here remove jlabel
-        //$$$$$$$$$$$$$$$$$
-
-
         bPane.remove(playerLabels.get(cp.getID()));
 
         playerLabels.remove(cp.getID());

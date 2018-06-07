@@ -142,6 +142,8 @@ public class Card
       //reset roles for off scene
       for (int i = 0; i < set.getRoles().size(); i++) {
         if(set.getRoles().get(i).getPlayer() != null){
+          int offset = set.getXPlayer() -50 + (40 * set.getRoles().get(i).getPlayer().getID());
+          boardUI.movePlayerImage(set.getRoles().get(i).getPlayer(), offset, set.getYPlayer() - 10);
           set.getRoles().get(i).getPlayer().setRehearsal(0);
           set.getRoles().get(i).getPlayer().setRole(null);
         //  set.getRoles().get(i).getPlayer().move(set.getRoles().get(i).getPlayer(), this.set.getName(), board);
@@ -152,6 +154,9 @@ public class Card
       //reset roles for on scene
       for (int i = 0; i < roles.size(); i++) {
         if(roles.get(i).takenBy != null){
+          int offset = set.getXPlayer() -50 + (40 * roles.get(i).getPlayer().getID());
+
+          boardUI.movePlayerImage(roles.get(i).getPlayer(), offset, set.getYPlayer() - 10);
           roles.get(i).getPlayer().setRehearsal(0);
           roles.get(i).getPlayer().setRole(null);
           //roles.get(i).getPlayer().move(roles.get(i).getPlayer(), this.set.getName(), board);
