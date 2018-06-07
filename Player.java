@@ -57,7 +57,7 @@ public class Player{
             if(neighbors.get(i).equals(destination) && moved == false){
               player.currentSpace = board.getSpaceMap().get(neighbors.get(i));
               moved = true;
-              // System.out.println("player " + player.ID + " has moved to " + player.currentSpace.getName());
+              //System.out.println("player " + player.ID + " has moved to " + player.currentSpace.getName());
               // System.out.println("Xpos: "+ board.getSpaceMap().get(player.currentSpace.getName()).getXPlayer());
               player.setX(player.currentSpace.getXPlayer());
               player.setY(player.currentSpace.getYPlayer());

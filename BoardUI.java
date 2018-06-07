@@ -14,7 +14,7 @@ public class BoardUI extends JFrame {
   private JButton rankUp;
   private JButton endTurn;
 
-  JComboBox<String> moveTo = new JComboBox<String>();
+  //JComboBox<String> moveTo;
 
   JLabel boardlabel;
   JLabel cardlabel;
@@ -36,6 +36,11 @@ public class BoardUI extends JFrame {
   private JScrollPane scroller;
   private JTextArea text;
   Board board = null;
+
+  JPopupMenu moveTo;
+  JMenuItem item;
+  ActionListener menuListener;
+
 
   private BoardUI() {
 
@@ -70,6 +75,8 @@ public class BoardUI extends JFrame {
 
        // Set the size of the GUI
     setSize(icon.getIconWidth()+200,icon.getIconHeight());
+
+    //moveTo = new JComboBox<String>();
 
     // Create the Menu for action buttons
     mLabel = new JLabel("MENU");
@@ -115,10 +122,12 @@ public class BoardUI extends JFrame {
     bPane.add(rankUp, new Integer(2));
     bPane.add(endTurn, new Integer(2));
 
-    //moveTo.setEditable(true);
+    //bPane.add(moveTo, new Integer(3));
+  //  moveTo.setVisible(false);
 
-    bPane.add(moveTo);
-  //  moveTo.setSelectedIndex(4);
+   moveTo = new JPopupMenu();
+   //menuListener = new ActionListener();
+
 
   }
 
@@ -156,6 +165,8 @@ public class BoardUI extends JFrame {
       public void mouseClicked(MouseEvent e) {
 
         Player player = board.activePlayer();
+        moveTo.removeAll();
+
 
          if (e.getSource()== act){
             System.out.println("Acting is Selected\n");
@@ -170,15 +181,21 @@ public class BoardUI extends JFrame {
 
          else if (e.getSource()== move){
 
+           System.out.println("Move clicked");
+
            ArrayList neighbors = player.getSpace().getNeighbors();
 
             for (int i = 0; i < player.getSpace().getNeighbors().size(); i++) {
-              moveTo.addItem(neighbors.get(i).toString());
+              item = new JMenuItem(neighbors.get(i).toString());
+              item.addActionListener(new MenuActionListener());
+              moveTo.add(item);
 
             }
 
-            Object selected = moveTo.getSelectedItem();
-            player.move(player, selected.toString(), board);
+            moveTo.show(move, move.getWidth()/2, move.getHeight()/2);
+
+            //Object selected = moveTo.getSelectedItem();
+            //player.move(player, selected.toString(), board);
           }
 
           updateStats();
@@ -187,6 +204,7 @@ public class BoardUI extends JFrame {
       public void mousePressed(MouseEvent e) {
       }
       public void mouseReleased(MouseEvent e) {
+        moveTo.removeAll();
       }
       public void mouseEntered(MouseEvent e) {
       }
@@ -194,39 +212,40 @@ public class BoardUI extends JFrame {
       }
    }
 
+
+
   // public void actionPerformed (ActionEvent e) {
   //
   //   System.out.println(e.getActionCommand() + " pressed");
   //
   //   Player activePlayer = board.activePlayer();
   //
-  //   if (e.getActionCommand() == "Act"){
-  // //    activePlayer.act();
-  //   }
   //
-  //   if (e.getActionCommand() == "Rehearse"){
-  //   //  activePlayer.rehearse();
-  //   }
+  //   System.out.println("Popup menu item ["
+  //   + e.getActionCommand() + "] was pressed.");
   //
-  //   if (e.getActionCommand() == "Move"){
-  //     //get the click to where
-  //   //  activePlayer.move();
-  //   }
-  //
-  //   if (e.getActionCommand() == "Take Role"){
-  //     //take roll click cmd
-  //   //  activePlayer.takeRole();
-  //   }
-  //
-  //   if (e.getActionCommand() == "Rank Up"){
-  //     //activePlayer
-  //   }
-  //
-  //   if (e.getActionCommand() == "End Turn"){
-  // //    activePlayer.endTurn();
-  //   }
   //
   // }
+
+  class MenuActionListener implements ActionListener {
+  //  @Override
+  public void actionPerformed(ActionEvent e) {
+    System.out.println(e.getActionCommand() + " pressed");
+    Player player = board.activePlayer();
+    player.move(player, e.getActionCommand(), board);
+    System.out.println("Print");
+  }
+}
+
+
+//   ActionListener menuActionListener = new ActionListener(){
+//
+//     @Override
+//     public void actionPerformed(ActionEvent e) {
+//         JLabel.setText(e.getActionCommand());
+//     }
+//
+// };
 
   // private void addButton(JPanel panel, JButton button, String label) {
   //
