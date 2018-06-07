@@ -98,7 +98,6 @@ public class Player{
     * Takes a role and calls roleQualificationCheck in order to determine if the player is allowed to take the role
     */
     public void takeRole(Player player, Board board, Boolean alreadyOnSet){
-<<<<<<< HEAD
       // Scanner sc = new Scanner(System.in);
       // String c = "y";
       //
