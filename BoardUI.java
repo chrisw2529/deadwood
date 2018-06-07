@@ -306,6 +306,7 @@ public class BoardUI extends JFrame {
         rankTo.removeAll();
         roles.removeAll();
         moveToOpen = false;
+        rankUpOpen = false;
         rolesOpen = false;
       }
       public void mouseEntered(MouseEvent e) {
