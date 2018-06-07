@@ -38,8 +38,10 @@ public class BoardUI extends JFrame {
   Board board = null;
 
   JPopupMenu moveTo;
+  JPopupMenu roles;
   JMenuItem item;
   ActionListener menuListener;
+  private boolean clicked = false;
 
 
   private BoardUI() {
@@ -126,6 +128,7 @@ public class BoardUI extends JFrame {
   //  moveTo.setVisible(false);
 
    moveTo = new JPopupMenu();
+   roles = new JPopupMenu();
    //menuListener = new ActionListener();
 
 
@@ -209,6 +212,39 @@ public class BoardUI extends JFrame {
           //   }
           // }
 
+          else if (e.getSource()== takeRole){
+
+            System.out.println("Taking role");
+
+            ArrayList<Role> offCard = player.spaceToSet(player,board).getRoles();
+            ArrayList<Role> onCard = player.spaceToSet(player,board).getCard().getRoles();
+
+            item = new JMenuItem("Off Card Roles");
+            roles.add(item);
+
+            for (int i = 0; i < player.getSpace().getNeighbors().size(); i++) {
+
+              item = new JMenuItem(offCard.get(i).getName() + ". Required rank: " + offCard.get(i).getLevel());
+              item.addActionListener(new MenuActionListener());
+              roles.add(item);
+
+            }
+
+            item = new JMenuItem("On Card Roles");
+            roles.add(item);
+
+            for (int i = 0; i < player.getSpace().getNeighbors().size(); i++) {
+              item = new JMenuItem(onCard.get(i).getName() + ". Required rank: " + onCard.get(i).getLevel());
+              item.addActionListener(new MenuActionListener());
+              roles.add(item);
+
+            }
+
+              roles.show(takeRole, takeRole.getWidth(), takeRole.getHeight());
+
+
+           }
+
           updateStats();
 
       }
@@ -216,6 +252,7 @@ public class BoardUI extends JFrame {
       }
       public void mouseReleased(MouseEvent e) {
         moveTo.removeAll();
+        roles.removeAll();
       }
       public void mouseEntered(MouseEvent e) {
       }
@@ -241,9 +278,11 @@ public class BoardUI extends JFrame {
   class MenuActionListener implements ActionListener {
   //  @Override
   public void actionPerformed(ActionEvent e) {
+    clicked = true;
     System.out.println(e.getActionCommand() + " pressed");
     Player player = board.activePlayer();
     player.move(player, e.getActionCommand(), board);
+    clicked = false;
     System.out.println("Print");
   }
 }
