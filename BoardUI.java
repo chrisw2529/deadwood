@@ -5,7 +5,7 @@ import java.io.*;
 import java.nio.file.*;
 import java.util.*;
 
-public class BoardUI extends JFrame implements ActionListener {
+public class BoardUI extends JFrame {
 
   private JButton act;
   private JButton rehearse;
@@ -13,6 +13,8 @@ public class BoardUI extends JFrame implements ActionListener {
   private JButton takeRole;
   private JButton rankUp;
   private JButton endTurn;
+
+  JComboBox<String> moveTo = new JComboBox<String>();
 
   JLabel boardlabel;
   JLabel cardlabel;
@@ -51,17 +53,6 @@ public class BoardUI extends JFrame implements ActionListener {
 
   public void initialize() {
 
-    // JPanel toolbar = new JPanel();
-    // add(toolbar, BorderLayout.NORTH);
-    // addButton(toolbar, act, "Act");
-    // addButton(toolbar, rehearse, "Rehearse");
-    // addButton(toolbar, move, "Move");
-    // addButton(toolbar, takeRole, "Take Role");
-    // addButton(toolbar, rankUp, "Rank Up");
-    // addButton(toolbar, endTurn, "End Turn");
-
-    //bPane = getLayeredPane();
-
     boardlabel = new JLabel();
     ImageIcon icon =  new ImageIcon("images/board.jpg");
     boardlabel.setIcon(icon);
@@ -70,21 +61,6 @@ public class BoardUI extends JFrame implements ActionListener {
        // Add the board to the lowest layer
     bPane.add(boardlabel, new Integer(0));
 
-    // cardlabel = new JLabel();
-    // ImageIcon cIcon =  new ImageIcon("images/01.png");
-    // cardlabel.setIcon(cIcon);
-    // cardlabel.setBounds(20,65,cIcon.getIconWidth()+2,cIcon.getIconHeight());
-    // cardlabel.setOpaque(true);
-    //
-    // // Add the card to the lower layer
-    // bPane.add(cardlabel, new Integer(1));
-    //
-    // playerlabel = new JLabel();
-    // ImageIcon pIcon = new ImageIcon("images/r2.png");
-    // playerlabel.setIcon(pIcon);
-    // //playerlabel.setBounds(114,227,pIcon.getIconWidth(),pIcon.getIconHeight());
-    // playerlabel.setBounds(114,227,46,46);
-    // bPane.add(playerlabel,new Integer(3));
 
        // Set the size of the GUI
     setSize(icon.getIconWidth()+200,icon.getIconHeight());
@@ -133,6 +109,11 @@ public class BoardUI extends JFrame implements ActionListener {
     bPane.add(rankUp, new Integer(2));
     bPane.add(endTurn, new Integer(2));
 
+    //moveTo.setEditable(true);
+
+    bPane.add(moveTo);
+  //  moveTo.setSelectedIndex(4);
+
   }
 
   class boardMouseListener implements MouseListener{
@@ -147,13 +128,25 @@ public class BoardUI extends JFrame implements ActionListener {
             player.act(player, board);
 
          }
+
          else if (e.getSource()== rehearse){
             System.out.println("Rehearse is Selected\n");
             player.rehearse(player, board);
          }
+
          else if (e.getSource()== move){
-            System.out.println("Move is Selected\n");
-         }
+
+           ArrayList neighbors = player.getSpace().getNeighbors();
+
+            for (int i = 0; i < player.getSpace().getNeighbors().size(); i++) {
+              moveTo.addItem(neighbors.get(i).toString());
+
+            }
+
+            Object selected = moveTo.getSelectedItem();
+            player.move(player, selected.toString(), board);
+          }
+
       }
       public void mousePressed(MouseEvent e) {
       }
@@ -165,47 +158,47 @@ public class BoardUI extends JFrame implements ActionListener {
       }
    }
 
-  public void actionPerformed (ActionEvent e) {
+  // public void actionPerformed (ActionEvent e) {
+  //
+  //   System.out.println(e.getActionCommand() + " pressed");
+  //
+  //   Player activePlayer = board.activePlayer();
+  //
+  //   if (e.getActionCommand() == "Act"){
+  // //    activePlayer.act();
+  //   }
+  //
+  //   if (e.getActionCommand() == "Rehearse"){
+  //   //  activePlayer.rehearse();
+  //   }
+  //
+  //   if (e.getActionCommand() == "Move"){
+  //     //get the click to where
+  //   //  activePlayer.move();
+  //   }
+  //
+  //   if (e.getActionCommand() == "Take Role"){
+  //     //take roll click cmd
+  //   //  activePlayer.takeRole();
+  //   }
+  //
+  //   if (e.getActionCommand() == "Rank Up"){
+  //     //activePlayer
+  //   }
+  //
+  //   if (e.getActionCommand() == "End Turn"){
+  // //    activePlayer.endTurn();
+  //   }
+  //
+  // }
 
-    System.out.println(e.getActionCommand() + " pressed");
-
-    Player activePlayer = board.activePlayer();
-
-    if (e.getActionCommand() == "Act"){
-  //    activePlayer.act();
-    }
-
-    if (e.getActionCommand() == "Rehearse"){
-    //  activePlayer.rehearse();
-    }
-
-    if (e.getActionCommand() == "Move"){
-      //get the click to where
-    //  activePlayer.move();
-    }
-
-    if (e.getActionCommand() == "Take Role"){
-      //take roll click cmd
-    //  activePlayer.takeRole();
-    }
-
-    if (e.getActionCommand() == "Rank Up"){
-      //activePlayer
-    }
-
-    if (e.getActionCommand() == "End Turn"){
-  //    activePlayer.endTurn();
-    }
-
-  }
-
-  private void addButton(JPanel panel, JButton button, String label) {
-
-    button = new JButton(label);
-    panel.add(button);
-    button.addActionListener(this);
-
-  }
+  // private void addButton(JPanel panel, JButton button, String label) {
+  //
+  //   button = new JButton(label);
+  //   panel.add(button);
+  //   button.addActionListener(this);
+  //
+  // }
 
   public void setCard(Card card, Set set, int i)
   {
@@ -356,7 +349,6 @@ public class BoardUI extends JFrame implements ActionListener {
 
   public void wrapSceneUI(Set set)
   {
-
     bPane.remove(cardsMap.get(set.getName()));
     bPane.revalidate();
     bPane.repaint();
