@@ -228,7 +228,7 @@ public class BoardUI extends JFrame {
             //player.move(player, selected.toString(), board);
           }
           else if (e.getSource()== rankUp){
-            if(board.activePlayer().getSpace().getName().equals("Ranch")){
+            if(board.activePlayer().getSpace().getName().equals("office")){
                 for(int i = 2; i <= 6; i++) {
                   item = new JMenuItem("use Fame to rank up to rank " + i);
                   item.addActionListener(new MenuActionListener());
@@ -240,7 +240,7 @@ public class BoardUI extends JFrame {
                  rankTo.add(item);
               }
               rankTo.show(rankUp, rankUp.getWidth()/2, rankUp.getHeight()/2);
-
+              rankUpOpen = true;
             }
             else{
               System.out.println("must be on casting Office");
@@ -334,7 +334,20 @@ public class BoardUI extends JFrame {
       //clicked = false;
       System.out.println("Print");
     }
-
+    if(rankUpOpen == true){
+      System.out.println("ranking up");
+      String[] button = e.getActionCommand().split(" ");
+      if(button[1].equals("Fame")){
+        System.out.println("ru using fame to rank " + button[7]);
+        Player player = board.activePlayer();
+        player.rankUpUsingFame(player, Integer.parseInt(button[7]));
+      }
+      else if(button[1].equals("Cash")){
+        System.out.println("ru using cash to rank " + button[7]);
+        Player player = board.activePlayer();
+        player.rankUpUsingCash(player, Integer.parseInt(button[7]));
+      }
+    }
     if(rolesOpen == true){
       player.takeRole(player,e.getActionCommand());
       System.out.println("You have chosen..." + e.getActionCommand());
