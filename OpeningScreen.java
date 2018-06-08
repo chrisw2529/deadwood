@@ -65,7 +65,6 @@ public class OpeningScreen extends JFrame implements ActionListener {
   * @param: ActionEvent
   * Initializes the players that the user chooses
   */
-
   public void actionPerformed (ActionEvent e) {
 
     System.out.println(e.getActionCommand() + " pressed");

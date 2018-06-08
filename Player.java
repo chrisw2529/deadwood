@@ -43,7 +43,6 @@ public class Player{
     * move Method
     * @param: Player object, accesses the player in order to move to player who's turn it is
     * @param: String destination, allows us to iterate through an ArrayList to find the String that matches the SpaceMap, which holds all of our spaces
-    * @param: Board object, used to access the SpaceMap
     * Allows our players to move to a destination, and also calls take role
     */
     public void move(Player player, String destination)
@@ -98,8 +97,7 @@ public class Player{
     /*
     * takeRole Method
     * @param: Player object, accesses the player in order to give the player a role that they have chosen
-    * @param: Board object, to access the Sets in order to access the correct cards corresponding to each Set
-    * @param: Boolean, this allows our player to take a role if they decide that would like to take one after not taking one the first time around
+    * @param: String, tells the method which role is being taken
     * Takes a role and calls roleQualificationCheck in order to determine if the player is allowed to take the role
     */
     public void takeRole(Player player, String whichRole){

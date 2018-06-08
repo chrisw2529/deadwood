@@ -14,44 +14,40 @@ public class BoardUI extends JFrame {
   private JButton takeRole;
   private JButton rankUp;
   private JButton endTurn;
+  private JLabel boardlabel;
+  private JLabel cardlabel;
+  private JLabel playerlabel;
+  private JLabel statPlayerLabel;
+  private JLabel mLabel;
+  private JLabel day;
+  private JLabel activePlayer1;
+  private JLabel activePlayer2;
+  private JLabel fame;
+  private JLabel cash;
+  private JLabel space;
+  private JLabel role;
+  private JLabel rehearsalToken;
 
-  //JComboBox<String> moveTo;
+  private ImageIcon icon;
 
-  JLabel boardlabel;
-  JLabel cardlabel;
-  JLabel playerlabel;
-  JLabel statPlayerLabel;
-  JLabel mLabel;
-  JLabel activePlayer1;
-  JLabel activePlayer2;
-  JLabel fame;
-  JLabel cash;
-  JLabel space;
-  JLabel role;
-  JLabel rehearsalToken;
-
-
-  ImageIcon icon;
-
-  HashMap<Integer,JLabel> playerLabels = new HashMap<Integer,JLabel>();
-  HashMap<String,JLabel> sMarkersMap = new HashMap<String,JLabel>();
-  HashMap<String,JLabel> cardBacks = new HashMap<String,JLabel>();
-  HashMap<String,JLabel> cardsMap = new HashMap<String,JLabel>();
-  JLayeredPane bPane = getLayeredPane();
+  private HashMap<Integer,JLabel> playerLabels = new HashMap<Integer,JLabel>();
+  private HashMap<String,JLabel> sMarkersMap = new HashMap<String,JLabel>();
+  private HashMap<String,JLabel> cardBacks = new HashMap<String,JLabel>();
+  private HashMap<String,JLabel> cardsMap = new HashMap<String,JLabel>();
+  private JLayeredPane bPane = getLayeredPane();
 
   private JScrollPane scroller;
   private JTextArea text;
-  Board board = null;
+  private Board board = null;
 
-  JPopupMenu moveTo;
-  JPopupMenu rankTo;
-  JPopupMenu roles;
-  Boolean moveToOpen = false;
-  Boolean rankUpOpen = false;
-  Boolean rolesOpen = false;
-  JMenuItem item;
-  ActionListener menuListener;
-  private boolean clicked = false;
+  private JPopupMenu moveTo;
+  private JPopupMenu rankTo;
+  private JPopupMenu roles;
+  private Boolean moveToOpen = false;
+  private Boolean rankUpOpen = false;
+  private Boolean rolesOpen = false;
+  private JMenuItem item;
+  private ActionListener menuListener;
 
 
   private BoardUI() {
@@ -81,53 +77,49 @@ public class BoardUI extends JFrame {
     boardlabel.setIcon(icon);
     boardlabel.setBounds(0,0,icon.getIconWidth(),icon.getIconHeight());
 
-       // Add the board to the lowest layer
+    // Add the board to the lowest layer
     bPane.add(boardlabel, new Integer(0));
 
-
-       // Set the size of the GUI
+    // Set the size of the GUI
     setSize(icon.getIconWidth()+400,icon.getIconHeight());
-    //add(new JScrollPane(bPane));
-  //  JScrollPane scroller = new JScrollPane(bPane, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-    //moveTo = new JComboBox<String>();
 
     // Create the Menu for action buttons
     mLabel = new JLabel("MENU");
-    mLabel.setBounds(icon.getIconWidth()+40,0,130,30);
+    mLabel.setBounds(icon.getIconWidth()+40,0,150,30);
     bPane.add(mLabel,new Integer(2));
 
     // Create Action buttons
     act = new JButton("ACT");
     act.setBackground(Color.white);
-    act.setBounds(icon.getIconWidth()+10, 30,130, 30);
+    act.setBounds(icon.getIconWidth()+10, 30,150, 30);
     act.addMouseListener(new boardMouseListener());
 
     rehearse = new JButton("REHEARSE");
     rehearse.setBackground(Color.white);
-    rehearse.setBounds(icon.getIconWidth()+10,60,130, 30);
+    rehearse.setBounds(icon.getIconWidth()+10,60,150, 30);
     rehearse.addMouseListener(new boardMouseListener());
 
     move = new JButton("MOVE");
     move.setBackground(Color.white);
-    move.setBounds(icon.getIconWidth()+10,90,130, 30);
+    move.setBounds(icon.getIconWidth()+10,90,150, 30);
     move.addMouseListener(new boardMouseListener());
 
     takeRole = new JButton("TAKE ROLE");
     takeRole.setBackground(Color.white);
-    takeRole.setBounds(icon.getIconWidth()+10,120,130, 30);
+    takeRole.setBounds(icon.getIconWidth()+10,120,150, 30);
     takeRole.addMouseListener(new boardMouseListener());
 
     rankUp = new JButton("RANK UP");
     rankUp.setBackground(Color.white);
-    rankUp.setBounds(icon.getIconWidth()+10,150,130, 30);
+    rankUp.setBounds(icon.getIconWidth()+10,150,150, 30);
     rankUp.addMouseListener(new boardMouseListener());
 
     endTurn = new JButton("END TURN");
     endTurn.setBackground(Color.white);
-    endTurn.setBounds(icon.getIconWidth()+10,180,130, 30);
+    endTurn.setBounds(icon.getIconWidth()+10,180,150, 30);
     endTurn.addMouseListener(new boardMouseListener());
 
-// Place the action buttons in the top layer
+    // Place the action buttons in the top layer
     bPane.add(act, new Integer(2));
     bPane.add(rehearse, new Integer(2));
     bPane.add(move, new Integer(2));
@@ -135,32 +127,32 @@ public class BoardUI extends JFrame {
     bPane.add(rankUp, new Integer(2));
     bPane.add(endTurn, new Integer(2));
 
-    //bPane.add(moveTo, new Integer(3));
-  //  moveTo.setVisible(false);
+    //pop up menus for action buttons
+    moveTo = new JPopupMenu();
+    rankTo = new JPopupMenu();
+    roles = new JPopupMenu();
 
-   moveTo = new JPopupMenu();
-   rankTo = new JPopupMenu();
-   roles = new JPopupMenu();
-   //menuListener = new ActionListener();
+    //Console
+    text = new JTextArea("Game information\n");
+    text.setEditable(false);
+    scroller = new JScrollPane(text);
+    scroller.setBounds(icon.getIconWidth()+10,550,350,300);
+    bPane.add(scroller, new Integer(2));
 
+    //Adds stats to board
+    statsInit();
 
-
-
-
-   text = new JTextArea("Game information\n");
-   text.setEditable(false);
-   scroller = new JScrollPane(text);
-
-   scroller.setBounds(icon.getIconWidth()+10,550,350,300);
-   bPane.add(scroller, new Integer(2));
-
-
-   statsInit();
-   //JScrollPane scrPane = new JScrollPane(bPane);
   }
 
+
+  /*
+  * statsInit Method
+  *
+  *
+  */
   public void statsInit(){
 
+    day = new JLabel("Day: " + 1);
     activePlayer1 = new JLabel("Active Player: ");
     activePlayer2 = new JLabel("Player " + board.activePlayer().getID());
     fame = new JLabel("Fame: " + 0);
@@ -170,17 +162,17 @@ public class BoardUI extends JFrame {
     rehearsalToken = new JLabel("Number of rehearsal Tokens: 0");
 
 
+    day.setBounds(icon.getIconWidth()+10,400,130,20);
+    activePlayer1.setBounds(icon.getIconWidth()+10,410,130,20);
+    activePlayer2.setBounds(icon.getIconWidth()+10,420,130,20);
+    fame.setBounds(icon.getIconWidth()+10,480,130,20);
+    cash.setBounds(icon.getIconWidth()+10,490,130,20);
+    space.setBounds(icon.getIconWidth()+10,500,230,20);
+    role.setBounds(icon.getIconWidth()+10,510,230,20);
+    rehearsalToken.setBounds(icon.getIconWidth()+10,520,230,20);
 
-    activePlayer1.setBounds(icon.getIconWidth()+10,400,130,20);
-    activePlayer2.setBounds(icon.getIconWidth()+10,410,130,20);
-    fame.setBounds(icon.getIconWidth()+10,470,130,20);
-    cash.setBounds(icon.getIconWidth()+10,480,130,20);
-    space.setBounds(icon.getIconWidth()+10,490,230,20);
-    role.setBounds(icon.getIconWidth()+10,500,230,20);
-    rehearsalToken.setBounds(icon.getIconWidth()+10,510,230,20);
 
-
-
+    bPane.add(day, new Integer(6));
     bPane.add(activePlayer1, new Integer(6));
     bPane.add(activePlayer2, new Integer(6));
     bPane.add(fame, new Integer(6));
@@ -189,15 +181,14 @@ public class BoardUI extends JFrame {
     bPane.add(role, new Integer(6));
     bPane.add(rehearsalToken, new Integer(6));
 
-
-
-
     replaceDie(false);
-
-
 
   }
 
+  /*
+  * updateConsole Method
+  * @param: String, updates the console with a String
+  */
   public void updateConsole(String update)
   {
     text.append(update + "\n");
@@ -205,7 +196,11 @@ public class BoardUI extends JFrame {
   }
 
 
-
+  /*
+  * replaceDie Method
+  * @param: Boolean
+  * Replaces the dice to indicate which players turn it is
+  */
   public void replaceDie(boolean notInit){
 
     Player cp = board.activePlayer();
@@ -234,26 +229,32 @@ public class BoardUI extends JFrame {
 
     playerLabels.put(10, statPlayerLabel);
     statPlayerLabel.setIcon(cIcon);
-    statPlayerLabel.setBounds(icon.getIconWidth()+10, 430,cIcon.getIconWidth()+2,cIcon.getIconHeight());
+    statPlayerLabel.setBounds(icon.getIconWidth()+10, 440,cIcon.getIconWidth()+2,cIcon.getIconHeight());
     statPlayerLabel.setOpaque(true);
-    System.out.println("die replaced");
+    //System.out.println("die replaced");
     bPane.add(statPlayerLabel, new Integer(7));
     bPane.repaint();
   }
+
+  /*
+  * updateStats Method
+  * Updates all stats, this method is called after any MouseEvent or ActionEvent to make sure that
+  * our display is updated.
+  */
   public void updateStats(){
 
-
+    day.setText("Day: " + board.getDay());
     activePlayer2.setText("Player " + board.activePlayer().getID());
     fame.setText("Fame: " + board.activePlayer().getFame());
     cash.setText("Cash: " + board.activePlayer().getCash());
     space.setText("Current Space: " + board.activePlayer().getSpace().getName());
     if(board.activePlayer().getRole() == null){
-      role.setText("Current Role: Not on a role ");
+      role.setText("Current Role: Not on a role");
     }
     else{
-      role.setText("current Role " + board.activePlayer().getRole().getName());
+      role.setText("Current Role: " + board.activePlayer().getRole().getName());
     }
-    rehearsalToken.setText("Number of rehearsal Tokens: " + board.activePlayer().getRehearsal());
+    rehearsalToken.setText("Number of Rehearsal Tokens: " + board.activePlayer().getRehearsal());
 
 
     bPane.repaint();
@@ -267,7 +268,6 @@ public class BoardUI extends JFrame {
 
         Player player = board.activePlayer();
         moveTo.removeAll();
-
 
          if (e.getSource()== act){
 
@@ -321,6 +321,7 @@ public class BoardUI extends JFrame {
             //Object selected = moveTo.getSelectedItem();
             //player.move(player, selected.toString(), board);
           }
+
           else if (e.getSource()== rankUp){
             if(board.activePlayer().getSpace().getName().equals("office")){
                 for(int i = 2; i <= 6; i++) {
@@ -350,8 +351,6 @@ public class BoardUI extends JFrame {
               if(player.currentRole != null) {
               //  System.out.println("Already on a role!");
                 updateConsole("Already on a role!");
-
-
               }
 
               else if(player.currentSpace.getName() == "office" || player.currentSpace.getName() == "trailer") {
@@ -368,7 +367,6 @@ public class BoardUI extends JFrame {
               }
 
               else {
-
 
                 ArrayList<Role> offCard = player.spaceToSet(player).getRoles();
                 ArrayList<Role> onCard = player.spaceToSet(player).getCard().getRoles();
@@ -399,8 +397,7 @@ public class BoardUI extends JFrame {
 
            }
 
-           else if (e.getSource()== endTurn){
-
+           else if (e.getSource()== endTurn) {
              player.endTurn(player);
            }
 
@@ -409,6 +406,11 @@ public class BoardUI extends JFrame {
       }
       public void mousePressed(MouseEvent e) {
       }
+
+      /*
+      * @param: MouseEvent
+      * Resets all lists that popup on menus
+      */
       public void mouseReleased(MouseEvent e) {
         moveTo.removeAll();
         rankTo.removeAll();
@@ -417,46 +419,53 @@ public class BoardUI extends JFrame {
         rankUpOpen = false;
         rolesOpen = false;
       }
+
       public void mouseEntered(MouseEvent e) {
       }
+
       public void mouseExited(MouseEvent e) {
       }
    }
 
 
-  class MenuActionListener implements ActionListener {
+class MenuActionListener implements ActionListener {
   //  @Override
+
+  /*
+  * @param: ActionEvent
+  * This method is specifically used for the lists that appear when you click a menu with multiple
+  * options, and inputs the chosen input
+  */
   public void actionPerformed(ActionEvent e) {
 
 
     //clicked = true;
-    System.out.println(e.getActionCommand() + " pressed");
-          Player player = board.activePlayer();
+    //System.out.println(e.getActionCommand() + " pressed");
+    Player player = board.activePlayer();
 
-    if(moveToOpen == true){
-    //  System.out.println("Should be true;");
+    if(moveToOpen == true) {
       player.move(player, e.getActionCommand());
       player.moved = true;
-      //clicked = false;
-      //System.out.println("Print");
     }
-    if(rankUpOpen == true){
-      //System.out.println("ranking up");
+
+    if(rankUpOpen == true) {
       String[] button = e.getActionCommand().split(" ");
       Player cp = board.activePlayer();
-      if(button[1].equals("Fame")){
-        //System.out.println("ru using fame to rank " + button[7]);
+
+      if(button[1].equals("Fame")) {
         player.rankUpUsingFame(cp, Integer.parseInt(button[7]));
       }
-      else if(button[1].equals("Cash")){
-        //System.out.println("ru using cash to rank " + button[7]);
+
+      else if(button[1].equals("Cash")) {
         player.rankUpUsingCash(cp, Integer.parseInt(button[7]));
       }
+
     }
-    if(rolesOpen == true){
+    if(rolesOpen == true) {
       player.takeRole(player,e.getActionCommand());
-      System.out.println("You have chosen..." + e.getActionCommand());
+     // System.out.println("You have chosen..." + e.getActionCommand());
     }
+
     updateStats();
 
   }
@@ -464,24 +473,12 @@ public class BoardUI extends JFrame {
 }
 
 
-//   ActionListener menuActionListener = new ActionListener(){
-//
-//     @Override
-//     public void actionPerformed(ActionEvent e) {
-//         JLabel.setText(e.getActionCommand());
-//     }
-//
-// };
-
-  // private void addButton(JPanel panel, JButton button, String label) {
-  //
-  //   button = new JButton(label);
-  //   panel.add(button);
-  //   button.addActionListener(this);
-  //
-  // }
-
-  public void setCard(Card card, Set set, int i)
+  /*
+  * setCard Method
+  * @param: Set object, needs to access the set for mapping into HashMap as well as x y coordinates
+  * Adds the cards to the given set
+  */
+  public void setCard(Card card, Set set, int i) //maybe doesn't need card object
   {
     // System.out.println(set.getName());
     // System.out.println(set.getX() + " " + set.getY());
@@ -505,7 +502,12 @@ public class BoardUI extends JFrame {
     bPane.add(cardlabel, new Integer(1));
   }
 
-  public void setCardBacks(Card card, Set set)
+  /*
+  * setCardBacks Method
+  * @param: Set object, accesses the x y to place the card
+  * Adds card back to all of the card x y
+  */
+  public void setCardBacks(Card card, Set set) //maybe doesn't need card
   {
 
     cardlabel = new JLabel();
@@ -518,6 +520,11 @@ public class BoardUI extends JFrame {
     bPane.add(cardlabel, new Integer(2));
   }
 
+  /*
+  * setPlayer Method
+  * @param:
+  *
+  */
   public void setPlayer(int id, int level){
     String img = "images/dice/";
     Player cp = board.getPlayers().get(id - 1);
@@ -560,7 +567,7 @@ public class BoardUI extends JFrame {
         bPane.remove(playerLabels.get(cp.getID()));
 
         playerLabels.remove(cp.getID());
-        System.out.println("repainting");
+        //System.out.println("repainting");
         bPane.repaint();
 
       }
@@ -569,8 +576,8 @@ public class BoardUI extends JFrame {
       ImageIcon cIcon =  new ImageIcon(img);
 
       playerLabels.put(cp.getID(), playerlabel);
-      System.out.println("img: " + img);
-      System.out.println("player x: "+ cp.getX() + " y: " + cp.getY());
+      //System.out.println("img: " + img);
+      //System.out.println("player x: "+ cp.getX() + " y: " + cp.getY());
       cp.setImageIcon(cIcon);
       cp.setJLabel(playerlabel);
       playerlabel.setIcon(cIcon);
@@ -585,6 +592,14 @@ public class BoardUI extends JFrame {
 
 
   }
+
+  /*
+  * movePlayerImage Method
+  * @param: Player object, changes the player x y attribute
+  * @param: Int, x coord
+  * @param: Int, y coord
+  * Changes position of die for the given player
+  */
   public void movePlayerImage(Player player, int x , int y){
     player.setX(x);
     player.setY(y);
@@ -592,7 +607,12 @@ public class BoardUI extends JFrame {
 
   }
 
-  public void addShotMarkers(Set set, ShotMarker sm)
+  /*
+  * addShotMarkers Method
+  * @param: ShotMarker object, each ShotMarker has a unique ID, since they are accessed by x y coordinates
+  * Adds shot markers to the indicated position regarding the set
+  */
+  public void addShotMarkers(Set set, ShotMarker sm) //maybe doesn't need set
   {
 
     JLabel shotMs = new JLabel();
@@ -608,6 +628,13 @@ public class BoardUI extends JFrame {
 
   }
 
+  /*
+  * removeShotMarkers Method
+  * @param: Set object, requires the set that the shot marker needs to be removed on
+  * @param: ShotMarker object, each ShotMarker has a unique ID, since they are accessed by x y coordinates
+  * Doesn't actually remove the shotmarker, just makes it invisible. Does this by accessing a HashMap that stores
+  * all of the shot markers and making the one that matches the unique ID invisible
+  */
   public void removeShotMarkers(Set set, ShotMarker shot)
   {
 
@@ -622,13 +649,23 @@ public class BoardUI extends JFrame {
 
   }
 
+  /*
+  * removeBack Method
+  * @param: Set object, removes back on current Set object
+  * Accesses the current card back by HashMap by using the set name as a key
+  */
   public void removeBack(Set set)
   {
 
-    System.out.println(set.getName());
+    //System.out.println(set.getName());
     cardBacks.get(set.getName()).setVisible(false);
   }
 
+  /*
+  * wrapSceneUI Method
+  * @param: Set object, wraps the current set
+  * Removes the card on the set to indicate that it has been wrapped
+  */
   public void wrapSceneUI(Set set)
   {
     bPane.remove(cardsMap.get(set.getName()));
@@ -636,6 +673,13 @@ public class BoardUI extends JFrame {
     bPane.repaint();
   }
 
+
+  /*
+  * resetBoard Method
+  * Iterates through all of the HashMaps containing the Jlabels and either resets their visibility, or in
+  * the Card case, it removes the remaining cards, since we reinitialize all of the cards at the beginning
+  * of a new day
+  */
   public void resetBoard()
   {
     Iterator iterator = sMarkersMap.keySet().iterator();
@@ -661,6 +705,11 @@ public class BoardUI extends JFrame {
       bPane.repaint();
     }
   }
+
+  /*
+  * disposeBoard Method
+  * Exits the board game when the game ends
+  */
   public void disposeBoard(){
     dispose();
 

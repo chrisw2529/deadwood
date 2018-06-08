@@ -1,3 +1,7 @@
+//$cat Deadwood.java
+    //package start;
+
+
 import java.util.Random;
 
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -42,7 +46,7 @@ public class Deadwood{
     board.setUpPlayers();
     System.out.println("You have chosen to play with " + howManyPlayers + " players.");
     System.out.println();
-    
+
     String c = "";
 
 

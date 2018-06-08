@@ -203,7 +203,6 @@ public class Board {
   */
   public void endDay(){
     //reset all shot markers to there inital value
-  //  System.out.println("ending day");
     boardUI.updateConsole("Ending day");
 
     day++;
@@ -218,9 +217,6 @@ public class Board {
         int offset = player.getX() -50 + (40 * player.ID);
         player.label.setBounds(offset, player.getY() -10, 40, 40);
       }
-
-
-
 
       //reset sets
       for (int i = 0; i < sets.size();i++ ) {
