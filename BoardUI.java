@@ -143,13 +143,19 @@ public class BoardUI extends JFrame {
 
 
 
+
+
    text = new JTextArea("Game information");
-   text.setBounds(icon.getIconWidth()+10,730,200,150);
+
+   text.setBounds(icon.getIconWidth()+10,550,350,300);
    bPane.add(text, new Integer(2));
+
+   statsInit();
 
   }
 
   public void statsInit(){
+    System.out.println("Stats init");
     activePlayer1 = new JLabel("Active Player: ");
     activePlayer2 = new JLabel("Player " + board.activePlayer().getID());
     fame = new JLabel("Fame: " + 0);

@@ -42,6 +42,7 @@ public class Deadwood{
     board.setUpPlayers();
     System.out.println("You have chosen to play with " + howManyPlayers + " players.");
     System.out.println();
+    
     String c = "";
 
 
