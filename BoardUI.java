@@ -146,7 +146,7 @@ public class BoardUI extends JFrame {
 
 
 
-<<<<<<< HEAD
+
    text = new JTextArea("Game information\n");
    text.setEditable(false);
    scroller = new JScrollPane(text);
@@ -158,15 +158,10 @@ public class BoardUI extends JFrame {
    //
   //  text.append("My name is\n" );
   //  text.append("Tony");
-=======
-   text = new JTextArea("Game information");
 
-   text.setBounds(icon.getIconWidth()+10,550,350,300);
-   bPane.add(text, new Integer(2));
->>>>>>> 8ba68c0c23234db6a06f1efd2cbb2ee92c74e919
 
    statsInit();
-
+   //JScrollPane scrPane = new JScrollPane(bPane);
   }
 
   public void statsInit(){
@@ -258,6 +253,10 @@ public class BoardUI extends JFrame {
 
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> linux
     activePlayer2.setText("Player " + board.activePlayer().getID());
     fame.setText("Fame: " + board.activePlayer().getFame());
     cash.setText("Cash: " + board.activePlayer().getCash());

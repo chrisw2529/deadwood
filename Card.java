@@ -91,7 +91,8 @@ public class Card
         if(set.getRoles().get(i).getPlayer() != null){
           int curCash = set.getRoles().get(i).getPlayer().getCash();
           set.getRoles().get(i).getPlayer().setCash(curCash + budget);
-          System.out.println("distributing off card bonus player " + set.getRoles().get(i).getPlayer().getID()+ "'s cash incresed by " + budget+ " dollars");
+          //System.out.println("distributing off card bonus player " + set.getRoles().get(i).getPlayer().getID()+ "'s cash incresed by " + budget+ " dollars");
+          boardUI.updateConsole("Distributing off card bonus player " + set.getRoles().get(i).getPlayer().getID()+ "'s cash increased by " + budget+ " dollars");
 
         }
       }
@@ -105,7 +106,9 @@ public class Card
         }
       }
       if(someOneOnCard){
-        System.out.println("distributing on card bonuses");
+        //System.out.println("distributing on card bonuses");
+        boardUI.updateConsole("Distributing on card bonuses");
+
         for(int i = 0; i< payout.length; i++){
           payout[i] = Board.roleDie();
         }
@@ -117,7 +120,9 @@ public class Card
           payout[i] = payout[payout.length - i - 1];
           payout[payout.length - i - 1] = temp;
         }
-        System.out.printf("The die rolls where : %s\n", Arrays.toString(payout));
+        //System.out.printf("The die rolls where : %s\n", Arrays.toString(payout));
+        boardUI.updateConsole("The die rolls where : %s\n" + Arrays.toString(payout));
+
         int count = 0;
         //payout on card roles
         while(count < payout.length){
@@ -125,7 +130,9 @@ public class Card
             Player payTo = roles.get(j).getPlayer();
             if(payTo != null){
               payTo.setCash(payTo.getCash() + payout[count]);
-              System.out.println("player " + (j+1) + "'s cash increased by " + payout[count]);
+            //  System.out.println("player " + (j+1) + "'s cash increased by " + payout[count]);
+              boardUI.updateConsole("Player " + (j+1) + "'s cash increased by " + payout[count]);
+
 
             }
             count++;
@@ -136,7 +143,9 @@ public class Card
         }
       }
       else{
-        System.out.println("no one was on card no on-card bonuses");
+        // System.out.println("No one was on card, no on-card bonuses");
+        boardUI.updateConsole("No one was on card, no on-card bonuses");
+
       }
 
       //reset roles for off scene
@@ -173,7 +182,7 @@ public class Card
         board.endDay();
       }
 
-      System.out.println("scene wrapped");
+      boardUI.updateConsole("Scene wrapped");
     }
 
 }
