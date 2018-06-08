@@ -137,6 +137,11 @@ public class BoardUI extends JFrame {
    //menuListener = new ActionListener();
 
 
+
+   text = new JTextArea("Game information");
+   text.setBounds(icon.getIconWidth()+10,430,200,150);
+   bPane.add(text, new Integer(2));
+
   }
 
   public void statsInit(){
