@@ -242,15 +242,6 @@ public class BoardUI extends JFrame {
   public void updateStats(){
 
 
-
-
-
-
-
-<<<<<<< HEAD
-=======
-
->>>>>>> linux
     activePlayer2.setText("Player " + board.activePlayer().getID());
     fame.setText("Fame: " + board.activePlayer().getFame());
     cash.setText("Cash: " + board.activePlayer().getCash());
