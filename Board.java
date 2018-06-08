@@ -113,10 +113,10 @@ public class Board {
 
     for (int i = 0; i < sets.size(); i++){
       sets.get(i).setCard(cards.get(i));
-      boardUI.setCard(cards.get(i), sets.get(i), cards.get(i).getImg());
+      boardUI.setCard(sets.get(i), cards.get(i).getImg());
 
       if(this.day == 1)
-        boardUI.setCardBacks(cards.get(i), sets.get(i));
+        boardUI.setCardBacks(sets.get(i));
 
       cards.get(i).setSet(sets.get(i));
 
@@ -126,7 +126,7 @@ public class Board {
 
       for (int i = 0; i < sets.size(); i++){
         for (int j = 0; j < sets.get(i).getShotMarkers().size(); j++) {
-          boardUI.addShotMarkers(sets.get(i), sets.get(i).getShotMarkers().get(j));
+          boardUI.addShotMarkers(sets.get(i).getShotMarkers().get(j));
         }
 
       }

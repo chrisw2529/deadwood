@@ -18,7 +18,6 @@ public class Set extends Space
     * @param: String name, indicates what the set name will be
     * @param: int shotMarker, each set gets their own shotMarker to indicate how many scenes there are
     */
-
     public Set(String name, int x, int y, int h, int w)
     {
         super(name);
@@ -74,7 +73,6 @@ public class Set extends Space
     {
       this.isWrapped = bool;
     }
-
 
     public void setCard(Card card)
     {

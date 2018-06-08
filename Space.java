@@ -7,8 +7,6 @@ public class Space
     ArrayList<String> neighbors = new ArrayList<String>();
     int xPlayer;
     int yPlayer;
-    //ArrayList<Player> players = new ArrayList<Player>();
-
 
     public Space(String name)
     {
@@ -17,19 +15,19 @@ public class Space
 
     public void addNeighbor(String name){
       neighbors.add(name);
-      // System.out.println("Neighbor added.");
     }
 
     public String getName(){
         return this.name;
     }
     public ArrayList<String> getNeighbors(){
-
         return this.neighbors;
     }
+
     public int getXPlayer(){
       return this.xPlayer;
     }
+    
     public int getYPlayer(){
       return this.yPlayer;
     }
