@@ -22,7 +22,7 @@ public class Board {
 
 
   int day = 1;
-  int remainingScenes = 1;
+  int remainingScenes = 10;
   int playerNum = 0;
   String endLine = "";
   ArrayList<Player> players = new ArrayList<Player>();
@@ -237,7 +237,7 @@ public class Board {
         players.get(i).setRole(null);
         players.get(i).setSpace(trailer);
       }
-      remainingScenes = 2;
+      remainingScenes = 10;
       boardUI.resetBoard();
       startDay();
     }
