@@ -125,7 +125,7 @@ public class Card
             Player payTo = roles.get(j).getPlayer();
             if(payTo != null){
               payTo.setCash(payTo.getCash() + payout[count]);
-              boardUI.updateConsole("Player " + (j+1) + "'s cash increased by " + payout[count]);
+              boardUI.updateConsole("Player " + (payTo.getID()) + "'s cash increased by " + payout[count]);
             }
             count++;
             if(count >= payout.length){
