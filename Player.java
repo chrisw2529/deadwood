@@ -8,7 +8,7 @@ import javax.swing.JLabel;
 
 public class Player{
 
-    int fame = 100;
+    int fame = 0;
     int cash = 0;
     int rank = 1;
     int rehearsalTok = 0;
@@ -367,8 +367,14 @@ public class Player{
 
       }
       int dieRoll = Board.roleDie();
-      boardUI.updateConsole("You rolled a " + dieRoll);
-      dieRoll = Board.roleDie() + player.rehearsalTok;
+      if(player.rehearsalTok == 0){
+        boardUI.updateConsole("You rolled a " + dieRoll);
+      }
+      else{
+        boardUI.updateConsole("You rolled a " + dieRoll + " plus " + player.rehearsalTok +" for having " + player.rehearsalTok +" rehearsal Token(s) for a total of " + (dieRoll + player.rehearsalTok));
+
+      }
+      dieRoll += player.rehearsalTok;
       //System.out.println(dieRoll);
       //boardUI.updateConsole("You rolled a " + dieRoll);
 

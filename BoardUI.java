@@ -87,7 +87,8 @@ public class BoardUI extends JFrame {
 
        // Set the size of the GUI
     setSize(icon.getIconWidth()+400,icon.getIconHeight());
-
+    //add(new JScrollPane(bPane));
+  //  JScrollPane scroller = new JScrollPane(bPane, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
     //moveTo = new JComboBox<String>();
 
     // Create the Menu for action buttons

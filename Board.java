@@ -22,7 +22,7 @@ public class Board {
 
 
   int day = 1;
-  int remainingScenes = 2;
+  int remainingScenes = 10;
   int playerNum = 0;
   ArrayList<Player> players = new ArrayList<Player>();
   ArrayList<Set> sets = new ArrayList<Set>();
@@ -176,7 +176,7 @@ public class Board {
     for(int i = 1; i < numPlayers + 1; i++){
       Player player = new Player(i);
       players.add(player);
-      player.setSpace(castingOffice);
+      player.setSpace(trailer);
       if(i == 1){
         player.setTurn(true);
       }
@@ -243,7 +243,7 @@ public class Board {
         players.get(i).setRole(null);
         players.get(i).setSpace(trailer);
       }
-      remainingScenes = 2;
+      remainingScenes = 10;
       boardUI.resetBoard();
       startDay();
     }
