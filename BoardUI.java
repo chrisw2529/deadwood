@@ -273,7 +273,7 @@ public class BoardUI extends JFrame {
            }
 
            else
-            player.act(player, board);
+            player.act(player);
 
          }
 
@@ -286,7 +286,7 @@ public class BoardUI extends JFrame {
            }
 
           else
-            player.rehearse(player, board);
+            player.rehearse(player);
          }
 
          else if (e.getSource()== move){
@@ -454,7 +454,7 @@ class MenuActionListener implements ActionListener {
   * @param: Set object, needs to access the set for mapping into HashMap as well as x y coordinates
   * Adds the cards to the given set
   */
-  public void setCard(Card card, Set set, int i) //maybe doesn't need card object
+  public void setCard(Set set, int i)
   {
     String img = "images/cards/";
     if(i < 10)
@@ -478,7 +478,7 @@ class MenuActionListener implements ActionListener {
   * @param: Set object, accesses the x y to place the card
   * Adds card back to all of the card x y
   */
-  public void setCardBacks(Card card, Set set) //maybe doesn't need card
+  public void setCardBacks(Set set)
   {
 
     cardlabel = new JLabel();
@@ -581,7 +581,7 @@ class MenuActionListener implements ActionListener {
   * @param: ShotMarker object, each ShotMarker has a unique ID, since they are accessed by x y coordinates
   * Adds shot markers to the indicated position regarding the set
   */
-  public void addShotMarkers(Set set, ShotMarker sm) //maybe doesn't need set
+  public void addShotMarkers(ShotMarker sm)
   {
 
     JLabel shotMs = new JLabel();

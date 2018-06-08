@@ -158,7 +158,7 @@ public class Player{
     * @param: Board object, used to access the SpaceMap
     * Allows our players to act if they are currently on a role
     */
-    public void act(Player player, Board board)
+    public void act(Player player)
     {
       boardUI = boardUI.getInstance();
       if(player.currentRole == null) {
@@ -212,7 +212,7 @@ public class Player{
     * @param: Board object, used to access the SpaceMap
     * Allows our players to rehearse if they are currently working on role
     */
-    public void rehearse(Player player, Board board)
+    public void rehearse(Player player)
     {
       if(player.currentRole == null) {
         boardUI.updateConsole("Not on a scene!");

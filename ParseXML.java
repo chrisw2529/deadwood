@@ -42,15 +42,10 @@ public class ParseXML{
         NodeList sceneList = root.getElementsByTagName("set");
         Set newSet;
 
-        // System.out.println(sceneList.getLength());
-
         for (int i=0; i<sceneList.getLength();i++){
 
-            // System.out.println("Printing information for sceneList "+(i+1));
             Node scene = sceneList.item(i);
             String sceneName = scene.getAttributes().getNamedItem("name").getNodeValue();
-            // System.out.println("set name = "+sceneName);
-
 
             Element neighbors = (Element) scene;
             NodeList sceneArea = neighbors.getElementsByTagName("area");
@@ -63,14 +58,13 @@ public class ParseXML{
             int h = -1;
             int w = -1;
             Node asub = sceneArea.item(0);
+
             x = Integer.parseInt(asub.getAttributes().getNamedItem("x").getNodeValue());
             y = Integer.parseInt(asub.getAttributes().getNamedItem("y").getNodeValue());
             h = Integer.parseInt(asub.getAttributes().getNamedItem("h").getNodeValue());
             w = Integer.parseInt(asub.getAttributes().getNamedItem("w").getNodeValue());
 
             newSet = new Set(sceneName, x, y, h, w);
-
-            // System.out.println("Area: " + x + ", " + y + ", " + h + ", " + w);
 
             for (int j=0; j< takeList.getLength(); j++){
 
@@ -99,15 +93,10 @@ public class ParseXML{
 
                 ShotMarker sm = new ShotMarker(x, y);
                 newSet.addShots(sm);
-                // System.out.println("takeNum = "+takeNum);
-                // System.out.println("Area: " + x + ", " + y + ", " + h + ", " + w);
-                // System.out.println();
-
 
             }
-          //  System.out.println("shot marker: " + shot);
-            newSet.setShot(shot);
 
+            newSet.setShot(shot);
 
             for (int j=0; j< partList.getLength(); j++){
 
@@ -135,37 +124,21 @@ public class ParseXML{
 
                     }
 
-                    if("line".equals(subsub.getNodeName()))
-                    line = subsub.getTextContent();
+            if("line".equals(subsub.getNodeName()))
+                line = subsub.getTextContent();
 
-
-
-                // System.out.println("partName = "+partName);
-                // System.out.println("level = "+level);
-                // System.out.println("Line = " + line);
-                // System.out.println("Area: " + x + ", " + y + ", " + h + ", " + w);
-                // System.out.println();
-
-                lvl = Integer.parseInt(level);
-
-
+            lvl = Integer.parseInt(level);
 
             }
             Role newRole = new Role(partName, line, lvl, newSet, null, false, x, y, h, w);
             newSet.addRoles(newRole);
-            // System.out.println("\n");
-
         }
 
 
             for (int j=0; j< neighborList.getLength(); j++){
 
                 Node sub = neighborList.item(j);
-
                 String neighborName = sub.getAttributes().getNamedItem("name").getNodeValue();
-                // System.out.println("neighborName = "+neighborName);
-                // System.out.println();
-
                 newSet.addNeighbor(neighborName);
 
             }
@@ -216,8 +189,6 @@ public class ParseXML{
 
                     Node subs = trailerNeighbors.item(j);
                     String neighborName = subs.getAttributes().getNamedItem("name").getNodeValue();
-                    //System.out.println("neighborName = "+neighborName);
-
                     trailer.addNeighbor(neighborName);
 
                 }
@@ -227,8 +198,6 @@ public class ParseXML{
         }
         b.setTrailer(trailer);
         b.addToMap(trailer.getName(), trailer);
-
-      //  System.out.println("Area: " + x + ", " + y + ", " + h + ", " + w);
 
     }
 
@@ -263,9 +232,6 @@ public class ParseXML{
                 h = subsub.getAttributes().getNamedItem("h").getNodeValue();
                 w = subsub.getAttributes().getNamedItem("w").getNodeValue();
 
-                // System.out.println("Area of Office: " + x + ", " + y + ", " + h + ", " + w);
-                // System.out.println();
-
             }
 
             if("neighbors".equals(subsub.getNodeName())){
@@ -277,8 +243,6 @@ public class ParseXML{
 
                     Node subs = trailerNeighbors.item(j);
                     String neighborName = subs.getAttributes().getNamedItem("name").getNodeValue();
-                    // System.out.println("neighborName = "+neighborName);
-
                     office.addNeighbor(neighborName);
 
                 }
@@ -297,10 +261,6 @@ public class ParseXML{
                     String amt = ssub.getAttributes().getNamedItem("amt").getNodeValue();
                     String currency = ssub.getAttributes().getNamedItem("currency").getNodeValue();
 
-                    // System.out.print("level : " + level + ", ");
-                    // System.out.print("currency : " + currency + ", ");
-                    // System.out.println("amt : " + amt);
-
                     Element areaUp = (Element) subsub;
 
                     NodeList areaOfUpgrades = areaUp.getElementsByTagName("area");
@@ -310,9 +270,6 @@ public class ParseXML{
                     yUpgrade = ssubsub.getAttributes().getNamedItem("y").getNodeValue();
                     hUpgrade = ssubsub.getAttributes().getNamedItem("h").getNodeValue();
                     wUpgrade = ssubsub.getAttributes().getNamedItem("w").getNodeValue();
-                    // System.out.println("Area: " + xUpgrade + ", " + yUpgrade + ", " + hUpgrade + ", " + wUpgrade);
-                    // System.out.println();
-
 
                 }
 
@@ -322,7 +279,6 @@ public class ParseXML{
 
         b.setCastingOffice(office);
         b.addToMap(office.getName(), office);
-
 
     }
 
@@ -336,20 +292,15 @@ public class ParseXML{
 
         for (int i=0; i<cardList.getLength();i++){
 
-            // System.out.println("Printing information for cardList "+(i+1));
             Node card = cardList.item(i);
 
             String cardName = card.getAttributes().getNamedItem("name").getNodeValue();
             String budget = card.getAttributes().getNamedItem("budget").getNodeValue();
             String img = card.getAttributes().getNamedItem("img").getNodeValue();
 
-            // System.out.println("card name = "+cardName);
-            // System.out.println("budget = "+budget);
-            //System.out.println(img);
             c = new Card(cardName, Integer.parseInt(budget));
             c.setImg(img);
             NodeList children = card.getChildNodes();
-
 
             for (int j=0; j< children.getLength(); j++){
 
@@ -361,9 +312,6 @@ public class ParseXML{
 
                     String sceneNum =  sub.getAttributes().getNamedItem("number").getNodeValue();
                     String description = sub.getTextContent();
-
-                    // System.out.println("Scene description = " + description);
-                    // System.out.println("sceneNum = "+ sceneNum);
 
                     c.setSceneNum(Integer.parseInt(sceneNum));
                     c.setDescription(description);
@@ -403,17 +351,11 @@ public class ParseXML{
                     Role cardRoles = new Role(partName, line, Integer.parseInt(level), null, c, true, x, y, h, w);
                     c.addRoles(cardRoles);
 
-                    // System.out.print("Part name = " + partName + ", ");
-                    // System.out.println("Level = " + level);
-                    // System.out.println("Line = " + line);
-                    // System.out.println("Area: " + x + ", " + y + ", " + h + ", " + w);
-
                 }
 
             } //for childnodes
 
             b.addToCards(c);
-          //  System.out.println("\n");
 
         }
 
