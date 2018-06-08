@@ -251,6 +251,7 @@ public class Board {
   * endGame tallies up the scores of all players, anounces the winner, and terminates the program
   */
   private void endGame(){
+    scoreScreen.initialize();
     System.out.println("The Game is over!");
     int highestScore = -1;
     int highestScoreingPlayer = -1;
@@ -267,7 +268,7 @@ public class Board {
       }
     }
     System.out.println("the winner is player " + (highestScoreingPlayer)+ " they scored " + highestScore + " points!");
-    System.exit(1);
+    //System.exit(1);
   }
 
   /*
