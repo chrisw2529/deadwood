@@ -271,7 +271,7 @@ public class BoardUI extends JFrame {
                 ArrayList<Role> offCard = player.spaceToSet(player).getRoles();
                 ArrayList<Role> onCard = player.spaceToSet(player).getCard().getRoles();
 
-                item = new JMenuItem("Off Card Roles");
+                item = new JMenuItem("On card*");
                 roles.add(item);
 
                 for (int i = 0; i < offCard.size(); i++) {
@@ -282,11 +282,10 @@ public class BoardUI extends JFrame {
 
                 }
 
-                item = new JMenuItem("On Card Roles");
-                roles.add(item);
+
 
                 for (int i = 0; i < onCard.size(); i++) {
-                  item = new JMenuItem(onCard.get(i).getName() + ". Required rank: " + onCard.get(i).getLevel());
+                  item = new JMenuItem(onCard.get(i).getName() + "* Required rank: " + onCard.get(i).getLevel());
                   item.addActionListener(new MenuActionListener());
                   roles.add(item);
 
@@ -296,6 +295,11 @@ public class BoardUI extends JFrame {
               }
 
 
+           }
+
+           else if (e.getSource()== endTurn){
+
+             player.endTurn(player);
            }
 
           updateStats();
@@ -329,25 +333,25 @@ public class BoardUI extends JFrame {
 
     if(moveToOpen == true){
       System.out.println("Should be true;");
-      player.move(player, e.getActionCommand(), board);
+      player.move(player, e.getActionCommand());
       player.moved = true;
       //clicked = false;
       System.out.println("Print");
     }
-    if(rankUpOpen == true){
-      System.out.println("ranking up");
-      String[] button = e.getActionCommand().split(" ");
-      if(button[1].equals("Fame")){
-        System.out.println("ru using fame to rank " + button[7]);
-        Player player = board.activePlayer();
-        player.rankUpUsingFame(player, Integer.parseInt(button[7]));
-      }
-      else if(button[1].equals("Cash")){
-        System.out.println("ru using cash to rank " + button[7]);
-        Player player = board.activePlayer();
-        player.rankUpUsingCash(player, Integer.parseInt(button[7]));
-      }
-    }
+    // if(rankUpOpen == true){
+    //   System.out.println("ranking up");
+    //   String[] button = e.getActionCommand().split(" ");
+    //   if(button[1].equals("Fame")){
+    //     System.out.println("ru using fame to rank " + button[7]);
+    //     Player player = board.activePlayer();
+    //     player.rankUpUsingFame(player, Integer.parseInt(button[7]));
+    //   }
+    //   else if(button[1].equals("Cash")){
+    //     System.out.println("ru using cash to rank " + button[7]);
+    //     Player player = board.activePlayer();
+    //     player.rankUpUsingCash(player, Integer.parseInt(button[7]));
+    //   }
+    // }
     if(rolesOpen == true){
       player.takeRole(player,e.getActionCommand());
       System.out.println("You have chosen..." + e.getActionCommand());
@@ -409,17 +413,6 @@ public class BoardUI extends JFrame {
 //FOR WHEN A PLAYER HOPS ON A SET    cardlabel.setVisible(false);
     cardBacks.put(set.getName(),cardlabel);
     bPane.add(cardlabel, new Integer(2));
-  }
-
-  public void removeBack(Set set)
-  {
-
-    if(set.getName() == "office" || set.getName() == "trailer") {
-      return;
-    }
-
-    System.out.println(set.getName());
-    cardBacks.get(set.getName()).setVisible(false);
   }
 
   public void setPlayer(int id, int level){
@@ -524,6 +517,13 @@ public class BoardUI extends JFrame {
     //set.getShotMarkers().remove(0);
     System.out.println("SHOT MARKER REMOVED");
 
+  }
+
+  public void removeBack(Set set)
+  {
+
+    System.out.println(set.getName());
+    cardBacks.get(set.getName()).setVisible(false);
   }
 
   public void wrapSceneUI(Set set)

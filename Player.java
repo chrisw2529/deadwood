@@ -46,7 +46,7 @@ public class Player{
     * @param: Board object, used to access the SpaceMap
     * Allows our players to move to a destination, and also calls take role
     */
-    public void move(Player player, String destination, Board board)
+    public void move(Player player, String destination)
     {
 
 
@@ -66,11 +66,11 @@ public class Player{
               int offset = player.getX() -50 + (40 * player.ID);
               player.label.setBounds(offset, player.getY() -10, 40, 40);
               System.out.println("player Xpos: " + player.getX() + "Ypos: " + player.getY());
-              Set currSet = spaceToSet(player);
-              boardUI.removeBack(currSet);
-              // if(player.currentSpace.getName() != "office" && player.currentSpace.getName() != "trailer") {
-              //   takeRole(player, board, false);
-              // }
+
+              if(player.currentSpace.getName() != "office" && player.currentSpace.getName() != "trailer") {
+                Set currSet = spaceToSet(player);
+                boardUI.removeBack(currSet);
+              }
 
               break;
             }
@@ -101,24 +101,33 @@ public class Player{
     public void takeRole(Player player, String whichRole){
       System.out.println("taker called");
       Set set = spaceToSet(player);
-            ArrayList<Role> off = set.getRoles();
-            ArrayList<Role> on = set.getCard().getRoles();
-            Role roleChosen = null;
+      ArrayList<Role> off = set.getRoles();
+      ArrayList<Role> on = set.getCard().getRoles();
+      Role roleChosen = null;
 
-                  for (int  i = 0 ; i < off.size() ; i++ ) {
-                    if(whichRole.contains(off.get(i).getName())){
-                      roleChosen = off.get(i);
-                      System.out.println("Role chosen");
-                    }
-                  }
+      if(whichRole.contains("*")) {
 
-                  for (int  i = 0 ; i < on.size() ; i++ ) {
-                    if(whichRole.contains(on.get(i).getName())){
-                      System.out.println("Role on chosen");
-                                            roleChosen = on.get(i);
-                    }
+        for (int  i = 0 ; i < on.size() ; i++ ) {
+          if(whichRole.contains(on.get(i).getName())){
+            System.out.println("Role on chosen");
+            roleChosen = on.get(i);
+          }
 
-                  }
+        }
+
+      }
+
+      else {
+
+        for (int  i = 0 ; i < off.size() ; i++ ) {
+          if(whichRole.contains(off.get(i).getName())){
+            roleChosen = off.get(i);
+            System.out.println("Role chosen");
+          }
+        }
+
+      }
+
 
       if(roleChosen == null)
         System.out.println("It's null");
@@ -528,6 +537,7 @@ public class Player{
       System.out.println("Player " + player.ID + "'s turn has ended.");
       player.isTurn = false;
       player.moved = false;
+      System.out.println("moved set to false");
       ArrayList<Player> players = board.getPlayers();
       for(int i = 0; i < players.size(); i++){
         if(players.get(i).getID() == player.ID){
