@@ -11,7 +11,6 @@ public class ShotMarker
     this.y = y;
     this.id = Integer.toString(this.count) + "sm";
     count++;
-    //System.out.println(this.id);
   }
 
   public int getX(){

@@ -67,7 +67,6 @@ public class OpeningScreen extends JFrame implements ActionListener {
   */
   public void actionPerformed (ActionEvent e) {
 
-    System.out.println(e.getActionCommand() + " pressed");
     if (e.getActionCommand() == "2 Players"){
       board.initializePlayers(2);
       this.boardUI = boardUI.getInstance();

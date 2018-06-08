@@ -279,6 +279,7 @@ public class Board {
 
   /*
   * prints the name of all of the sets
+  *(helper method)
   */
   public void printSets()
   {
@@ -290,6 +291,7 @@ public class Board {
 
   /*
   * prints the name of all of the scebes and what set there on
+  *(helper method)
   */
   public void printScenes()
   {
@@ -300,6 +302,7 @@ public class Board {
 
   /*
   * prints the location of all the players
+  *(helper method)
   */
   public void printAllPlayerLocation(){
 

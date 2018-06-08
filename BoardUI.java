@@ -501,24 +501,19 @@ class MenuActionListener implements ActionListener {
     String img = "images/dice/";
     Player cp = board.getPlayers().get(id - 1);
     if(level < 1 || level > 6){
-      System.out.println("error: level must be between 1, 6");
     }
     else{
       if(level == 1){
         if(cp.getID() == 1){
           img += "r" + level + ".png";
-          System.out.println("player 1 x = " + cp.getX());
-
         }
         else if(cp.getID() == 2){
           img += "b" + level + ".png";
           cp.setX(cp.getX() + 42);
-          System.out.println("player 2 x = " + cp.getX());
         }
         else if(cp.getID() == 3){
           img += "g" + level + ".png";
           cp.setX(cp.getX() + 84);
-          System.out.println("player 3 x = " + cp.getX());
 
         }
         else{
@@ -592,7 +587,6 @@ class MenuActionListener implements ActionListener {
 
     // Add the card to the lower layer
     bPane.add(shotMs, new Integer(1));
-    //System.out.println(sm.getID());
     sMarkersMap.put(sm.getID(), shotMs);
 
   }
