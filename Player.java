@@ -460,6 +460,8 @@ public class Player{
           player.setRank(desiredRank);
           System.out.println("CONGRATULATIONS!! you are now rank " + desiredRank);
           boardUI.setPlayer(ID, desiredRank);
+          boardUI.replaceDie(true);
+
         }
         else{
           System.out.println("Don't have enough cash to rank up cash needed is: "+ (desiredRank-1)*5);
@@ -498,6 +500,8 @@ public class Player{
           player.setRank(desiredRank);
           System.out.println("CONGRATULATIONS!! you are now rank " + desiredRank);
           boardUI.setPlayer(ID, desiredRank);
+          boardUI.replaceDie(true);
+
 
 
         }
@@ -552,7 +556,7 @@ public class Player{
           }
         }
       }
-      boardUI.replaceDie();
+      boardUI.replaceDie(true);
     }
 
     /*

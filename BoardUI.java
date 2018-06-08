@@ -168,11 +168,11 @@ public class BoardUI extends JFrame {
 
     activePlayer1.setBounds(icon.getIconWidth()+10,400,130,20);
     activePlayer2.setBounds(icon.getIconWidth()+10,410,130,20);
-    fame.setBounds(icon.getIconWidth()+10,460,130,20);
-    cash.setBounds(icon.getIconWidth()+10,470,130,20);
-    space.setBounds(icon.getIconWidth()+10,480,230,20);
-    role.setBounds(icon.getIconWidth()+10,490,230,20);
-    rehearsalToken.setBounds(icon.getIconWidth()+10,500,230,20);
+    fame.setBounds(icon.getIconWidth()+10,470,130,20);
+    cash.setBounds(icon.getIconWidth()+10,480,130,20);
+    space.setBounds(icon.getIconWidth()+10,490,230,20);
+    role.setBounds(icon.getIconWidth()+10,500,230,20);
+    rehearsalToken.setBounds(icon.getIconWidth()+10,510,230,20);
 
 
 
@@ -184,15 +184,18 @@ public class BoardUI extends JFrame {
     bPane.add(role, new Integer(6));
     bPane.add(rehearsalToken, new Integer(6));
 
-    replaceDie();
+
+
+
+    replaceDie(false);
 
 
 
   }
-  public void replaceDie(){
+  public void replaceDie(boolean notInit){
     Player cp = board.activePlayer();
     int level = cp.getRank();
-    String img = "";
+    String img = "images/dice/";
     if(cp.getID() == 1){
       img += "r" + level + ".png";
     }
@@ -203,17 +206,24 @@ public class BoardUI extends JFrame {
       img += "g" + level + ".png";
     }
 
+    if(notInit){
+      bPane.remove(playerLabels.get(10));
+      playerLabels.remove(10);
+    }
+
+    //System.out.println("repainting");
+    //bPane.repaint();
 
     statPlayerLabel = new JLabel();
     ImageIcon cIcon =  new ImageIcon(img);
 
     playerLabels.put(10, statPlayerLabel);
     statPlayerLabel.setIcon(cIcon);
-    statPlayerLabel.setBounds(icon.getIconWidth()+10, 410,cIcon.getIconWidth()+2,cIcon.getIconHeight());
+    statPlayerLabel.setBounds(icon.getIconWidth()+10, 430,cIcon.getIconWidth()+2,cIcon.getIconHeight());
     statPlayerLabel.setOpaque(true);
-
-    // Add the card to the lower layer
+    System.out.println("die replaced");
     bPane.add(statPlayerLabel, new Integer(7));
+    bPane.repaint();
   }
   public void updateStats(){
 
