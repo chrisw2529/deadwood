@@ -159,7 +159,7 @@ public class BoardUI extends JFrame {
   //  text.append("Tony");
 
    statsInit();
-
+   //JScrollPane scrPane = new JScrollPane(bPane);
   }
 
   public void statsInit(){
@@ -240,7 +240,7 @@ public class BoardUI extends JFrame {
 
 
 
-    
+
     activePlayer2.setText("Player " + board.activePlayer().getID());
     fame.setText("Fame: " + board.activePlayer().getFame());
     cash.setText("Cash: " + board.activePlayer().getCash());

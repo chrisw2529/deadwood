@@ -366,9 +366,12 @@ public class Player{
         return;
 
       }
+      int dieRoll = Board.roleDie();
+      boardUI.updateConsole("You rolled a " + dieRoll);
+      dieRoll = Board.roleDie() + player.rehearsalTok;
+      //System.out.println(dieRoll);
+      //boardUI.updateConsole("You rolled a " + dieRoll);
 
-      int dieRoll = Board.roleDie() + player.rehearsalTok;
-      System.out.println(dieRoll);
 
 
       if(dieRoll >= spaceToSet(player).getCard().getBudget()) {
