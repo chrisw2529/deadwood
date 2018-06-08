@@ -58,8 +58,6 @@ public class Player{
             if(neighbors.get(i).equals(destination) && moved == false){
               player.currentSpace = board.getSpaceMap().get(neighbors.get(i));
               moved = true;
-              // System.out.println("player " + player.ID + " has moved to " + player.currentSpace.getName());
-              // System.out.println("Xpos: "+ board.getSpaceMap().get(player.currentSpace.getName()).getXPlayer());
               boardUI.updateConsole("Player " + player.ID + " has moved to " + player.currentSpace.getName());
               player.setX(player.currentSpace.getXPlayer());
               player.setY(player.currentSpace.getYPlayer());
@@ -77,7 +75,6 @@ public class Player{
           }
           if(moved == false){
             boardUI.updateConsole("You can't move there!");
-            //System.out.println("you can't move there!");
           }
 
         }
@@ -88,8 +85,6 @@ public class Player{
       }
       else{
         boardUI.updateConsole("Cannot move while on a role");
-        //
-        // System.out.println("cannot move while on a role");
       }
 
     }
@@ -111,189 +106,18 @@ public class Player{
 
         for (int  i = 0 ; i < on.size() ; i++ ) {
           if(whichRole.contains(on.get(i).getName())){
-          //  System.out.println("Role on chosen");
             roleChosen = on.get(i);
           }
-
         }
-
       }
-
       else {
-
         for (int  i = 0 ; i < off.size() ; i++ ) {
           if(whichRole.contains(off.get(i).getName())){
             roleChosen = off.get(i);
-        //    System.out.println("Role chosen");
           }
         }
-
       }
-
-
-    //  if(roleChosen == null)
-    //    System.out.println("It's null");
-
-            //      System.out.println("tr");
       roleQualificationCheck(player, roleChosen);
-
-
-
-      // Scanner sc = new Scanner(System.in);
-      // String c = "y";
-      //
-      // if(player.currentRole != null) {
-      //   System.out.println("Already on a role!");
-      //   return;
-      // }
-      //
-      // if(player.currentSpace.getName() == "office" || player.currentSpace.getName() == "trailer") {
-      //   System.out.println("You cannot take a role on this space!");
-      //   return;
-      // }
-      //
-      //
-      //
-      // if(spaceToSet(player).getIsWrapped() == false){
-      //
-      //   if (alreadyOnSet == false) {
-      //     System.out.println("would you like to take a role? (y/n)");
-      //     c = sc.nextLine();
-      //   }
-      //
-      //   Boolean chooseWisely = true;
-      //
-      //   while(chooseWisely == true){
-      //
-      //     if(c.equals("y")){
-      //       System.out.println("which role would you like to take? or press end to cancel");
-      //       Set set = spaceToSet(player);
-      //       ArrayList<Role> off = set.getRoles();
-      //       ArrayList<Role> on = set.getCard().getRoles();
-      //       System.out.println("off");
-      //       //System.out.println("size of off is " + off.size());
-      //       for (int  i = 0 ; i < off.size() ; i++ ) {
-      //         System.out.println("( "+ (i+ 1) +" ) "+ off.get(i).getName() + " requires rank " + off.get(i).getLevel());
-      //       }
-      //       System.out.println("on");
-      //       for (int  i = 0 ; i < on.size() ; i++ ) {
-      //         System.out.println("( "+ (i+1) +" ) " + on.get(i).getName() + " requires rank " + on.get(i).getLevel());
-      //       }
-      //
-      //       Boolean notDone = true;
-      //
-      //       while(notDone){
-      //         c = sc.nextLine();
-      //         if(c.equals("on 1")){
-      //           notDone = (!roleQualificationCheck(player, on.get(0), board));
-      //           chooseWisely = false;
-      //           // endTurn(player, board);
-      //         }
-      //         else if(c.equals("on 2")){
-      //           try{
-      //               notDone = (!roleQualificationCheck(player, on.get(1), board));
-      //               chooseWisely = false;
-      //               // endTurn(player, board);
-      //           }
-      //           catch(IndexOutOfBoundsException ex){
-      //             System.out.println("role DNE!");
-      //           }
-      //         }
-      //         else if(c.equals("on 3")){
-      //           try{
-      //               notDone = (!roleQualificationCheck(player, on.get(2), board));
-      //               chooseWisely = false;
-      //               // endTurn(player, board);
-      //           }
-      //           catch(IndexOutOfBoundsException ex){
-      //             System.out.println("role DNE!");
-      //           }
-      //         }
-      //         else if(c.equals("on 4")){
-      //           try{
-      //               notDone = (!roleQualificationCheck(player, on.get(3), board));
-      //               chooseWisely = false;
-      //               // endTurn(player, board);
-      //           }
-      //           catch(IndexOutOfBoundsException ex){
-      //             System.out.println("role DNE!");
-      //           }
-      //         }
-      //         else if(c.equals("off 1")){
-      //           notDone = (!roleQualificationCheck(player, off.get(0), board));
-      //           chooseWisely = false;
-      //           // endTurn(player, board);
-      //         }
-      //         else if(c.equals("off 2")){
-      //           notDone = (!roleQualificationCheck(player, off.get(1), board));
-      //           chooseWisely = false;
-      //           // endTurn(player, board);
-      //         }
-      //         else if(c.equals("off 3")){
-      //           try{
-      //               notDone = (!roleQualificationCheck(player, off.get(2), board));
-      //               chooseWisely = false;
-      //               // endTurn(player, board);
-      //           }
-      //           catch(IndexOutOfBoundsException ex){
-      //             System.out.println("role DNE!");
-      //           }
-      //         }
-      //         else if(c.equals("off 4")){
-      //           try{
-      //               notDone = (!roleQualificationCheck(player, off.get(3), board));
-      //               chooseWisely = false;
-      //               // endTurn(player, board);
-      //           }
-      //           catch(IndexOutOfBoundsException ex){
-      //             System.out.println("role DNE!");
-      //           }
-      //         }
-      //         else if(c.equals("end")){
-      //           if(alreadyOnSet != true) {
-      //             endTurn(player, board);
-      //           }
-      //           else {
-      //             System.out.println("What would you like to do?");
-      //           }if(!if(!
-      //
-      //         else{
-      //           System.out.println("Not a valid entry, use the format 'off (num)'");
-      //           System.out.println("For example, 'off 1'");
-      //           System.out.println("If you decide you don't want to take a role afterall, type 'end'");
-      //         }
-      //       }
-      //
-      //
-      //
-      //     }
-      //     else if(c.equals("n")){
-      //       System.out.println("you have decided not to take a role ending turn");
-      //       chooseWisely = false;
-      //       endTurn(player, board);
-      //     }
-      //
-      //     else if(c.equals("end")){
-      //       System.out.println("you have decided not to take a role ending turn");
-      //       chooseWisely = false;
-      //       endTurn(player, board);
-      //     }
-      //
-      //     else {
-      //       System.out.println("Invalid entry, use 'y', 'n'");
-      //       c = sc.nextLine();
-      //     }
-      //
-      //   }
-      //
-      //
-      // }
-      //
-      // else{
-      //   System.out.println("scene is wrapped ending turn");
-      //   endTurn(player, board);
-      // }
-
     }
 
     /*
@@ -303,44 +127,26 @@ public class Player{
     * Checks the attributes of the current player and tells them if they're allowed to
     */
     public void roleQualificationCheck(Player player, Role role){
-    //  System.out.println("level is : " + role.getName()+ role.getLevel());
-    //  System.out.println("p levle ; " + player.rank );
-  //  System.out.println("inside rqc");
       if(role.getPlayer() != null){
         boardUI.updateConsole("Role is taken by another player");
-
-      //  System.out.println("role is taken by another player");
-        // return false;
       }
       else{
         if(player.rank >= role.getLevel()){
           player.currentRole = role;
           role.setPlayer(player);
           boardUI.updateConsole("You accepted the role of " + player.currentRole.getName());
-
-        //  System.out.println("you accepted the role of " + player.currentRole.getName());
-        //  System.out.println("role position X, Y: "+ role.getX()+ ",   " +role.getY());
-        //  System.out.println("player is player: " + player.getID());
           this.boardUI = boardUI.getInstance();
-          //System.out.println("get x: " + role.getSet().getName());
           if(role.onScene){
             boardUI.movePlayerImage(player, role.getCard().getSet().getX()  + role.getX(), role.getCard().getSet().getY() + role.getY());
-
           }
           else{
             boardUI.movePlayerImage(player, role.getX() + 3, role.getY()+ 3);
           }
           endTurn(player);
-          // return true;
         }
         else{
           boardUI.updateConsole("You are not ranked high enough");
           boardUI.updateConsole("If you cannot take a role due to your low rank, you must end your turn.");
-
-          // System.out.println("you are not ranked high enough");
-          // System.out.println("If you cannot take a role due to your low rank, you must end your turn by typing 'end'");
-          // return false;
-
         }
       }
 
@@ -354,15 +160,10 @@ public class Player{
     */
     public void act(Player player, Board board)
     {
-
       boardUI = boardUI.getInstance();
-
       if(player.currentRole == null) {
-
-        //System.out.println("Not on a scene!");
         boardUI.updateConsole("Not on a scene!");
         return;
-
       }
       int dieRoll = Board.roleDie();
       if(player.rehearsalTok == 0){
@@ -373,54 +174,29 @@ public class Player{
 
       }
       dieRoll += player.rehearsalTok;
-      //System.out.println(dieRoll);
-      //boardUI.updateConsole("You rolled a " + dieRoll);
-
-
 
       if(dieRoll >= spaceToSet(player).getCard().getBudget()) {
         if(player.currentRole.onScene == true) {
           player.fame += 2;
-          // System.out.println("Player " + player.ID + " has acted successfully and has gained 2 fames.");
-          // System.out.println("Player " + player.ID + "has " + player.fame + " fame(s), $" + player.cash + ", and is rank " + player.rank);
           boardUI.updateConsole("Player " + player.ID + " has acted successfully and has gained 2 fames.");
           boardUI.updateConsole("Player " + player.ID + "has " + player.fame + " fame(s), $" + player.cash + ", and is rank " + player.rank);
         }
-
         else {
           player.fame++;
           player.cash++;
-          // System.out.println("Player " + player.ID + " has acted successfully and has gained 1 fame and 1 cash.");
-          // System.out.println("Player " + player.ID + "has " + player.fame + " fame(s), $" + player.cash + ", and is rank " + player.rank);
           boardUI.updateConsole("Player " + player.ID + " has acted successfully and has gained 1 fame and 1 cash.");
           boardUI.updateConsole("Player " + player.ID + "has " + player.fame + " fame(s), $" + player.cash + ", and is rank " + player.rank);
 
         }
-
-      //  int sm = player.spaceToSet(player).getShotMarkers().size();
-      //  int ism = player.spaceToSet(player).getInitShotMarker();
-       //player.spaceToSet(player).decrementShotMarker();
-      //  board.decrementShotMarker();
       int whichShotMarker = player.spaceToSet(player).getInitShotMarker() - player.spaceToSet(player).getShotMarker();
       boardUI.removeShotMarkers(player.spaceToSet(player), player.spaceToSet(player).getShotMarkers().get(whichShotMarker));
-        //player.spaceToSet(player).getShotMarkers().remove(sm-1);
-
-
       }
-
       else {
-
-        //System.out.println("Player " + player.ID + " has acted unsuccessfully");
         boardUI.updateConsole("Player " + player.ID + " has acted unsuccessfully");
-
-
         if(player.currentRole.onScene == false) {
           player.cash++;
           boardUI.updateConsole("Since player " + player.ID + " was off-scene, they have gained 1 cash.");
           boardUI.updateConsole("Player " + player.ID + " has " + player.fame + " fame(s), $" + player.cash + ", and is rank " + player.rank);
-          // System.out.println("Since player " + player.ID + " was off-scene, they have gained 1 cash.");
-          // System.out.println("Player " + player.ID + "has " + player.fame + " fame(s), $" + player.cash + ", and is rank " + player.rank);
-
         }
       }
       endTurn(player);
@@ -428,8 +204,6 @@ public class Player{
       if(player.spaceToSet(player).getShotMarker() == 0){
         player.spaceToSet(player).getCard().wrapScene(board);
       }
-
-
     }
 
     /*
@@ -440,30 +214,17 @@ public class Player{
     */
     public void rehearse(Player player, Board board)
     {
-
       if(player.currentRole == null) {
-
-        //System.out.println("Not on a scene!");
         boardUI.updateConsole("Not on a scene!");
-
         return;
-
       }
-
-      //somthing is wrong here
       if(player.rehearsalTok == player.spaceToSet(player).getCard().getBudget() - 1) {
-      //  System.out.println("You have too many rehearsal tokens and you must act.");
         boardUI.updateConsole("You have too many rehearsal tokens and you must act.");
-
         return;
       }
-
       player.rehearsalTok++;
-    //  System.out.println("Player " + player.ID + " has increased their rehearsal tokens to " + player.getRehearsal());
       boardUI.updateConsole("Player " + player.ID + " has increased their rehearsal tokens to " + player.getRehearsal());
-
       endTurn(player);
-
     }
 
 
@@ -474,21 +235,13 @@ public class Player{
     * Allows our players to rank up using their cash if they are in the casting office
     */
     public void rankUpUsingCash(Player player, int desiredRank){
-
       if(!player.getSpace().getName().equals("office")){
-        // System.out.println("You can only rank up while in the Casting Office!");
         boardUI.updateConsole("You can only rank up while in the Casting Office!");
-
       }
       else if(desiredRank > 6){
-        // System.out.println("the maximum rank you can be is 6");
         boardUI.updateConsole("The maximum rank you can be is 6");
-
       }
-
       else if(desiredRank <= player.rank){
-        // System.out.println("you must rank UP");
-        // System.out.println("you are current rank " + player.rank);
         boardUI.updateConsole("You must rank UP");
         boardUI.updateConsole("You are currently rank " + player.rank);
 
@@ -500,15 +253,12 @@ public class Player{
           this.boardUI = boardUI.getInstance();
           player.setCash(cash - (desiredRank-1) * 5);
           player.setRank(desiredRank);
-        //  System.out.println("CONGRATULATIONS!! you are now rank " + desiredRank);
           boardUI.updateConsole("CONGRATULATIONS!! you are now rank " + desiredRank);
-
           boardUI.setPlayer(ID, desiredRank);
           boardUI.replaceDie(true);
 
         }
         else{
-        //  System.out.println("Don't have enough cash to rank up cash needed is: "+ (desiredRank-1)*5);
           boardUI.updateConsole("Don't have enough cash to rank up cash needed is: "+ (desiredRank-1)*5);
 
         }
@@ -527,19 +277,13 @@ public class Player{
       int reqFame = fameNeeded(desiredRank-1, 0);
 
       if(!player.getSpace().getName().equals("office")){
-        // System.out.println("You can only rank up while in the Casting Office!");
         boardUI.updateConsole("You can only rank up while in the Casting Office!");
-
       }
       else if(desiredRank > 6){
-        // System.out.println("The maximum rank you can be is 6");
         boardUI.updateConsole("The maximum rank you can be is 6");
-
       }
 
       else if(desiredRank <= player.rank){
-        // System.out.println("you must rank UP");
-        // System.out.println("you are current rank " + player.rank);
         boardUI.updateConsole("You must rank UP");
         boardUI.updateConsole("You are currently rank " + player.rank);
 
@@ -548,22 +292,14 @@ public class Player{
       else{
         if(fame >= reqFame){
           this.boardUI = boardUI.getInstance();
-
           player.setFame(fame - reqFame);
           player.setRank(desiredRank);
-          // System.out.println("CONGRATULATIONS!! you are now rank " + desiredRank);
           boardUI.updateConsole("CONGRATULATIONS!! you are now rank " + desiredRank);
-
           boardUI.setPlayer(ID, desiredRank);
           boardUI.replaceDie(true);
-
-
-
         }
         else{
-          //System.out.println("don't have enough fame to rank up fame needed is: "+ reqFame);
           boardUI.updateConsole("Don't have enough fame to rank up fame needed is: "+ reqFame);
-
         }
       }
 
@@ -577,8 +313,6 @@ public class Player{
     */
     private int fameNeeded(int rank, int fame){
       int ret;
-
-
       if(rank <= 1){
         return 4;
       }
@@ -597,22 +331,17 @@ public class Player{
 
       //System.out.println("Player " + player.ID + "'s turn has ended.");
       boardUI.updateConsole("Player " + player.ID + "'s turn has ended.");
-
       player.isTurn = false;
       player.moved = false;
-      //System.out.println("moved set to false");
       ArrayList<Player> players = board.getPlayers();
       for(int i = 0; i < players.size(); i++){
         if(players.get(i).getID() == player.ID){
           if(i == players.size()- 1){
             players.get(0).setTurn(true);
-            //System.out.println("It is now Player 1's turn ");
             boardUI.updateConsole("It is now Player 1's turn ");
-
           }
           else{
             players.get(i+1).setTurn(true);
-          //  System.out.println("It is now Player" + (i + 2) +"'s turn ");
             boardUI.updateConsole("It is now Player " + (i + 2) +"'s turn ");
 
           }
@@ -629,9 +358,7 @@ public class Player{
     */
     public Set spaceToSet(Player player){
       ArrayList<Set> sets = this.board.getSetList();
-  //  System.out.println("Here?");
       for (int i = 0 ; i < sets.size() ; i++) {
-  //      System.out.println("123Here?");
         if(sets.get(i).getName().equals(player.currentSpace.getName())){
           return sets.get(i);
         }
@@ -640,6 +367,22 @@ public class Player{
       return null;
     }
 
+
+    /*
+    * getPlayerInfo method
+    * @param: Player object, gives all info of the current player
+    */
+    public void getPlayerInfo(Player player)
+    {
+
+        System.out.println("the active player is player " + player.ID + " they have $" + player.cash + " and " +player.fame+ " Fame and they are rank " + player.getRank());
+        System.out.println("They are on " + player.currentSpace.getName());
+
+        if(currentRole != null) {
+          System.out.println("They are working on " + player.currentRole.getName()  + ", \"" + player.currentRole.getLine() + " \"" );
+        }
+
+    }
 
 
     public int getID(){
@@ -680,22 +423,6 @@ public class Player{
     }
     public JLabel getJLabel(){
       return this.label;
-    }
-
-    /*
-    * getPlayerInfo method
-    * @param: Player object, gives all info of the current player
-    */
-    public void getPlayerInfo(Player player)
-    {
-
-        System.out.println("the active player is player " + player.ID + " they have $" + player.cash + " and " +player.fame+ " Fame and they are rank " + player.getRank());
-        System.out.println("They are on " + player.currentSpace.getName());
-
-        if(currentRole != null) {
-          System.out.println("They are working on " + player.currentRole.getName()  + ", \"" + player.currentRole.getLine() + " \"" );
-        }
-
     }
 
     public boolean isTurn(){

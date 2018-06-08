@@ -147,7 +147,7 @@ public class BoardUI extends JFrame {
 
   /*
   * statsInit Method
-  *
+  * makes all of the JLables and text for all of the player info on the screen
   *
   */
   public void statsInit(){
@@ -198,7 +198,7 @@ public class BoardUI extends JFrame {
 
   /*
   * replaceDie Method
-  * @param: Boolean
+  * @param: Boolean (pass in false if you are initializing the die if not pass in true)
   * Replaces the dice to indicate which players turn it is
   */
   public void replaceDie(boolean notInit){
@@ -220,10 +220,6 @@ public class BoardUI extends JFrame {
       bPane.remove(playerLabels.get(10));
       playerLabels.remove(10);
     }
-
-    //System.out.println("repainting");
-    //bPane.repaint();
-
     statPlayerLabel = new JLabel();
     ImageIcon cIcon =  new ImageIcon(img);
 
@@ -231,7 +227,6 @@ public class BoardUI extends JFrame {
     statPlayerLabel.setIcon(cIcon);
     statPlayerLabel.setBounds(icon.getIconWidth()+10, 440,cIcon.getIconWidth()+2,cIcon.getIconHeight());
     statPlayerLabel.setOpaque(true);
-    //System.out.println("die replaced");
     bPane.add(statPlayerLabel, new Integer(7));
     bPane.repaint();
   }
@@ -296,8 +291,6 @@ public class BoardUI extends JFrame {
 
          else if (e.getSource()== move){
 
-          // System.out.println("Move clicked");
-
            if(player.moved == false){
              ArrayList neighbors = player.getSpace().getNeighbors();
 
@@ -313,13 +306,8 @@ public class BoardUI extends JFrame {
            }
 
            else {
-             //System.out.println("Can't move twice!");
              updateConsole("Can't move twice!");
            }
-
-
-            //Object selected = moveTo.getSelectedItem();
-            //player.move(player, selected.toString(), board);
           }
 
           else if (e.getSource()== rankUp){
@@ -338,7 +326,6 @@ public class BoardUI extends JFrame {
               rankUpOpen = true;
             }
             else{
-              //System.out.println("must be on casting Office");
               updateConsole("Must be on Casting Office");
 
             }
@@ -349,33 +336,26 @@ public class BoardUI extends JFrame {
               rolesOpen = true;
 
               if(player.currentRole != null) {
-              //  System.out.println("Already on a role!");
                 updateConsole("Already on a role!");
               }
 
               else if(player.currentSpace.getName() == "office" || player.currentSpace.getName() == "trailer") {
-              //  System.out.println("You cannot take a role on this space!");
                 updateConsole("You cannot take a role on this space!");
 
                 return;
               }
 
               else if(player.spaceToSet(player).getIsWrapped() == true) {
-                //System.out.println("Scene already wrapped!");
                 updateConsole("Scene already wrapped!");
 
               }
 
               else {
-
                 ArrayList<Role> offCard = player.spaceToSet(player).getRoles();
                 ArrayList<Role> onCard = player.spaceToSet(player).getCard().getRoles();
-
                 item = new JMenuItem("On card*");
                 roles.add(item);
-
                 for (int i = 0; i < offCard.size(); i++) {
-
                   item = new JMenuItem(offCard.get(i).getName() + ". Required rank: " + offCard.get(i).getLevel());
                   item.addActionListener(new MenuActionListener());
                   roles.add(item);
@@ -429,7 +409,6 @@ public class BoardUI extends JFrame {
 
 
 class MenuActionListener implements ActionListener {
-  //  @Override
 
   /*
   * @param: ActionEvent
@@ -439,8 +418,6 @@ class MenuActionListener implements ActionListener {
   public void actionPerformed(ActionEvent e) {
 
 
-    //clicked = true;
-    //System.out.println(e.getActionCommand() + " pressed");
     Player player = board.activePlayer();
 
     if(moveToOpen == true) {
@@ -463,7 +440,6 @@ class MenuActionListener implements ActionListener {
     }
     if(rolesOpen == true) {
       player.takeRole(player,e.getActionCommand());
-     // System.out.println("You have chosen..." + e.getActionCommand());
     }
 
     updateStats();
@@ -480,16 +456,11 @@ class MenuActionListener implements ActionListener {
   */
   public void setCard(Card card, Set set, int i) //maybe doesn't need card object
   {
-    // System.out.println(set.getName());
-    // System.out.println(set.getX() + " " + set.getY());
     String img = "images/cards/";
-
     if(i < 10)
         img += "0"+i+".png";
     else
         img += i+".png";
-
-    //System.out.println("this is the string: "+img);
 
     cardlabel = new JLabel();
     ImageIcon cIcon =  new ImageIcon(img);
@@ -515,15 +486,16 @@ class MenuActionListener implements ActionListener {
     cardlabel.setIcon(cIcon);
     cardlabel.setBounds(set.getX(),set.getY(),cIcon.getIconWidth()+2,cIcon.getIconHeight());
     cardlabel.setOpaque(true);
-//FOR WHEN A PLAYER HOPS ON A SET    cardlabel.setVisible(false);
+    //FOR WHEN A PLAYER HOPS ON A SET
     cardBacks.put(set.getName(),cardlabel);
     bPane.add(cardlabel, new Integer(2));
   }
 
   /*
   * setPlayer Method
-  * @param:
-  *
+  * @param: id of the player
+  * @param: level of player
+  * initalized the player images and changes the images when a player ranks up then repaints
   */
   public void setPlayer(int id, int level){
     String img = "images/dice/";
@@ -567,7 +539,6 @@ class MenuActionListener implements ActionListener {
         bPane.remove(playerLabels.get(cp.getID()));
 
         playerLabels.remove(cp.getID());
-        //System.out.println("repainting");
         bPane.repaint();
 
       }
@@ -576,8 +547,6 @@ class MenuActionListener implements ActionListener {
       ImageIcon cIcon =  new ImageIcon(img);
 
       playerLabels.put(cp.getID(), playerlabel);
-      //System.out.println("img: " + img);
-      //System.out.println("player x: "+ cp.getX() + " y: " + cp.getY());
       cp.setImageIcon(cIcon);
       cp.setJLabel(playerlabel);
       playerlabel.setIcon(cIcon);
@@ -637,16 +606,8 @@ class MenuActionListener implements ActionListener {
   */
   public void removeShotMarkers(Set set, ShotMarker shot)
   {
-
-    //bPane.remove(sMarkersMap.get(sm.getX()+sm.getY()));
     sMarkersMap.get(shot.getID()).setVisible(false);
-    System.out.println("Setting this to INVIS!!"+shot.getX()%shot.getY());
-    //bPane.repaint();
     set.decrementShotMarker();
-    System.out.println(set.getShotMarker());
-    //set.getShotMarkers().remove(0);
-    System.out.println("SHOT MARKER REMOVED");
-
   }
 
   /*
@@ -656,8 +617,6 @@ class MenuActionListener implements ActionListener {
   */
   public void removeBack(Set set)
   {
-
-    //System.out.println(set.getName());
     cardBacks.get(set.getName()).setVisible(false);
   }
 
@@ -700,7 +659,6 @@ class MenuActionListener implements ActionListener {
 
     while (iterator2.hasNext()) {
       String key = (String) iterator2.next();
-      //cardsMap.get(key).setVisible(true);
       bPane.remove(cardsMap.get(key));
       bPane.repaint();
     }
