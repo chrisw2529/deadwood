@@ -4,6 +4,7 @@ import java.awt.event.*;
 import java.io.*;
 import java.nio.file.*;
 import java.util.*;
+import javax.swing.text.DefaultCaret;
 
 public class BoardUI extends JFrame {
 
@@ -145,16 +146,24 @@ public class BoardUI extends JFrame {
 
 
 
-   text = new JTextArea("Game information");
-   text.setBounds(icon.getIconWidth()+10,500,200,150);
-   bPane.add(text, new Integer(2));
+   text = new JTextArea("Game information\n");
+   text.setEditable(false);
+   scroller = new JScrollPane(text);
+
+   scroller.setBounds(icon.getIconWidth()+10,550,350,300);
+   bPane.add(scroller, new Integer(2));
+
+  //  text.append("Hello\n" );
+   //
+  //  text.append("My name is\n" );
+  //  text.append("Tony");
 
    statsInit();
 
   }
 
   public void statsInit(){
-    System.out.println("Stats init");
+
     activePlayer1 = new JLabel("Active Player: ");
     activePlayer2 = new JLabel("Player " + board.activePlayer().getID());
     fame = new JLabel("Fame: " + 0);
@@ -191,6 +200,16 @@ public class BoardUI extends JFrame {
   public void replaceDie(){
 
   }
+
+  public void updateConsole(String update)
+  {
+    text.append(update + "\n");
+    text.setCaretPosition(text.getDocument().getLength());
+  }
+
+
+
+
   public void updateStats(){
     Player cp = board.activePlayer();
     int level = cp.getRank();
@@ -221,7 +240,7 @@ public class BoardUI extends JFrame {
 
 
 
-
+    
     activePlayer2.setText("Player " + board.activePlayer().getID());
     fame.setText("Fame: " + board.activePlayer().getFame());
     cash.setText("Cash: " + board.activePlayer().getCash());
@@ -252,7 +271,7 @@ public class BoardUI extends JFrame {
 
            if(player.currentRole == null) {
 
-             System.out.println("Not on a scene!");
+             updateConsole("Not on a scene!");
 
            }
 
@@ -265,7 +284,7 @@ public class BoardUI extends JFrame {
 
            if(player.currentRole == null) {
 
-             System.out.println("Not on a scene!");
+             updateConsole("Not on a scene!");
 
            }
 
@@ -275,7 +294,7 @@ public class BoardUI extends JFrame {
 
          else if (e.getSource()== move){
 
-           System.out.println("Move clicked");
+          // System.out.println("Move clicked");
 
            if(player.moved == false){
              ArrayList neighbors = player.getSpace().getNeighbors();
@@ -292,7 +311,8 @@ public class BoardUI extends JFrame {
            }
 
            else {
-             System.out.println("Can't move twice!");
+             //System.out.println("Can't move twice!");
+             updateConsole("Can't move twice!");
            }
 
 
@@ -315,7 +335,9 @@ public class BoardUI extends JFrame {
               rankUpOpen = true;
             }
             else{
-              System.out.println("must be on casting Office");
+              //System.out.println("must be on casting Office");
+              updateConsole("Must be on Casting Office");
+
             }
           }
 
@@ -324,21 +346,27 @@ public class BoardUI extends JFrame {
               rolesOpen = true;
 
               if(player.currentRole != null) {
-                System.out.println("Already on a role!");
+              //  System.out.println("Already on a role!");
+                updateConsole("Already on a role!");
+
 
               }
 
               else if(player.currentSpace.getName() == "office" || player.currentSpace.getName() == "trailer") {
-                System.out.println("You cannot take a role on this space!");
+              //  System.out.println("You cannot take a role on this space!");
+                updateConsole("You cannot take a role on this space!");
+
                 return;
               }
 
               else if(player.spaceToSet(player).getIsWrapped() == true) {
-                System.out.println("Scene already wrapped!");
+                //System.out.println("Scene already wrapped!");
+                updateConsole("Scene already wrapped!");
+
               }
 
               else {
-                System.out.println("Taking role");
+
 
                 ArrayList<Role> offCard = player.spaceToSet(player).getRoles();
                 ArrayList<Role> onCard = player.spaceToSet(player).getCard().getRoles();
@@ -404,22 +432,22 @@ public class BoardUI extends JFrame {
           Player player = board.activePlayer();
 
     if(moveToOpen == true){
-      System.out.println("Should be true;");
+    //  System.out.println("Should be true;");
       player.move(player, e.getActionCommand());
       player.moved = true;
       //clicked = false;
-      System.out.println("Print");
+      //System.out.println("Print");
     }
     if(rankUpOpen == true){
-      System.out.println("ranking up");
+      //System.out.println("ranking up");
       String[] button = e.getActionCommand().split(" ");
       Player cp = board.activePlayer();
       if(button[1].equals("Fame")){
-        System.out.println("ru using fame to rank " + button[7]);
+        //System.out.println("ru using fame to rank " + button[7]);
         player.rankUpUsingFame(cp, Integer.parseInt(button[7]));
       }
       else if(button[1].equals("Cash")){
-        System.out.println("ru using cash to rank " + button[7]);
+        //System.out.println("ru using cash to rank " + button[7]);
         player.rankUpUsingCash(cp, Integer.parseInt(button[7]));
       }
     }

@@ -130,7 +130,8 @@ public class Board {
     }
 
 
-    System.out.println("it is now day " + day);
+    //boardUI.updateConsole("It is now day " + day);
+
   }
 
   /*
@@ -172,7 +173,6 @@ public class Board {
   public void initializePlayers(int numPlayers){
     this.playerNum = numPlayers;
     for(int i = 1; i < numPlayers + 1; i++){
-      System.out.println("Hello");
       Player player = new Player(i);
       players.add(player);
       player.setSpace(castingOffice);
@@ -202,7 +202,9 @@ public class Board {
   */
   public void endDay(){
     //reset all shot markers to there inital value
-    System.out.println("ending day");
+  //  System.out.println("ending day");
+    boardUI.updateConsole("Ending day");
+
     day++;
     if(day > 3 ){
       endGame();
@@ -251,7 +253,9 @@ public class Board {
   * endGame tallies up the scores of all players, anounces the winner, and terminates the program
   */
   private void endGame(){
-    System.out.println("The Game is over!");
+    //System.out.println("The Game is over!");
+    boardUI.updateConsole("The game is over!");
+
     int highestScore = -1;
     int highestScoreingPlayer = -1;
     for (int i = 0; i < players.size() ; i++) {
@@ -260,13 +264,17 @@ public class Board {
       int rank = players.get(i).getRank();
       rank = rank * 5;
       int score = fame + cash + rank;
-      System.out.println("Player "+ (i+1) + " has " + score + " points");
+      //System.out.println("Player "+ (i+1) + " has " + score + " points");
+      boardUI.updateConsole("Player "+ (i+1) + " has " + score + " points");
+
       if(highestScore <= score){
         highestScore = score;
         highestScoreingPlayer = i+1;
       }
     }
-    System.out.println("the winner is player " + (highestScoreingPlayer)+ " they scored " + highestScore + " points!");
+  //  System.out.println("the winner is player " + (highestScoreingPlayer)+ " they scored " + highestScore + " points!");
+    boardUI.updateConsole("The winner is player " + (highestScoreingPlayer)+ ", they scored " + highestScore + " points!");
+
     System.exit(1);
   }
 
