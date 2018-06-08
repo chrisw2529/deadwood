@@ -121,7 +121,7 @@ public class Card
           payout[payout.length - i - 1] = temp;
         }
         //System.out.printf("The die rolls where : %s\n", Arrays.toString(payout));
-        boardUI.updateConsole("The die rolls where : %s\n" + Arrays.toString(payout));
+        boardUI.updateConsole("The die rolls where : " + Arrays.toString(payout));
 
         int count = 0;
         //payout on card roles

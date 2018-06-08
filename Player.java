@@ -419,15 +419,15 @@ public class Player{
         if(player.currentRole.onScene == false) {
           player.cash++;
           boardUI.updateConsole("Since player " + player.ID + " was off-scene, they have gained 1 cash.");
-          boardUI.updateConsole("Player " + player.ID + "has " + player.fame + " fame(s), $" + player.cash + ", and is rank " + player.rank);
+          boardUI.updateConsole("Player " + player.ID + " has " + player.fame + " fame(s), $" + player.cash + ", and is rank " + player.rank);
           // System.out.println("Since player " + player.ID + " was off-scene, they have gained 1 cash.");
           // System.out.println("Player " + player.ID + "has " + player.fame + " fame(s), $" + player.cash + ", and is rank " + player.rank);
 
         }
       }
+      endTurn(player);
 
       if(player.spaceToSet(player).getShotMarker() == 0){
-        endTurn(player);
         player.spaceToSet(player).getCard().wrapScene(board);
       }
 
