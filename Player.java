@@ -56,6 +56,7 @@ public class Player{
           ArrayList<String> neighbors = player.currentSpace.getNeighbors();
           for(int i = 0; i < neighbors.size(); i++){
             if(neighbors.get(i).equals(destination) && moved == false){
+
               player.currentSpace = board.getSpaceMap().get(neighbors.get(i));
               moved = true;
               boardUI.updateConsole("Player " + player.ID + " has moved to " + player.currentSpace.getName());
@@ -63,7 +64,6 @@ public class Player{
               player.setY(player.currentSpace.getYPlayer());
               int offset = player.getX() -50 + (40 * player.ID);
               player.label.setBounds(offset, player.getY() -10, 40, 40);
-              System.out.println("player Xpos: " + player.getX() + "Ypos: " + player.getY());
 
               if(player.currentSpace.getName() != "office" && player.currentSpace.getName() != "trailer") {
                 Set currSet = spaceToSet(player);
@@ -96,7 +96,7 @@ public class Player{
     * Takes a role and calls roleQualificationCheck in order to determine if the player is allowed to take the role
     */
     public void takeRole(Player player, String whichRole){
-      System.out.println("taker called");
+
       Set set = spaceToSet(player);
       ArrayList<Role> off = set.getRoles();
       ArrayList<Role> on = set.getCard().getRoles();
@@ -329,7 +329,6 @@ public class Player{
     */
     public void endTurn(Player player) {
 
-      //System.out.println("Player " + player.ID + "'s turn has ended.");
       boardUI.updateConsole("Player " + player.ID + "'s turn has ended.");
       player.isTurn = false;
       player.moved = false;
@@ -371,6 +370,7 @@ public class Player{
     /*
     * getPlayerInfo method
     * @param: Player object, gives all info of the current player
+    * Milestone 2 method
     */
     public void getPlayerInfo(Player player)
     {
