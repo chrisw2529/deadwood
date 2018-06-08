@@ -146,6 +146,7 @@ public class BoardUI extends JFrame {
 
 
 
+<<<<<<< HEAD
    text = new JTextArea("Game information\n");
    text.setEditable(false);
    scroller = new JScrollPane(text);
@@ -157,6 +158,12 @@ public class BoardUI extends JFrame {
    //
   //  text.append("My name is\n" );
   //  text.append("Tony");
+=======
+   text = new JTextArea("Game information");
+
+   text.setBounds(icon.getIconWidth()+10,550,350,300);
+   bPane.add(text, new Integer(2));
+>>>>>>> 8ba68c0c23234db6a06f1efd2cbb2ee92c74e919
 
    statsInit();
 
@@ -176,11 +183,11 @@ public class BoardUI extends JFrame {
 
     activePlayer1.setBounds(icon.getIconWidth()+10,400,130,20);
     activePlayer2.setBounds(icon.getIconWidth()+10,410,130,20);
-    fame.setBounds(icon.getIconWidth()+10,460,130,20);
-    cash.setBounds(icon.getIconWidth()+10,470,130,20);
-    space.setBounds(icon.getIconWidth()+10,480,230,20);
-    role.setBounds(icon.getIconWidth()+10,490,230,20);
-    rehearsalToken.setBounds(icon.getIconWidth()+10,500,230,20);
+    fame.setBounds(icon.getIconWidth()+10,470,130,20);
+    cash.setBounds(icon.getIconWidth()+10,480,130,20);
+    space.setBounds(icon.getIconWidth()+10,490,230,20);
+    role.setBounds(icon.getIconWidth()+10,500,230,20);
+    rehearsalToken.setBounds(icon.getIconWidth()+10,510,230,20);
 
 
 
@@ -195,9 +202,9 @@ public class BoardUI extends JFrame {
 
 
 
+    replaceDie(false);
 
-  }
-  public void replaceDie(){
+
 
   }
 
@@ -209,11 +216,11 @@ public class BoardUI extends JFrame {
 
 
 
+  public void replaceDie(boolean notInit){
 
-  public void updateStats(){
     Player cp = board.activePlayer();
     int level = cp.getRank();
-    String img = "";
+    String img = "images/dice/";
     if(cp.getID() == 1){
       img += "r" + level + ".png";
     }
@@ -224,23 +231,33 @@ public class BoardUI extends JFrame {
       img += "g" + level + ".png";
     }
 
+    if(notInit){
+      bPane.remove(playerLabels.get(10));
+      playerLabels.remove(10);
+    }
+
+    //System.out.println("repainting");
+    //bPane.repaint();
 
     statPlayerLabel = new JLabel();
     ImageIcon cIcon =  new ImageIcon(img);
 
     playerLabels.put(10, statPlayerLabel);
     statPlayerLabel.setIcon(cIcon);
-    statPlayerLabel.setBounds(icon.getIconWidth()+10, 410,cIcon.getIconWidth()+2,cIcon.getIconHeight());
-    playerlabel.setOpaque(true);
+    statPlayerLabel.setBounds(icon.getIconWidth()+10, 430,cIcon.getIconWidth()+2,cIcon.getIconHeight());
+    statPlayerLabel.setOpaque(true);
+    System.out.println("die replaced");
+    bPane.add(statPlayerLabel, new Integer(7));
+    bPane.repaint();
+  }
+  public void updateStats(){
 
-    // Add the card to the lower layer
-    bPane.add(statPlayerLabel, new Integer(5));
 
 
 
 
 
-    
+
     activePlayer2.setText("Player " + board.activePlayer().getID());
     fame.setText("Fame: " + board.activePlayer().getFame());
     cash.setText("Cash: " + board.activePlayer().getCash());
