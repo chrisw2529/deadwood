@@ -146,18 +146,12 @@ public class BoardUI extends JFrame {
 
 
 
-
    text = new JTextArea("Game information\n");
    text.setEditable(false);
    scroller = new JScrollPane(text);
 
    scroller.setBounds(icon.getIconWidth()+10,550,350,300);
    bPane.add(scroller, new Integer(2));
-
-  //  text.append("Hello\n" );
-   //
-  //  text.append("My name is\n" );
-  //  text.append("Tony");
 
 
    statsInit();
@@ -674,6 +668,10 @@ public class BoardUI extends JFrame {
       bPane.remove(cardsMap.get(key));
       bPane.repaint();
     }
+  }
+  public void disposeBoard(){
+    dispose();
+
   }
 
 
