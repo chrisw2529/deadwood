@@ -664,6 +664,10 @@ public class BoardUI extends JFrame {
       bPane.repaint();
     }
   }
+  public void disposeBoard(){
+    dispose();
+
+  }
 
 
 

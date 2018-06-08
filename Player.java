@@ -417,10 +417,12 @@ public class Player{
         }
       }
 
-      if(player.spaceToSet(player).getShotMarker() == 0)
-        player.spaceToSet(player).getCard().wrapScene(board);
-
+      if(player.spaceToSet(player).getShotMarker() == 0){
         endTurn(player);
+        player.spaceToSet(player).getCard().wrapScene(board);
+      }
+
+
     }
 
     /*

@@ -12,6 +12,8 @@ public class ScoreScreen extends JFrame implements ActionListener {
 
   JLabel logo;
   JLabel Score;
+  private JScrollPane scroller;
+
   private JTextArea text;
 
 
@@ -60,6 +62,11 @@ public class ScoreScreen extends JFrame implements ActionListener {
 
     // Add the board to the lowest layer
     //bPane.add(logo, new Integer(0));
+    text = new JTextArea("Game information\n");
+    text.setEditable(false);
+    scroller = new JScrollPane(text);
+    scroller.setBounds(10,20,200,300);
+    bPane.add(scroller, new Integer(2));
 
 
     twoPlayers = new JButton("Play Again 2 Players");
@@ -78,6 +85,7 @@ public class ScoreScreen extends JFrame implements ActionListener {
 
   public void updateConsole(String update)
   {
+    System.out.println("update is: " + update);
     text.append(update + "\n");
     text.setCaretPosition(text.getDocument().getLength());
   }

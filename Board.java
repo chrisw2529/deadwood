@@ -243,7 +243,7 @@ public class Board {
         players.get(i).setRole(null);
         players.get(i).setSpace(trailer);
       }
-      remainingScenes = 10;
+      remainingScenes = 2;
       boardUI.resetBoard();
       startDay();
     }
@@ -255,9 +255,10 @@ public class Board {
   */
   private void endGame(){
     //System.out.println("The Game is over!");
-
-    scoreScreen.initialize();
-    scoreScreen.updateConsole("The Game is over!");
+    //boardUI.disposeBoard();
+    // this.scoreScreen = scoreScreen.getInstance();
+    // scoreScreen.initialize();
+    boardUI.updateConsole("The Game is over!");
     int highestScore = -1;
     int highestScoreingPlayer = -1;
     for (int i = 0; i < players.size() ; i++) {
@@ -267,14 +268,14 @@ public class Board {
       rank = rank * 5;
       int score = fame + cash + rank;
       //System.out.println("Player "+ (i+1) + " has " + score + " points");
-      scoreScreen.updateConsole("Player "+ (i+1) + " has " + score + " points");
+      boardUI.updateConsole("Player "+ (i+1) + " has " + score + " points");
 
       if(highestScore <= score){
         highestScore = score;
         highestScoreingPlayer = i+1;
       }
     }
-    scoreScreen.updateConsole("The winner is player " + (highestScoreingPlayer)+ ", they scored " + highestScore + " points!");
+    boardUI.updateConsole("The winner is player " + (highestScoreingPlayer)+ ", they scored " + highestScore + " points!");
 
   }
 
