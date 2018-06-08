@@ -371,6 +371,7 @@ public class Player{
     * getPlayerInfo method
     * @param: Player object, gives all info of the current player
     * Milestone 2 method
+    *(helper method)
     */
     public void getPlayerInfo(Player player)
     {
