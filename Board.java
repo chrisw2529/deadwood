@@ -31,6 +31,7 @@ public class Board {
   Trailer trailer;
   CastingOffice castingOffice;
   BoardUI boardUI;
+  ScoreScreen scoreScreen;
 
   private Board() {}
 
@@ -254,8 +255,9 @@ public class Board {
   */
   private void endGame(){
     //System.out.println("The Game is over!");
-    boardUI.updateConsole("The game is over!");
 
+    scoreScreen.initialize();
+    scoreScreen.updateConsole("The Game is over!");
     int highestScore = -1;
     int highestScoreingPlayer = -1;
     for (int i = 0; i < players.size() ; i++) {
@@ -265,17 +267,15 @@ public class Board {
       rank = rank * 5;
       int score = fame + cash + rank;
       //System.out.println("Player "+ (i+1) + " has " + score + " points");
-      boardUI.updateConsole("Player "+ (i+1) + " has " + score + " points");
+      scoreScreen.updateConsole("Player "+ (i+1) + " has " + score + " points");
 
       if(highestScore <= score){
         highestScore = score;
         highestScoreingPlayer = i+1;
       }
     }
-  //  System.out.println("the winner is player " + (highestScoreingPlayer)+ " they scored " + highestScore + " points!");
-    boardUI.updateConsole("The winner is player " + (highestScoreingPlayer)+ ", they scored " + highestScore + " points!");
+    scoreScreen.updateConsole("The winner is player " + (highestScoreingPlayer)+ ", they scored " + highestScore + " points!");
 
-    System.exit(1);
   }
 
   /*

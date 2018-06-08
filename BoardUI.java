@@ -146,24 +146,12 @@ public class BoardUI extends JFrame {
 
 
 
-<<<<<<< HEAD
    text = new JTextArea("Game information\n");
    text.setEditable(false);
    scroller = new JScrollPane(text);
 
    scroller.setBounds(icon.getIconWidth()+10,550,350,300);
    bPane.add(scroller, new Integer(2));
-
-  //  text.append("Hello\n" );
-   //
-  //  text.append("My name is\n" );
-  //  text.append("Tony");
-=======
-   text = new JTextArea("Game information");
-
-   text.setBounds(icon.getIconWidth()+10,550,350,300);
-   bPane.add(text, new Integer(2));
->>>>>>> 8ba68c0c23234db6a06f1efd2cbb2ee92c74e919
 
    statsInit();
 
