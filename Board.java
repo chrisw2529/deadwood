@@ -22,8 +22,9 @@ public class Board {
 
 
   int day = 1;
-  int remainingScenes = 10;
+  int remainingScenes = 1;
   int playerNum = 0;
+  String endLine = "";
   ArrayList<Player> players = new ArrayList<Player>();
   ArrayList<Set> sets = new ArrayList<Set>();
   ArrayList<Card> cards = new ArrayList<Card>();
@@ -236,7 +237,7 @@ public class Board {
         players.get(i).setRole(null);
         players.get(i).setSpace(trailer);
       }
-      remainingScenes = 10;
+      remainingScenes = 2;
       boardUI.resetBoard();
       startDay();
     }
@@ -247,7 +248,7 @@ public class Board {
   * endGame tallies up the scores of all players, and anounces the winner
   */
   private void endGame(){
-    boardUI.updateConsole("The Game is over!");
+    setEndGameLine("The Game is over!");
     int highestScore = -1;
     int highestScoreingPlayer = -1;
     for (int i = 0; i < players.size() ; i++) {
@@ -256,13 +257,19 @@ public class Board {
       int rank = players.get(i).getRank();
       rank = rank * 5;
       int score = fame + cash + rank;
-      boardUI.updateConsole("Player "+ (i+1) + " has " + score + " points");
+      setEndGameLine("Player "+ (i+1) + " has " + score + " points");
       if(highestScore <= score){
         highestScore = score;
         highestScoreingPlayer = i+1;
       }
     }
-    boardUI.updateConsole("The winner is player " + (highestScoreingPlayer)+ ", they scored " + highestScore + " points!");
+    //boardUI.updateConsole("The winner is player " + (highestScoreingPlayer)+ ", they scored " + highestScore + " points!");
+    setEndGameLine("The winner is Player " + (highestScoreingPlayer)+ ", they scored " + highestScore + " points!");
+    boardUI.disposeBoard();
+    EndGameScreen end = new EndGameScreen();
+
+
+
 
   }
 
@@ -358,6 +365,13 @@ public class Board {
   }
   public CastingOffice getCastingOffice(){
     return this.castingOffice;
+  }
+
+  public void setEndGameLine(String endLine) {
+      this.endLine += endLine + "<br/>";
+  }
+  public String getEndGameLine() {
+      return endLine;
   }
 
   public void setDay(int day){
