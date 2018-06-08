@@ -573,6 +573,9 @@ public class Player{
     {
       return this.currentSpace;
     }
+    public Role getRole(){
+      return this.currentRole;
+    }
 
     public int getFame(){
       return this.fame;
