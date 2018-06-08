@@ -552,6 +552,7 @@ public class Player{
           }
         }
       }
+      boardUI.replaceDie();
     }
 
     /*

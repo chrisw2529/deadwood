@@ -144,7 +144,7 @@ public class BoardUI extends JFrame {
 
 
    text = new JTextArea("Game information");
-   text.setBounds(icon.getIconWidth()+10,430,200,150);
+   text.setBounds(icon.getIconWidth()+10,730,200,150);
    bPane.add(text, new Integer(2));
 
   }
@@ -178,15 +178,12 @@ public class BoardUI extends JFrame {
     bPane.add(role, new Integer(6));
     bPane.add(rehearsalToken, new Integer(6));
 
-
+    replaceDie();
 
 
 
   }
   public void replaceDie(){
-
-  }
-  public void updateStats(){
     Player cp = board.activePlayer();
     int level = cp.getRank();
     String img = "";
@@ -207,10 +204,13 @@ public class BoardUI extends JFrame {
     playerLabels.put(10, statPlayerLabel);
     statPlayerLabel.setIcon(cIcon);
     statPlayerLabel.setBounds(icon.getIconWidth()+10, 410,cIcon.getIconWidth()+2,cIcon.getIconHeight());
-    playerlabel.setOpaque(true);
+    statPlayerLabel.setOpaque(true);
 
     // Add the card to the lower layer
-    bPane.add(statPlayerLabel, new Integer(5));
+    bPane.add(statPlayerLabel, new Integer(7));
+  }
+  public void updateStats(){
+
 
 
 
