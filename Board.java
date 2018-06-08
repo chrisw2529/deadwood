@@ -33,7 +33,9 @@ public class Board {
   BoardUI boardUI;
   ScoreScreen scoreScreen;
 
-  private Board() {}
+  private Board() {
+    
+  }
 
   //Holder for the board
   private static class LazyHolder
@@ -46,7 +48,7 @@ public class Board {
     return LazyHolder.INSTANCE;
   }
   /*
-  *takes in the board and calls parseXML and then startDay
+  *takes in the board and calls parseXML and then startDay then setPlayerPositions
   */
   public void setupBoard(Board board){
 
@@ -54,13 +56,14 @@ public class Board {
     startDay();
     setPlayerPositions();
   }
-
+  //wrapper for set player in boardUI.java
   public void setUpPlayers(){
-    System.out.println("size is: " + players.size());
      for(int i = 1; i < players.size() + 1; i++){
        boardUI.setPlayer(i, 1);
      }
   }
+
+  //puts the position of each set into a HashMap to be used to move the images of players when they move
   private void setPlayerPositions(){
     this.spaceMap.get("Train Station").setXPlayer(21);
     this.spaceMap.get("Train Station").setYPlayer(69);
@@ -130,9 +133,6 @@ public class Board {
 
     }
 
-
-    //boardUI.updateConsole("It is now day " + day);
-
   }
 
   /*
@@ -152,8 +152,6 @@ public class Board {
       System.out.println("file not found");
 
     }
-
-
 
     try {
       Document d = p.getDocFromFile("XML_Files/cards.xml");
@@ -204,7 +202,6 @@ public class Board {
   public void endDay(){
     //reset all shot markers to there inital value
     boardUI.updateConsole("Ending day");
-
     day++;
     if(day > 3 ){
       endGame();
@@ -234,6 +231,7 @@ public class Board {
           cards.get(i).getRoles().get(j).setPlayer(null);
         }
       }
+      //resets roles of players and puts them in the trailer
       for(int i = 0; i< players.size(); i++){
         players.get(i).setRehearsal(0);
         players.get(i).setRole(null);
@@ -247,13 +245,9 @@ public class Board {
   }
 
   /*
-  * endGame tallies up the scores of all players, anounces the winner, and terminates the program
+  * endGame tallies up the scores of all players, and anounces the winner
   */
   private void endGame(){
-    //System.out.println("The Game is over!");
-    //boardUI.disposeBoard();
-    // this.scoreScreen = scoreScreen.getInstance();
-    // scoreScreen.initialize();
     boardUI.updateConsole("The Game is over!");
     int highestScore = -1;
     int highestScoreingPlayer = -1;
@@ -263,9 +257,7 @@ public class Board {
       int rank = players.get(i).getRank();
       rank = rank * 5;
       int score = fame + cash + rank;
-      //System.out.println("Player "+ (i+1) + " has " + score + " points");
       boardUI.updateConsole("Player "+ (i+1) + " has " + score + " points");
-
       if(highestScore <= score){
         highestScore = score;
         highestScoreingPlayer = i+1;
@@ -276,13 +268,48 @@ public class Board {
   }
 
   /*
-  * roles on die and return the result of the role
+  * roles one die and return the result of the role
   */
   public static int roleDie(){
     Random rand = new Random();
     int dieRoll = (rand.nextInt(6) + 1);
     return dieRoll;
   }
+
+
+
+  /*
+  * prints the name of all of the sets
+  */
+  public void printSets()
+  {
+    for (int i = 0; i < sets.size() ; i++ ) {
+      System.out.println(sets.get(i).getName());
+      sets.get(i).getRoles();
+    }
+  }
+
+  /*
+  * prints the name of all of the scebes and what set there on
+  */
+  public void printScenes()
+  {
+    for (int i = 0; i < sets.size() ; i++ ) {
+      System.out.println(sets.get(i).getCard().getName() + " on " + sets.get(i).getName());
+    }
+  }
+
+  /*
+  * prints the location of all the players
+  */
+  public void printAllPlayerLocation(){
+
+    for (int i = 0; i < players.size(); i++ ) {
+      System.out.println("player " +players.get(i).getID() + " is currently at the "+ players.get(i).getSpace().getName());
+    }
+  }
+
+
   public int getDay(){
     return this.day;
   }
@@ -347,36 +374,6 @@ public class Board {
     this.remainingScenes = remainingScenes;
   }
 
-  /*
-  * prints the name of all of the sets
-  */
-  public void printSets()
-  {
-    for (int i = 0; i < sets.size() ; i++ ) {
-      System.out.println(sets.get(i).getName());
-      sets.get(i).getRoles();
-    }
-  }
-  /*
-  * prints the name of all of the scebes and what set there on
-  */
-  public void printScenes()
-  {
-    for (int i = 0; i < sets.size() ; i++ ) {
-      System.out.println(sets.get(i).getCard().getName() + " on " + sets.get(i).getName());
-    }
-  }
-
-  /*
-  * prints the location of all the players
-  */
-  public void printAllPlayerLocation(){
-
-    for (int i = 0; i < players.size(); i++ ) {
-      System.out.println("player " +players.get(i).getID() + " is currently at the "+ players.get(i).getSpace().getName());
-    }
-
-  }
 
 
 

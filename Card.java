@@ -91,7 +91,6 @@ public class Card
         if(set.getRoles().get(i).getPlayer() != null){
           int curCash = set.getRoles().get(i).getPlayer().getCash();
           set.getRoles().get(i).getPlayer().setCash(curCash + budget);
-          //System.out.println("distributing off card bonus player " + set.getRoles().get(i).getPlayer().getID()+ "'s cash incresed by " + budget+ " dollars");
           boardUI.updateConsole("Distributing off card bonus player " + set.getRoles().get(i).getPlayer().getID()+ "'s cash increased by " + budget+ " dollars");
 
         }
@@ -106,9 +105,7 @@ public class Card
         }
       }
       if(someOneOnCard){
-        //System.out.println("distributing on card bonuses");
         boardUI.updateConsole("Distributing on card bonuses");
-
         for(int i = 0; i< payout.length; i++){
           payout[i] = Board.roleDie();
         }
@@ -120,9 +117,7 @@ public class Card
           payout[i] = payout[payout.length - i - 1];
           payout[payout.length - i - 1] = temp;
         }
-        //System.out.printf("The die rolls where : %s\n", Arrays.toString(payout));
         boardUI.updateConsole("The die rolls where : " + Arrays.toString(payout));
-
         int count = 0;
         //payout on card roles
         while(count < payout.length){
@@ -130,10 +125,7 @@ public class Card
             Player payTo = roles.get(j).getPlayer();
             if(payTo != null){
               payTo.setCash(payTo.getCash() + payout[count]);
-            //  System.out.println("player " + (j+1) + "'s cash increased by " + payout[count]);
               boardUI.updateConsole("Player " + (j+1) + "'s cash increased by " + payout[count]);
-
-
             }
             count++;
             if(count >= payout.length){
@@ -143,9 +135,7 @@ public class Card
         }
       }
       else{
-        // System.out.println("No one was on card, no on-card bonuses");
         boardUI.updateConsole("No one was on card, no on-card bonuses");
-
       }
 
       //reset roles for off scene
@@ -155,7 +145,6 @@ public class Card
           boardUI.movePlayerImage(set.getRoles().get(i).getPlayer(), offset, set.getYPlayer() - 10);
           set.getRoles().get(i).getPlayer().setRehearsal(0);
           set.getRoles().get(i).getPlayer().setRole(null);
-        //  set.getRoles().get(i).getPlayer().move(set.getRoles().get(i).getPlayer(), this.set.getName(), board);
           set.getRoles().get(i).setPlayer(null);
         }
 
@@ -164,11 +153,9 @@ public class Card
       for (int i = 0; i < roles.size(); i++) {
         if(roles.get(i).takenBy != null){
           int offset = set.getXPlayer() -50 + (40 * roles.get(i).getPlayer().getID());
-
           boardUI.movePlayerImage(roles.get(i).getPlayer(), offset, set.getYPlayer() - 10);
           roles.get(i).getPlayer().setRehearsal(0);
           roles.get(i).getPlayer().setRole(null);
-          //roles.get(i).getPlayer().move(roles.get(i).getPlayer(), this.set.getName(), board);
           roles.get(i).setPlayer(null);
         }
 
