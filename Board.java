@@ -31,10 +31,9 @@ public class Board {
   Trailer trailer;
   CastingOffice castingOffice;
   BoardUI boardUI;
-  ScoreScreen scoreScreen;
 
   private Board() {
-    
+
   }
 
   //Holder for the board
