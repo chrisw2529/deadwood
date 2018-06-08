@@ -19,11 +19,16 @@ public class BoardUI extends JFrame {
   JLabel boardlabel;
   JLabel cardlabel;
   JLabel playerlabel;
+  JLabel statPlayerLabel;
   JLabel mLabel;
   JLabel activePlayer1;
   JLabel activePlayer2;
   JLabel fame;
   JLabel cash;
+  JLabel space;
+  JLabel role;
+  JLabel rehearsalToken;
+
 
   ImageIcon icon;
 
@@ -80,7 +85,7 @@ public class BoardUI extends JFrame {
 
 
        // Set the size of the GUI
-    setSize(icon.getIconWidth()+200,icon.getIconHeight());
+    setSize(icon.getIconWidth()+400,icon.getIconHeight());
 
     //moveTo = new JComboBox<String>();
 
@@ -149,25 +154,82 @@ public class BoardUI extends JFrame {
     activePlayer2 = new JLabel("Player " + board.activePlayer().getID());
     fame = new JLabel("Fame: " + 0);
     cash = new JLabel("Cash: " + 0);
+    space = new JLabel("Current Space: " + board.activePlayer().getSpace().getName());
+    role = new JLabel("Current Role: Not on a role ");
+    rehearsalToken = new JLabel("Number of rehearsal Tokens: 0");
+
 
 
     activePlayer1.setBounds(icon.getIconWidth()+10,400,130,20);
     activePlayer2.setBounds(icon.getIconWidth()+10,410,130,20);
-    fame.setBounds(icon.getIconWidth()+10,420,130,20);
-    cash.setBounds(icon.getIconWidth()+10,430,130,20);
+    fame.setBounds(icon.getIconWidth()+10,460,130,20);
+    cash.setBounds(icon.getIconWidth()+10,470,130,20);
+    space.setBounds(icon.getIconWidth()+10,480,230,20);
+    role.setBounds(icon.getIconWidth()+10,490,230,20);
+    rehearsalToken.setBounds(icon.getIconWidth()+10,500,230,20);
+
+
 
     bPane.add(activePlayer1, new Integer(6));
     bPane.add(activePlayer2, new Integer(6));
     bPane.add(fame, new Integer(6));
     bPane.add(cash, new Integer(6));
+    bPane.add(space, new Integer(6));
+    bPane.add(role, new Integer(6));
+    bPane.add(rehearsalToken, new Integer(6));
+
+
 
 
 
   }
+  public void replaceDie(){
+
+  }
   public void updateStats(){
+    Player cp = board.activePlayer();
+    int level = cp.getRank();
+    String img = "";
+    if(cp.getID() == 1){
+      img += "r" + level + ".png";
+    }
+    else if(cp.getID() == 2){
+      img += "b" + level + ".png";
+    }
+    else if(cp.getID() == 3){
+      img += "g" + level + ".png";
+    }
+
+
+    statPlayerLabel = new JLabel();
+    ImageIcon cIcon =  new ImageIcon(img);
+
+    playerLabels.put(10, statPlayerLabel);
+    statPlayerLabel.setIcon(cIcon);
+    statPlayerLabel.setBounds(icon.getIconWidth()+10, 410,cIcon.getIconWidth()+2,cIcon.getIconHeight());
+    playerlabel.setOpaque(true);
+
+    // Add the card to the lower layer
+    bPane.add(statPlayerLabel, new Integer(5));
+
+
+
+
+
+
     activePlayer2.setText("Player " + board.activePlayer().getID());
-    fame.setText("Fame " + board.activePlayer().getFame());
-    cash.setText("Fash " + board.activePlayer().getCash());
+    fame.setText("Fame: " + board.activePlayer().getFame());
+    cash.setText("Cash: " + board.activePlayer().getCash());
+    space.setText("Current Space: " + board.activePlayer().getSpace().getName());
+    if(board.activePlayer().getRole() == null){
+      role.setText("Current Role: Not on a role ");
+    }
+    else{
+      role.setText("current Role " + board.activePlayer().getRole().getName());
+    }
+    rehearsalToken.setText("Number of rehearsal Tokens: " + board.activePlayer().getRehearsal());
+
+
     bPane.repaint();
 
   }
@@ -343,24 +405,25 @@ public class BoardUI extends JFrame {
       //clicked = false;
       System.out.println("Print");
     }
-    // if(rankUpOpen == true){
-    //   System.out.println("ranking up");
-    //   String[] button = e.getActionCommand().split(" ");
-    //   if(button[1].equals("Fame")){
-    //     System.out.println("ru using fame to rank " + button[7]);
-    //     Player player = board.activePlayer();
-    //     player.rankUpUsingFame(player, Integer.parseInt(button[7]));
-    //   }
-    //   else if(button[1].equals("Cash")){
-    //     System.out.println("ru using cash to rank " + button[7]);
-    //     Player player = board.activePlayer();
-    //     player.rankUpUsingCash(player, Integer.parseInt(button[7]));
-    //   }
-    // }
+    if(rankUpOpen == true){
+      System.out.println("ranking up");
+      String[] button = e.getActionCommand().split(" ");
+      Player cp = board.activePlayer();
+      if(button[1].equals("Fame")){
+        System.out.println("ru using fame to rank " + button[7]);
+        player.rankUpUsingFame(cp, Integer.parseInt(button[7]));
+      }
+      else if(button[1].equals("Cash")){
+        System.out.println("ru using cash to rank " + button[7]);
+        player.rankUpUsingCash(cp, Integer.parseInt(button[7]));
+      }
+    }
     if(rolesOpen == true){
       player.takeRole(player,e.getActionCommand());
       System.out.println("You have chosen..." + e.getActionCommand());
     }
+    updateStats();
+
   }
 
 }
