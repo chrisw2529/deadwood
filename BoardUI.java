@@ -158,8 +158,8 @@ public class BoardUI extends JFrame {
   }
   public void updateStats(){
     activePlayer2.setText("Player " + board.activePlayer().getID());
-    fame.setText("fame " + board.activePlayer().getFame());
-    cash.setText("cash " + board.activePlayer().getCash());
+    fame.setText("Fame " + board.activePlayer().getFame());
+    cash.setText("Fash " + board.activePlayer().getCash());
     bPane.repaint();
 
   }
@@ -238,6 +238,8 @@ public class BoardUI extends JFrame {
 
           else if (e.getSource()== takeRole){
 
+              rolesOpen = true;
+
               if(player.currentRole != null) {
                 System.out.println("Already on a role!");
 
@@ -248,15 +250,15 @@ public class BoardUI extends JFrame {
                 return;
               }
 
-              else if(player.spaceToSet(player, board).getIsWrapped() == true) {
+              else if(player.spaceToSet(player).getIsWrapped() == true) {
                 System.out.println("Scene already wrapped!");
               }
 
               else {
                 System.out.println("Taking role");
 
-                ArrayList<Role> offCard = player.spaceToSet(player,board).getRoles();
-                ArrayList<Role> onCard = player.spaceToSet(player,board).getCard().getRoles();
+                ArrayList<Role> offCard = player.spaceToSet(player).getRoles();
+                ArrayList<Role> onCard = player.spaceToSet(player).getCard().getRoles();
 
                 item = new JMenuItem("Off Card Roles");
                 roles.add(item);
@@ -310,10 +312,10 @@ public class BoardUI extends JFrame {
 
     //clicked = true;
     System.out.println(e.getActionCommand() + " pressed");
+          Player player = board.activePlayer();
 
     if(moveToOpen == true){
       System.out.println("Should be true;");
-      Player player = board.activePlayer();
       player.move(player, e.getActionCommand(), board);
       player.moved = true;
       //clicked = false;
@@ -321,6 +323,7 @@ public class BoardUI extends JFrame {
     }
 
     if(rolesOpen == true){
+      player.takeRole(player,e.getActionCommand());
       System.out.println("You have chosen..." + e.getActionCommand());
     }
   }

@@ -35,6 +35,7 @@ public class Player{
     {
         this.ID = id;
         this.boardUI = boardUI.getInstance();
+        this.board = board.getInstance();
 
     }
 
@@ -65,11 +66,11 @@ public class Player{
               int offset = player.getX() -50 + (40 * player.ID);
               player.label.setBounds(offset, player.getY() -10, 40, 40);
               System.out.println("player Xpos: " + player.getX() + "Ypos: " + player.getY());
-              Set currSet = spaceToSet(player, board);
+              Set currSet = spaceToSet(player);
               boardUI.removeBack(currSet);
-              if(player.currentSpace.getName() != "office" && player.currentSpace.getName() != "trailer") {
-                takeRole(player, board, false);
-              }
+              // if(player.currentSpace.getName() != "office" && player.currentSpace.getName() != "trailer") {
+              //   takeRole(player, board, false);
+              // }
 
               break;
             }
@@ -97,7 +98,36 @@ public class Player{
     * @param: Boolean, this allows our player to take a role if they decide that would like to take one after not taking one the first time around
     * Takes a role and calls roleQualificationCheck in order to determine if the player is allowed to take the role
     */
-    public void takeRole(Player player, Board board, Boolean alreadyOnSet){
+    public void takeRole(Player player, String whichRole){
+      System.out.println("taker called");
+      Set set = spaceToSet(player);
+            ArrayList<Role> off = set.getRoles();
+            ArrayList<Role> on = set.getCard().getRoles();
+            Role roleChosen = null;
+
+                  for (int  i = 0 ; i < off.size() ; i++ ) {
+                    if(whichRole.contains(off.get(i).getName())){
+                      roleChosen = off.get(i);
+                      System.out.println("Role chosen");
+                    }
+                  }
+
+                  for (int  i = 0 ; i < on.size() ; i++ ) {
+                    if(whichRole.contains(on.get(i).getName())){
+                      System.out.println("Role on chosen");
+                                            roleChosen = on.get(i);
+                    }
+
+                  }
+
+      if(roleChosen == null)
+        System.out.println("It's null");
+
+            //      System.out.println("tr");
+      roleQualificationCheck(player, roleChosen);
+
+
+
       // Scanner sc = new Scanner(System.in);
       // String c = "y";
       //
@@ -113,7 +143,7 @@ public class Player{
       //
       //
       //
-      // if(spaceToSet(player, board).getIsWrapped() == false){
+      // if(spaceToSet(player).getIsWrapped() == false){
       //
       //   if (alreadyOnSet == false) {
       //     System.out.println("would you like to take a role? (y/n)");
@@ -126,7 +156,7 @@ public class Player{
       //
       //     if(c.equals("y")){
       //       System.out.println("which role would you like to take? or press end to cancel");
-      //       Set set = spaceToSet(player, board);
+      //       Set set = spaceToSet(player);
       //       ArrayList<Role> off = set.getRoles();
       //       ArrayList<Role> on = set.getCard().getRoles();
       //       System.out.println("off");
@@ -214,10 +244,7 @@ public class Player{
       //           }
       //           else {
       //             System.out.println("What would you like to do?");
-      //           }
-      //           notDone = false;
-      //           chooseWisely = false;
-      //         }
+      //           }if(!if(!
       //
       //         else{
       //           System.out.println("Not a valid entry, use the format 'off (num)'");
@@ -264,12 +291,13 @@ public class Player{
     * @param: Board object, used to check if there's already a player on the chosen role
     * Checks the attributes of the current player and tells them if they're allowed to
     */
-    public boolean roleQualificationCheck(Player player, Role role, Board board){
+    public void roleQualificationCheck(Player player, Role role){
     //  System.out.println("level is : " + role.getName()+ role.getLevel());
     //  System.out.println("p levle ; " + player.rank );
-      if(role.takenBy != null){
+    System.out.println("inside rqc");
+      if(role.getPlayer() != null){
         System.out.println("role is taken by another player");
-        return false;
+        // return false;
       }
       else{
         if(player.rank >= role.getLevel()){
@@ -287,13 +315,13 @@ public class Player{
           else{
             boardUI.movePlayerImage(player, role.getX() + 3, role.getY()+ 3);
           }
-          endTurn(player, board);
-          return true;
+          endTurn(player);
+          // return true;
         }
         else{
           System.out.println("you are not ranked high enough");
           System.out.println("If you cannot take a role due to your low rank, you must end your turn by typing 'end'");
-          return false;
+          // return false;
 
         }
       }
@@ -322,7 +350,7 @@ public class Player{
       System.out.println(dieRoll);
 
 
-      if(dieRoll >= spaceToSet(player, board).getCard().getBudget()) {
+      if(dieRoll >= spaceToSet(player).getCard().getBudget()) {
         if(player.currentRole.onScene == true) {
           player.fame += 2;
           System.out.println("Player " + player.ID + " has acted successfully and has gained 2 fames.");
@@ -337,13 +365,13 @@ public class Player{
 
         }
 
-      //  int sm = player.spaceToSet(player,board).getShotMarkers().size();
-      //  int ism = player.spaceToSet(player,board).getInitShotMarker();
-       //player.spaceToSet(player,board).decrementShotMarker();
+      //  int sm = player.spaceToSet(player).getShotMarkers().size();
+      //  int ism = player.spaceToSet(player).getInitShotMarker();
+       //player.spaceToSet(player).decrementShotMarker();
       //  board.decrementShotMarker();
-      int whichShotMarker = player.spaceToSet(player,board).getInitShotMarker() - player.spaceToSet(player,board).getShotMarker();
-      boardUI.removeShotMarkers(player.spaceToSet(player,board), player.spaceToSet(player,board).getShotMarkers().get(whichShotMarker));
-        //player.spaceToSet(player,board).getShotMarkers().remove(sm-1);
+      int whichShotMarker = player.spaceToSet(player).getInitShotMarker() - player.spaceToSet(player).getShotMarker();
+      boardUI.removeShotMarkers(player.spaceToSet(player), player.spaceToSet(player).getShotMarkers().get(whichShotMarker));
+        //player.spaceToSet(player).getShotMarkers().remove(sm-1);
 
 
       }
@@ -360,10 +388,10 @@ public class Player{
         }
       }
 
-      if(player.spaceToSet(player, board).getShotMarker() == 0)
-        player.spaceToSet(player,board).getCard().wrapScene(board);
+      if(player.spaceToSet(player).getShotMarker() == 0)
+        player.spaceToSet(player).getCard().wrapScene(board);
 
-        endTurn(player, board);
+        endTurn(player);
     }
 
     /*
@@ -383,14 +411,14 @@ public class Player{
       }
 
       //somthing is wrong here
-      if(player.rehearsalTok == player.spaceToSet(player, board).getCard().getBudget() - 1) {
+      if(player.rehearsalTok == player.spaceToSet(player).getCard().getBudget() - 1) {
         System.out.println("You have too many rehearsal tokens and you must act.");
         return;
       }
 
       player.rehearsalTok++;
       System.out.println("Player " + player.ID + " has increased their rehearsal tokens to " + player.getRehearsal());
-      endTurn(player, board);
+      endTurn(player);
 
     }
 
@@ -495,7 +523,7 @@ public class Player{
     * @param: Player object, ends the given players turn
     * @param: Board object, finds the next player and makes it their turn
     */
-    public void endTurn(Player player, Board board) {
+    public void endTurn(Player player) {
 
       System.out.println("Player " + player.ID + "'s turn has ended.");
       player.isTurn = false;
@@ -522,11 +550,11 @@ public class Player{
     * @param: Board object, accesses the SpaceMap to convert it to the required object, (Set, CastingOffice, or Trailer)
     * This method allows us to access the set that the player is on, since we also have access to the Space that the player is on, we must look for the specific set (if they're on a set)
     */
-    public Set spaceToSet(Player player, Board board){
-      ArrayList<Set> sets = board.getSetList();
-      //System.out.println("Here?");
+    public Set spaceToSet(Player player){
+      ArrayList<Set> sets = this.board.getSetList();
+    System.out.println("Here?");
       for (int i = 0 ; i < sets.size() ; i++) {
-        //System.out.println("Here?");
+  //      System.out.println("123Here?");
         if(sets.get(i).getName().equals(player.currentSpace.getName())){
           return sets.get(i);
         }
