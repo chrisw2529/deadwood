@@ -38,8 +38,10 @@ public class BoardUI extends JFrame {
   Board board = null;
 
   JPopupMenu moveTo;
-  Boolean moveToOpen = false;
+  JPopupMenu rankTo;
   JPopupMenu roles;
+  Boolean moveToOpen = false;
+  Boolean rankUpOpen = false;
   Boolean rolesOpen = false;
   JMenuItem item;
   ActionListener menuListener;
@@ -130,6 +132,7 @@ public class BoardUI extends JFrame {
   //  moveTo.setVisible(false);
 
    moveTo = new JPopupMenu();
+   rankTo = new JPopupMenu();
    roles = new JPopupMenu();
    //menuListener = new ActionListener();
 
@@ -224,17 +227,25 @@ public class BoardUI extends JFrame {
             //Object selected = moveTo.getSelectedItem();
             //player.move(player, selected.toString(), board);
           }
-          // else if (e.getSource()== rankUp){
-          //   if(board.activePlayer().getSpace().getName().equals("office")){
-          //       for (int i = 0; i < 5 ; i++) {
-          //         item = new JMenuItem("use fame to rank");
-          //         item.addActionListener(new MenuActionListener());
-          //         moveTo.add(item);                }
-          //   }
-          //   else{
-          //     System.out.println("must be on casting Office");
-          //   }
-          // }
+          else if (e.getSource()== rankUp){
+            if(board.activePlayer().getSpace().getName().equals("Ranch")){
+                for(int i = 2; i <= 6; i++) {
+                  item = new JMenuItem("use Fame to rank up to rank " + i);
+                  item.addActionListener(new MenuActionListener());
+                  rankTo.add(item);
+               }
+               for(int i = 2; i <= 6; i++) {
+                 item = new JMenuItem("use Cash to rank up to rank " + i);
+                 item.addActionListener(new MenuActionListener());
+                 rankTo.add(item);
+              }
+              rankTo.show(rankUp, rankUp.getWidth()/2, rankUp.getHeight()/2);
+
+            }
+            else{
+              System.out.println("must be on casting Office");
+            }
+          }
 
           else if (e.getSource()== takeRole){
 
@@ -294,8 +305,10 @@ public class BoardUI extends JFrame {
       }
       public void mouseReleased(MouseEvent e) {
         moveTo.removeAll();
+        rankTo.removeAll();
         roles.removeAll();
         moveToOpen = false;
+        rankUpOpen = false;
         rolesOpen = false;
       }
       public void mouseEntered(MouseEvent e) {
